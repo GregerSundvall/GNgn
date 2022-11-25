@@ -23,10 +23,10 @@ int main( int argc, char* argv[] )
     renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
     
 
-    int playerX = windowWidth * 0.5;
-    int playerY = windowHeight * 0.5;
-    int playerMoveXInput = 0;
-    int playerMoveYInput = 0;
+    int playerPosX = windowWidth * 0.5;
+    int playerPosY = windowHeight * 0.5;
+    int playerMoveInputX = 0;
+    int playerMoveInputY = 0;
     float playerVelocityX = 0.0;
     float playerVelocityY = 0.0;
     
@@ -37,68 +37,29 @@ int main( int argc, char* argv[] )
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
-            switch (event.type)
+            if (event.type == SDL_QUIT) 
             {
-            case SDL_QUIT:
-                { running =  false; break; }
-
-            case SDL_KEYDOWN:
-                {
-                    int scancode = event.key.keysym.scancode;
-                    if (scancode == SDL_SCANCODE_ESCAPE)
-                    {
-                        running = false;
-                        break;
-                    }
-                    if (scancode == SDL_SCANCODE_W)
-                    {
-                        playerMoveYInput = SDL_clamp(playerMoveYInput -1, -1, 0);
-                    }
-                    if (scancode == SDL_SCANCODE_A)
-                    {
-                        playerMoveXInput = SDL_clamp(playerMoveXInput - 1, -1, 0);
-                    }
-                    if (scancode == SDL_SCANCODE_S)
-                    {
-                        playerY += 1;
-                    }
-                    if (scancode == SDL_SCANCODE_D)
-                    {
-                        playerX += 1;
-                    }
-                }
-                
-            case SDL_KEYUP:
-                {
-                    int scancode = event.key.keysym.scancode;
-
-                    if (scancode == SDL_SCANCODE_W)
-                    {
-                        // Move
-                    }
-                    if (scancode == SDL_SCANCODE_A)
-                    {
-                        // Move
-                    }
-                    if (scancode == SDL_SCANCODE_S)
-                    {
-                        // Move
-                    }
-                    if (scancode == SDL_SCANCODE_D)
-                    {
-                        // Move
-                    }
-                }
-                
-            default: continue;
+                running = false;
+                break;
             }
+
+            playerMoveInputX = 0;
+            playerMoveInputY = 0;
+            const Uint8* keyStates = SDL_GetKeyboardState(NULL);
+            if (keyStates[SDL_SCANCODE_W]) { playerMoveInputY -= 1; }
+            if (keyStates[SDL_SCANCODE_S]) { playerMoveInputY += 1; }
+            if (keyStates[SDL_SCANCODE_A]) { playerMoveInputX -= 1; }
+            if (keyStates[SDL_SCANCODE_D]) { playerMoveInputX += 1; }
         }
+
+        playerPosX += playerMoveInputX;
+        playerPosY += playerMoveInputY;
 
         SDL_SetRenderDrawColor(renderer, 10, 100, 10, 255);
         SDL_RenderClear(renderer);
 
         SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
-        SDL_Rect player = {playerX, playerY, 32, 32};
+        SDL_Rect player = {playerPosX, playerPosY, 32, 32};
         SDL_RenderFillRect(renderer, &player);
 
 
