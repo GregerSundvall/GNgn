@@ -1,90 +1,112 @@
-// SDL_Playground.cpp : Defines the entry point for the application.
-//
 
 
 #include <complex>
 
 #include "SDL.h"
 
+
+
 int main( int argc, char* argv[] )
 {
-    const int WIDTH = 800;
-    const int HEIGHT = 600;
+    const int windowWidth = 1920;
+    const int windowHeight = 1080;
     SDL_Window* window = NULL;
     SDL_Renderer* renderer = NULL;
 
     SDL_Init(SDL_INIT_VIDEO);
-    window = SDL_CreateWindow("SDL2 Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-
-
-    SDL_Texture* texture;
-    int width = 800;
-    int height = 600;
-    SDL_PixelFormatEnum format = SDL_PIXELFORMAT_RGBA8888;
-    SDL_TextureAccess access = SDL_TEXTUREACCESS_STREAMING;
-    texture = SDL_CreateTexture(renderer, format, access, width, height);
-
-
-    Uint8 image[width][height][4];
-    for (int i = 0; i < width; ++i)
-    {
-        for (int j = 0; j < height; ++j)
-        {
-            for (int k = 0; k < 4; ++k)
-            {
-                image[i][j][k] = 0;
-            }
-        }
-    }
-    // SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 8, SDL_PIXELFORMAT_RGBA8888);
+    window = SDL_CreateWindow(
+        "SDL2 Test",
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        windowWidth, windowHeight,
+        SDL_WINDOW_SHOWN);
+    renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
     
 
+    int playerX = windowWidth * 0.5;
+    int playerY = windowHeight * 0.5;
+    int playerMoveXInput = 0;
+    int playerMoveYInput = 0;
+    float playerVelocityX = 0.0;
+    float playerVelocityY = 0.0;
+    
     
     bool running = true;
     while (running)
     {
-        if (image[0][0][0] == 255)
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
         {
-            running = false;
-            continue;
-        }
-        void* pixels;
-        int pitch;
-
-        if( SDL_LockTexture( texture, NULL, &pixels, &pitch ) != 0 )
-        {
-            SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't lock texture: %s\n", SDL_GetError());
-        }
-
-        for (int i = 0; i < width; ++i)
-        {
-            for (int j = 0; j < height; ++j)
+            switch (event.type)
             {
-                for (int k = 0; k < 4; ++k)
+            case SDL_QUIT:
+                { running =  false; break; }
+
+            case SDL_KEYDOWN:
                 {
-                    image[i][j][k] += 1;
+                    int scancode = event.key.keysym.scancode;
+                    if (scancode == SDL_SCANCODE_ESCAPE)
+                    {
+                        running = false;
+                        break;
+                    }
+                    if (scancode == SDL_SCANCODE_W)
+                    {
+                        playerMoveYInput = SDL_clamp(playerMoveYInput -1, -1, 0);
+                    }
+                    if (scancode == SDL_SCANCODE_A)
+                    {
+                        playerMoveXInput = SDL_clamp(playerMoveXInput - 1, -1, 0);
+                    }
+                    if (scancode == SDL_SCANCODE_S)
+                    {
+                        playerY += 1;
+                    }
+                    if (scancode == SDL_SCANCODE_D)
+                    {
+                        playerX += 1;
+                    }
                 }
+                
+            case SDL_KEYUP:
+                {
+                    int scancode = event.key.keysym.scancode;
+
+                    if (scancode == SDL_SCANCODE_W)
+                    {
+                        // Move
+                    }
+                    if (scancode == SDL_SCANCODE_A)
+                    {
+                        // Move
+                    }
+                    if (scancode == SDL_SCANCODE_S)
+                    {
+                        // Move
+                    }
+                    if (scancode == SDL_SCANCODE_D)
+                    {
+                        // Move
+                    }
+                }
+                
+            default: continue;
             }
         }
-        
-        memcpy(pixels, image, width * height);
 
-        
-        // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 10, 100, 10, 255);
         SDL_RenderClear(renderer);
-        SDL_RenderCopy(renderer, texture, NULL, NULL);
+
+        SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+        SDL_Rect player = {playerX, playerY, 32, 32};
+        SDL_RenderFillRect(renderer, &player);
+
+
+
         
-        // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        // SDL_Rect rect = { (int)x, (int)100, 100, 100 };
-        // SDL_RenderFillRect(renderer, &rect);
-
         SDL_RenderPresent(renderer);
-        // SDL_Delay(16);
+        SDL_Delay(16);
     }
-
-
-
     
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
