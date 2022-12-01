@@ -3,8 +3,8 @@
 class Enemies
 {
 public:
-    float enemies[30000] = {-3};
-    int enemiesToSpawn = 10000;
+    float enemies[90000] = {-3};
+    int enemiesToSpawn = 30000;
     // int freeEnemies[30000] = {-1};
     int lastIndexSpawned = -1;
     

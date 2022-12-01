@@ -10,7 +10,7 @@ void Enemies::Update()
         ActivateEnemy();
     }
 
-    for (int i = 0; i < 30000; i+=3)
+    for (int i = 0; i < 90000; i+=3)
     {
         if (enemies[i] >= 0)
         {
