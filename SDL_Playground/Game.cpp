@@ -23,28 +23,28 @@ void Game::Update()
 
     if (player->isAlive) { player->Update(); }
 
-    enemies.Update();
+    enemies->Update();
 
     // Check every enemy vs every enemy (Extremely slow)
-    // for (int i = 0; i < 30000; i+=3)
-    // {
-    //     for (int j = 0; j < 30000; j+=3)
-    //     {
-    //         Overlap(enemies.enemies[i], enemies.enemies[i+1],
-    //             enemies.enemies[j], enemies.enemies[j+1]);
-    //     }
-    //
-    // }
+    for (int i = 0; i < 30000; i+=3)
+    {
+        for (int j = 0; j < 30000; j+=3)
+        {
+            Overlap(enemies->enemies[i], enemies->enemies[i+1],
+                enemies->enemies[j], enemies->enemies[j+1]);
+        }
+    
+    }
 
     
     // Check player vs every enemy
-    for (int i = 0; i < 30000; i+=3)
-    {
-        if (Overlap(player->posX, player->posY,
-            enemies.enemies[i], enemies.enemies[i+1]))
-        {
-            enemies.enemies[i] = -1;
-        }
-    }
+    // for (int i = 0; i < 30000; i+=3)
+    // {
+    //     if (Overlap(player->posX, player->posY,
+    //         enemies->enemies[i], enemies->enemies[i+1]))
+    //     {
+    //         enemies->enemies[i] = -1;
+    //     }
+    // }
 
 }

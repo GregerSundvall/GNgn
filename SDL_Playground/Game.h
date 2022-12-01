@@ -11,13 +11,13 @@ class Game
 {
     bool isRunning = true;
     Player* player;
-    Enemies enemies;
+    Enemies* enemies;
 
 public:
     Game()
     {
         player = new Player;
-        enemies = Enemies();
+        enemies = new Enemies;
 
     }
 
