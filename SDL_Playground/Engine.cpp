@@ -9,7 +9,7 @@ float dTime = 0.0f;
 void Engine::Run()
 {
     Uint64 previousTicks = SDL_GetPerformanceCounter();
-    float FPScounts[10] = {0};
+    float FPScounts[100] = {0};
     int nextFPSIndex = 0;
     float accumulatedFPS = 0;
 
@@ -25,10 +25,10 @@ void Engine::Run()
         float currentFPS = 1 / dTime;
         FPScounts[(nextFPSIndex)] = currentFPS;
         accumulatedFPS += currentFPS;
-        if (nextFPSIndex == 9)
+        if (nextFPSIndex == 99)
         {
             nextFPSIndex = 0;
-            std::cout << static_cast<int>(accumulatedFPS / 10) << std::endl;
+            std::cout << static_cast<int>(accumulatedFPS / 100) << std::endl;
             accumulatedFPS = 0;
         }
         else
