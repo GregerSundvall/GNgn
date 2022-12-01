@@ -21,5 +21,7 @@ public:
 
     }
 
+    bool Overlap(float aX, float aY, float bX, float bY);
+
     void Update();
 };

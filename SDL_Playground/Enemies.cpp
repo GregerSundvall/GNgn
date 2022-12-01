@@ -14,11 +14,15 @@ void Enemies::Update()
     {
         if (enemies[i] >= 0)
         {
-            enemies[i+1] += 0.1f;
+            enemies[i+1] += 0.05f;
             enemies[i] += rand() %200 * 0.001 -0.1;
             SDL_SetRenderDrawColor(renderer, (int)enemies[i+2], 100, 100, 255);
             SDL_Rect enemyRect = {static_cast<int>(enemies[i]), static_cast<int>(enemies[i + 1]), 4, 4};
             SDL_RenderFillRect(renderer, &enemyRect);
+            if (enemies[i] > 1000)
+            {
+                enemies[i+1] = -1;
+            }
         }
 
     }
