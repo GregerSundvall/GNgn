@@ -2,8 +2,8 @@
 
 struct Player
 {
-    float posX = 0;
-    float posY = 0;
+    float posX = 400;
+    float posY = 900;
     float moveInputX = 0;
     float moveInputY = 0;
     // float velocityX = 0.0;

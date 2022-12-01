@@ -9,6 +9,9 @@ float dTime = 0.0f;
 void Engine::Run()
 {
     Uint64 previousTicks = SDL_GetPerformanceCounter();
+    float FPScounts[10] = {0};
+    int nextFPSIndex = 0;
+    float accumulatedFPS = 0;
 
     input = new Input();
     game = new Game();
@@ -19,7 +22,20 @@ void Engine::Run()
         Uint64 deltaTicks = ticks - previousTicks;
         previousTicks = ticks; 
         dTime = (float)deltaTicks / SDL_GetPerformanceFrequency();
-    
+        float currentFPS = 1 / dTime;
+        FPScounts[(nextFPSIndex)] = currentFPS;
+        accumulatedFPS += currentFPS;
+        if (nextFPSIndex == 9)
+        {
+            nextFPSIndex = 0;
+            std::cout << static_cast<int>(accumulatedFPS / 10) << std::endl;
+            accumulatedFPS = 0;
+        }
+        else
+        {
+            nextFPSIndex++;
+        }
+        
         input->Update();
         if (input->Esc) { SDLisRunning = false; break; }
         
@@ -27,7 +43,6 @@ void Engine::Run()
         
         
         SDL_RenderPresent(renderer);
-        // SDL_Delay(16); // Fix deltatime and remove this
     }
 
     // Destroy game?
