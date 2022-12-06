@@ -1,19 +1,23 @@
 ﻿#include "Enemies.h"
+
+#include <ctime>
 #include <SDL_render.h>
-#include <utility>
+#include <random>
 #include "Engine.h"
 
 void Enemies::Update()
 {
     if (enemiesToSpawn > 0)
     {
-        SpawnEnemy(100, 100);
+        std::uniform_int_distribution<int> distribution(0, 8000);
+        int x = distribution(generator) / 10;
+        SpawnEnemy(x, 100, 100);
         enemiesToSpawn--;
     }
 
     for (int i = 0; i < enemyCount; ++i)
     {
-        enemies[i].y += 0.01;
+        enemies[i].y += enemies[i].speed * dTime;
         if (enemies[i].y > 800)
         {
             continue;
@@ -24,21 +28,21 @@ void Enemies::Update()
     }
     
 }
-void Enemies::SpawnEnemy(float x, float y)
+void Enemies::SpawnEnemy(float x, float y, float speed)
 {
-    Enemy enemy = Enemy(x, y);
-
-    if (recycledIndexes.size() > 0)
+    Enemy enemy = Enemy(x, y, speed);
+    
+    if (recycledIndexes.size() > 0) // Recycled index available.
     {
         enemies[recycledIndexes.back()] = enemy;
         recycledIndexes.pop_back();
     }
-    else if (nextFreshIndex < capacity)
+    else if (nextFreshIndex < capacity) // No recycled indexes available, but still room in array.
     {
         enemies[nextFreshIndex] = enemy;
         nextFreshIndex++;
     }
-    else
+    else // Array full. Create new larger array, copy all from old, add new enemy.
     {
         Enemy* grown = new Enemy[capacity * 2];
         for (int i = 0; i < capacity; ++i)

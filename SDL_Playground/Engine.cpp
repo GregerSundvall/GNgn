@@ -1,4 +1,7 @@
 ﻿#include "Engine.h"
+
+#include <random>
+
 #include "Game.h"
 #include "iostream"
 
@@ -15,6 +18,7 @@ void Engine::Run()
 
     input = new Input();
     game = new Game();
+
     
     while (SDLisRunning)
     {
