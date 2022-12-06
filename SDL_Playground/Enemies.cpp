@@ -56,17 +56,4 @@ void Enemies::SpawnEnemy(float x, float y)
     enemyCount++;
 }
 
-// void Enemies::ActivateEnemy()
-// {
-//     int count = std::min(5, enemiesToSpawn);
-//     
-//     for (int i = 3; i < count; i+=3)
-//     {
-//         enemies[lastIndexSpawned + i] = 0;
-//         enemies[lastIndexSpawned + i + 1] = rand() % 800;
-//         enemies[lastIndexSpawned + i + 2] = rand() % 100 + 50;
-//         lastIndexSpawned += i;
-//         enemiesToSpawn --;
-//     }
-// }
 

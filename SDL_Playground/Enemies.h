@@ -29,10 +29,6 @@ public:
     int nextFreshIndex = 0;
     std::vector<int> recycledIndexes;
     int enemiesToSpawn = 5;
-    // int recycledIndexes[];
-    // float enemies[90000] = {-3};
-    // int freeEnemies[30000] = {-1};
-    // int lastIndexSpawned = -1;
     
     Enemies()
     {
@@ -40,9 +36,7 @@ public:
     }
 
     void Update();
+    void SpawnEnemy(float x, float y);
 
 private:
-    // void ActivateEnemy();
-
-    void SpawnEnemy(float x, float y);
 };
