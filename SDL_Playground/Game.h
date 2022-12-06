@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <cstdlib>
 
 #include "Enemies.h"
 #include "Player.h"

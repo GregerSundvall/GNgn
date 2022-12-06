@@ -27,13 +27,13 @@ void Game::Update()
 
     
     // Check player vs every enemy
-    for (int i = 0; i < 90000; i+=3)
-    {
-        if (Overlap(player->posX, player->posY,
-            enemies.enemies[i], enemies.enemies[i+1]))
-        {
-            enemies.enemies[i] = -1;
-        }
-    }
+    // for (int i = 0; i < 90000; i+=3)
+    // {
+    //     if (Overlap(player->posX, player->posY,
+    //         enemies.enemies[i], enemies.enemies[i+1]))
+    //     {
+    //         enemies.enemies[i] = -1;
+    //     }
+    // }
 
 }

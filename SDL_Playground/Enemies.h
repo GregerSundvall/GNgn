@@ -1,21 +1,48 @@
 ﻿#pragma once
+#include <vector>
+#include <array>
+
+struct Enemy
+{
+    float x;
+    float y;
+
+    Enemy()
+    {
+        x = -1;
+        y = -1;
+    }
+
+    Enemy(float x, float y)
+    {
+        this->x = x;
+        this->y = y;
+    }
+};
 
 class Enemies
 {
 public:
-    float enemies[90000] = {-3};
-    int enemiesToSpawn = 30000;
+    Enemy* enemies;
+    int enemyCount = 0;
+    int capacity = 8;
+    int nextFreshIndex = 0;
+    std::vector<int> recycledIndexes;
+    int enemiesToSpawn = 5;
+    // int recycledIndexes[];
+    // float enemies[90000] = {-3};
     // int freeEnemies[30000] = {-1};
-    int lastIndexSpawned = -1;
+    // int lastIndexSpawned = -1;
     
     Enemies()
     {
-
-        
+        enemies = new Enemy[capacity];
     }
 
     void Update();
 
 private:
-    void ActivateEnemy();
+    // void ActivateEnemy();
+
+    void SpawnEnemy(float x, float y);
 };
