@@ -47,10 +47,10 @@ void Engine::Run()
         
         
         SDL_RenderPresent(renderer);
+        SDL_Delay(6);
     }
 
     // Destroy game?
-    
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

@@ -10,7 +10,7 @@ void Enemies::Update()
     if (enemiesToSpawn > 0)
     {
         std::uniform_int_distribution<int> distribution(0, 8000);
-        int x = distribution(generator) / 10;
+        float x = static_cast<float>(distribution(generator) / 10);
         SpawnEnemy(x, 100, 100);
         enemiesToSpawn--;
     }
@@ -32,12 +32,12 @@ void Enemies::SpawnEnemy(float x, float y, float speed)
 {
     Enemy enemy = Enemy(x, y, speed);
     
-    if (recycledIndexes.size() > 0) // Recycled index available.
+    if (recycledIndexes.size() > 0) // Recycled index available, use.
     {
         enemies[recycledIndexes.back()] = enemy;
         recycledIndexes.pop_back();
     }
-    else if (nextFreshIndex < capacity) // No recycled indexes available, but still room in array.
+    else if (nextFreshIndex < capacity) // No recycled indexes available, use a fresh index.
     {
         enemies[nextFreshIndex] = enemy;
         nextFreshIndex++;
@@ -50,7 +50,8 @@ void Enemies::SpawnEnemy(float x, float y, float speed)
             grown[i] = enemies[i];
             grown[i] = enemies[i];
         }
-        Enemy *enemies = grown;
+        enemies = grown;
+        grown = nullptr;
         capacity *= 2;
 
         enemies[nextFreshIndex] = enemy;

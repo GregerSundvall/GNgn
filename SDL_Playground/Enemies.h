@@ -29,10 +29,10 @@ class Enemies
 public:
     Enemy* enemies;
     int enemyCount = 0;
-    int capacity = 8;
+    int capacity = 16;
     int nextFreshIndex = 0;
     std::vector<int> recycledIndexes;
-    int enemiesToSpawn = 5;
+    int enemiesToSpawn = 1000;
     
     
     std::default_random_engine generator;
@@ -40,7 +40,7 @@ public:
     Enemies()
     {
         enemies = new Enemy[capacity];
-        generator.seed(time(NULL));
+        generator.seed(static_cast<unsigned>(time(NULL)));
     }
 
     void Update();
