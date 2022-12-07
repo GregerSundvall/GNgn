@@ -32,19 +32,19 @@ public:
     int capacity = 16;
     int nextFreshIndex = 0;
     std::vector<int> recycledIndexes;
-    int enemiesToSpawn = 1000;
-    
+    int enemiesToSpawn = 10000;
     
     std::default_random_engine generator;
     
     Enemies()
     {
         enemies = new Enemy[capacity];
-        generator.seed(static_cast<unsigned>(time(NULL)));
+        generator.seed(static_cast<unsigned>(time(nullptr)));
     }
 
     void Update();
     void SpawnEnemy(float x, float y, float speed);
+    void DestroyEnemy(int id);
 
 private:
 };
