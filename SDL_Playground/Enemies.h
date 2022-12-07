@@ -27,7 +27,8 @@ struct Enemy
 class Enemies
 {
 public:
-    Enemy* enemies;
+    // Enemy* enemies;
+    std::vector<Enemy> transforms;
     int enemyCount = 0;
     int capacity = 16;
     int nextFreshIndex = 0;
@@ -38,7 +39,7 @@ public:
     
     Enemies()
     {
-        enemies = new Enemy[capacity];
+        // enemies = new Enemy[capacity];
         generator.seed(static_cast<unsigned>(time(nullptr)));
     }
 
@@ -46,5 +47,5 @@ public:
     void SpawnEnemy(float x, float y, float speed);
     void DestroyEnemy(int id);
 
-private:
+
 };
