@@ -1,7 +1,5 @@
 
 
-#include <iostream>
-
 #include "Engine.h"
 #include "SDL.h"
 #include "SDL_Playground.h"
