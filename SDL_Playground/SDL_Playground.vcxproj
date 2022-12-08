@@ -133,6 +133,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />
@@ -140,15 +141,20 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SDL_Playground.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="TransformSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SDL_Playground.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="TransformSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDL_Playground.rc" />
