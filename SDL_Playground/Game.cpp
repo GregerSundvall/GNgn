@@ -37,3 +37,8 @@ void Game::Update()
     // }
 
 }
+
+void Game::Destroy()
+{
+    enemies.Destroy();
+}

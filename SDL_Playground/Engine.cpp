@@ -25,7 +25,7 @@ void Engine::Run()
         Uint64 ticks = SDL_GetPerformanceCounter();
         Uint64 deltaTicks = ticks - previousTicks;
         previousTicks = ticks; 
-        dTime = (float)deltaTicks / SDL_GetPerformanceFrequency();
+        dTime = static_cast<float>(deltaTicks) / SDL_GetPerformanceFrequency();
         float currentFPS = 1 / dTime;
         FPScounts[(nextFPSIndex)] = currentFPS;
         accumulatedFPS += currentFPS;
@@ -50,7 +50,8 @@ void Engine::Run()
         SDL_Delay(6);
     }
 
-    // Destroy game?
+    game->Destroy();
+    
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
