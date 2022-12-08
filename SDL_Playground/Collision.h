@@ -10,7 +10,6 @@ struct Collider
     int ID = -1;
     bool InUse = false;
 
-public:
     Collider()
     {
         Left = -1;
