@@ -1,66 +1,46 @@
 ﻿#pragma once
-#include <array>
 #include <vector>
 
 struct Collider
 {
-    float X;
-    float Y;
-    int Width;
-    int Height;
-    bool Enabled = true;
+    float Left;
+    float Right;
+    float Upper;
+    float Lower;
+    int ID = -1;
     bool InUse = false;
 
+public:
     Collider()
     {
-        X = 0;
-        Y = 0;
-        Width = 0;
-        Height = 0;
+        Left = -1;
+        Right = -1;
+        Upper = -1;
+        Lower = -1;
     };
     
-    Collider(float x, float y, int width, int height)
+    Collider(float centerX, float centerY, int width, int height)
     {
-        X = x;
-        Y = y;
-        Width = width;
-        Height = height;
+        Left = centerX - width/2;
+        Right = centerX + width/2;
+        Upper = centerY - height/2;
+        Lower = centerY + height/2;
+        InUse = true;
     }
 };
 
 class Collision
 {
-    std::vector<Collider> Colliders = {Collider()};
-    int Capacity = 8;
+    std::vector<Collider> colliders;
+    std::vector<int> recycledIndexes;
     int MemberCount = 0;
+    int nextFreshIndex = 0;
     
 public:
 
-    int CreateCollider(float x, float y, int width, int height)
-    {
-        int index = -1;
-        for (int i = 0; i < Colliders.size(); ++i)
-        {
-            if (Colliders.at(i).InUse == false)
-            {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1)
-        {
-            Capacity *= 2;
-            
-            
-        }
-        Colliders[index].X = x;
-        Colliders[index].Y = y;
-        Colliders[index].Width = width;
-        Colliders[index].Height = height;
-        MemberCount++;
-        return index;
-    }
-
+    bool CheckAgainstAll(int colliderID);
+    void CreateCollider(float centerX, float centerY, int width, int height);
     void FreeCollider(int index);
+    void Destroy();
     
 };

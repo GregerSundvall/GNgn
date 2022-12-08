@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <vector>
-#include <array>
 #include <random>
 
 struct Enemy
@@ -9,11 +8,14 @@ struct Enemy
     float y;
     float speed;
 
+    int id;
+
     Enemy()
     {
         x = -1;
         y = -1;
         speed = 0;
+        id = -1;
     }
 
     Enemy(float x, float y, float speed)
@@ -21,31 +23,30 @@ struct Enemy
         this->x = x;
         this->y = y;
         this->speed = speed;
+        this->id = -1;
     }
 };
 
 class Enemies
 {
 public:
-    // Enemy* enemies;
     std::vector<Enemy> transforms;
-    int enemyCount = 0;
-    int capacity = 16;
-    int nextFreshIndex = 0;
     std::vector<int> recycledIndexes;
-    int enemiesToSpawn = 10000;
+    int enemyCount = 0;
+    int nextFreshIndex = 0;
+    int enemySpawnQueue = 1000;
     
     std::default_random_engine generator;
     
     Enemies()
     {
-        // enemies = new Enemy[capacity];
         generator.seed(static_cast<unsigned>(time(nullptr)));
     }
 
     void Update();
     void SpawnEnemy(float x, float y, float speed);
     void DestroyEnemy(int id);
-
+    void Destroy();
+    
 
 };
