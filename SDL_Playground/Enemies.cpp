@@ -1,6 +1,4 @@
 ﻿#include "Enemies.h"
-
-#include <ctime>
 #include <SDL_render.h>
 #include <random>
 #include "Engine.h"

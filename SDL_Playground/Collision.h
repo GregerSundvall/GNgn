@@ -1,30 +1,21 @@
 ﻿#pragma once
 #include <vector>
+#include "Transform.h"
 
 struct Collider
 {
-    float Left;
-    float Right;
-    float Upper;
-    float Lower;
     int ID = -1;
-    bool InUse = false;
-
-    Collider()
-    {
-        Left = -1;
-        Right = -1;
-        Upper = -1;
-        Lower = -1;
-    };
+    Float2 Position;
+    Float2 Size;
+    Float2 Velocity;
     
-    Collider(float centerX, float centerY, int width, int height)
+    Collider(Float2 position = Float2(0, 0),
+        Float2 size = Float2(0, 0),
+        Float2 velocity = Float2(0, 0))
     {
-        Left = centerX - width/2;
-        Right = centerX + width/2;
-        Upper = centerY - height/2;
-        Lower = centerY + height/2;
-        InUse = true;
+        Position = position;
+        Size = size;
+        Velocity = velocity;
     }
 };
 
@@ -39,8 +30,8 @@ public:
 
     void Update();
     bool CheckAgainstAll(int colliderID);
-    void CreateCollider(float centerX, float centerY, int width, int height);
-    void FreeCollider(int index);
+    int Register(Float2 position, Float2 size);
+    void Unregister(int index);
     void Destroy();
     
 };

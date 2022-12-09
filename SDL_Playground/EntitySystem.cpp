@@ -1,7 +1,9 @@
 ﻿#include "EntitySystem.h"
 
+#include "Transform.h"
 
-int EntitySystem::CreateEntity()
+
+int EntitySystem::CreateEntity(Float2 position, bool addTransform = true, bool addCollider = true, Float2 size = Float2(4, 4))
 {
     int index;
     
@@ -15,11 +17,27 @@ int EntitySystem::CreateEntity()
         index = nextFreshIndex;
         nextFreshIndex++;
     }
+    
     entities[index] = Entity();
-    entities[index].ID = index; // Let entity know it's own index. Needed?
+    entities[index].ID = index; // Let entity know it's own index. Not needed?
+    if (addTransform) { AddTransform(index, position, size); }
+    if (addCollider) { AddCollider(index); }
+
     memberCount++;
     
     return index;
+}
+
+void EntitySystem::AddTransform(int entityID, Float2 position, Float2 size)
+{
+    entities[entityID].TransformID = transformSystem->Register(position, size);
+}
+
+void EntitySystem::AddCollider(int entityID)
+{
+    // Creates collider with same position/size as transform.
+    Transform* transform = transformSystem->GetTransform(entities[entityID].TransformID);
+    entities[entityID].CollisionID = collisionSystem->Register(transform->Position, transform->Size);
 }
 
 void EntitySystem::Update()

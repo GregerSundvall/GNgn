@@ -21,7 +21,7 @@ void TransformSystem::Update()
     // Let Game handle entity going out of bounds
 }
 
-int TransformSystem::Register(Float2 position, Float2 velocity)
+int TransformSystem::Register(Float2 position, Float2 size)
 {
     int index;
     
@@ -35,7 +35,7 @@ int TransformSystem::Register(Float2 position, Float2 velocity)
         index = nextFreshIndex;
         nextFreshIndex++;
     }
-    transforms[index] = Transform(position, velocity);
+    transforms[index] = Transform(position, size);
     transforms[index].ID = index; // Let transform know it's own index. Needed?
     memberCount++;
     

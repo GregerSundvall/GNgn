@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <vector>
 
+
 struct Float2;
 struct Transform;
 
@@ -14,7 +15,7 @@ class TransformSystem
     
 public:
     void Update();
-    int Register(Float2 position, Float2 velocity);
+    int Register(Float2 position, Float2 size);
     void Unregister(int id);
     void Destroy();
     Transform* GetTransform(int id);

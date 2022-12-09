@@ -11,17 +11,15 @@ struct Transform
 {
     int ID = -1;
     Float2 Position;
+    Float2 Size;
     Float2 Velocity;
 
-    Transform()
-    {
-        Position = Float2(-1, -1);
-        Velocity = Float2(0, 0);
-    }
-
-    Transform(Float2 position, Float2 velocity)
+    Transform(Float2 position = Float2(0, 0),
+        Float2 size = Float2(0, 0),
+        Float2 velocity = Float2(0, 0))
     {
         Position = position;
+        Size = size;
         Velocity = velocity;
     }
 };
