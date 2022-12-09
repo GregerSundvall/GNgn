@@ -22,6 +22,4 @@ struct Entity
     int TransformID = -1;
     int ColliderID = -1;
     Color Color = {100, 100, 100};
-
-
 };
