@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include <vector>
-
-
 struct Float2;
 struct Transform;
 

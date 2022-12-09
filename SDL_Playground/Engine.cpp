@@ -1,13 +1,13 @@
 ﻿#include "Engine.h"
-
 #include <random>
-
 #include "Game.h"
 #include "iostream"
 
 SDL_Renderer* renderer;
 Input* input;
 float dTime = 0.0f;
+// std::vector<std::vector*> stuffToDraw;
+// std::default_random_engine generator;
 
 
 void Engine::Run()
@@ -19,7 +19,6 @@ void Engine::Run()
 
     input = new Input();
     game = new Game();
-
     
     while (SDLisRunning)
     {
@@ -52,6 +51,7 @@ void Engine::Run()
         game->Update();
 
         // Draw
+        
         SDL_RenderPresent(renderer);
 
         // Gimme a reasonable framerate (not like 2000fps)
