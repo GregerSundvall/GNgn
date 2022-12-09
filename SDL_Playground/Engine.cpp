@@ -9,6 +9,7 @@ SDL_Renderer* renderer;
 Input* input;
 float dTime = 0.0f;
 
+
 void Engine::Run()
 {
     Uint64 previousTicks = SDL_GetPerformanceCounter();
@@ -22,6 +23,11 @@ void Engine::Run()
     
     while (SDLisRunning)
     {
+        // Clear screen
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        // FPS stuff
         Uint64 ticks = SDL_GetPerformanceCounter();
         Uint64 deltaTicks = ticks - previousTicks;
         previousTicks = ticks; 
@@ -39,14 +45,16 @@ void Engine::Run()
         {
             nextFPSIndex++;
         }
-        
+
+        // Run update methods
         input->Update();
-        if (input->Esc) { SDLisRunning = false; break; }
-        
+        if (input->Esc) { SDLisRunning = false; break; } // Stop engine on Esc
         game->Update();
-        
-        
+
+        // Draw
         SDL_RenderPresent(renderer);
+
+        // Gimme a reasonable framerate (not like 2000fps)
         SDL_Delay(6);
     }
 

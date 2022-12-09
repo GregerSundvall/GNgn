@@ -1,29 +1,16 @@
 ﻿#pragma once
-
-
-#include "Collision.h"
-#include "Enemies.h"
-#include "Player.h"
-
+#include "EntitySystem.h"
 
 
 class Game
 {
     bool isRunning = true;
-    Player* player;
-    Collision collision;
-    Enemies enemies;
+    EntitySystem* entitySystem = new EntitySystem;
+    // Move input system here?
+    // Event system
 
 public:
-    Game()
-    {
-        player = new Player;
-        collision = Collision();
-        enemies = Enemies();
 
-    }
-
-    bool Overlap(float aX, float aY, float bX, float bY);
     void Update();
     void Destroy();
 };

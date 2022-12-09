@@ -3,6 +3,8 @@
 struct Collider;
 struct Transform;
 
+
+
 struct Color
 {
     int R;
@@ -12,10 +14,13 @@ struct Color
 };
 
 
+
+
 struct Entity
 {
-    int transformID;
-    int colliderID;
+    int ID;
+    int TransformID = -1;
+    int ColliderID = -1;
     Color Color = {100, 100, 100};
 
 

@@ -28,7 +28,7 @@ struct Collider
     }
 };
 
-class Collision
+class CollisionSystem
 {
     std::vector<Collider> colliders;
     std::vector<int> recycledIndexes;
@@ -37,6 +37,7 @@ class Collision
     
 public:
 
+    void Update();
     bool CheckAgainstAll(int colliderID);
     void CreateCollider(float centerX, float centerY, int width, int height);
     void FreeCollider(int index);
