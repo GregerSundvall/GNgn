@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-struct Vector2
+struct Float2
 {
     float X;
     float Y;
@@ -10,17 +10,16 @@ struct Vector2
 struct Transform
 {
     int ID = -1;
-    Vector2 Position;
-    Vector2 Velocity;
+    Float2 Position;
+    Float2 Velocity;
 
     Transform()
     {
-        ID = -1;
-        Position = Vector2(-1, -1);
-        Velocity = Vector2(0, 0);
+        Position = Float2(-1, -1);
+        Velocity = Float2(0, 0);
     }
 
-    Transform(Vector2 position, Vector2 velocity)
+    Transform(Float2 position, Float2 velocity)
     {
         Position = position;
         Velocity = velocity;

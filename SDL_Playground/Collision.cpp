@@ -1,6 +1,10 @@
 ﻿#include "Collision.h"
 
-bool Collision::CheckAgainstAll(int colliderID)
+void CollisionSystem::Update()
+{
+}
+
+bool CollisionSystem::CheckAgainstAll(int colliderID)
 {
     bool collision = false;
     for (int i = 0; i < MemberCount; ++i)
@@ -20,7 +24,7 @@ bool Collision::CheckAgainstAll(int colliderID)
     return collision;
 }
 
-void Collision::CreateCollider(float centerX, float centerY, int width, int height)
+void CollisionSystem::CreateCollider(float centerX, float centerY, int width, int height)
 {
     Collider collider = Collider(centerX, centerY, width, height);
     int index;
@@ -41,14 +45,14 @@ void Collision::CreateCollider(float centerX, float centerY, int width, int heig
     MemberCount++;
 }
 
-void Collision::FreeCollider(int index)
+void CollisionSystem::FreeCollider(int index)
 {
     colliders.at(index) = Collider();
     recycledIndexes.push_back(index);
     MemberCount--;
 }
 
-void Collision::Destroy()
+void CollisionSystem::Destroy()
 {
     colliders.clear();
 }

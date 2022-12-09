@@ -21,7 +21,7 @@ void TransformSystem::Update()
     // Let Game handle entity going out of bounds
 }
 
-int TransformSystem::Register(Vector2 position, Vector2 velocity)
+int TransformSystem::Register(Float2 position, Float2 velocity)
 {
     int index;
     
@@ -53,4 +53,9 @@ void TransformSystem::Destroy()
 {
     transforms.clear();
     recycledIndexes.clear();
+}
+
+Transform* TransformSystem::GetTransform(int id)
+{
+    return &transforms[id];
 }
