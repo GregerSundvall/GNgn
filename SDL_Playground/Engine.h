@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "Input.h"
 
-struct Drawable
+
 
 
 
@@ -12,7 +12,6 @@ extern SDL_Renderer* renderer;
 extern Input* input;
 extern float dTime;
 extern std::default_random_engine generator;
-extern std::vector<std::vector*> stuffToDraw;
 
 class Engine
 {

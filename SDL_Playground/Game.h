@@ -1,6 +1,14 @@
 ﻿#pragma once
+#include <SDL_rect.h>
+
 #include "EntitySystem.h"
 
+class DrawSystem
+{
+    std::vector<SDL_Rect> Rectangles;
+
+    void AddRectangle(SDL_Rect rect){};
+};
 
 class Game
 {
@@ -11,6 +19,7 @@ class Game
 
     
     EntitySystem* entitySystem = new EntitySystem;
+    DrawSystem* drawSystem = new DrawSystem;
     // Event system
     // Move input system here?
     // Move SDL stuff here?

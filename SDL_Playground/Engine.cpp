@@ -7,7 +7,7 @@ SDL_Renderer* renderer;
 Input* input;
 float dTime = 0.0f;
 // std::vector<std::vector*> stuffToDraw;
-// std::default_random_engine generator;
+std::default_random_engine generator;
 
 
 void Engine::Run()
@@ -19,6 +19,7 @@ void Engine::Run()
 
     input = new Input();
     game = new Game();
+    game->Start();
     
     while (SDLisRunning)
     {
