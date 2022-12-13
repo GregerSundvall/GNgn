@@ -1,39 +1,12 @@
 ﻿#pragma once
-#include "CollisionSystem.h"
 #include "Components.h"
+#include "CollisionSystem.h"
+#include "MovementSystem.h"
 #include "TransformSystem.h"
 struct Collider;
 struct Transform;
 
 
-
-
-struct Entity
-{
-    int ID;
-    int TransformID = -1;
-    int MovementID = -1;
-    int CollisionID = -1;
-    int SpriteID = -1;
-};
-
-class MovementSystem
-{
-    std::vector<Movement> movements;
-
-public:
-    int Register(int entityID, Float2 size)
-    {
-        movements.push_back(Movement(entityID, size));
-        return movements.size() -1;
-    }
-    void Unregister(int spriteID)
-    {
-        movements[spriteID] = movements[movements.size() -1];
-        movements.pop_back();
-    }
-    void Update(){}
-};
 
 class SpriteSystem
 {
@@ -49,25 +22,23 @@ public:
         sprites[spriteID] = sprites[sprites.size() -1];
         sprites.pop_back();
     }
+    void Destructor() {sprites.clear();}
 };
 
 
 class EntitySystem
 {
     std::vector<Entity> entities;
-    std::vector<int> recycledIndexes;
-    int memberCount = 0;
-    int nextFreshIndex = 0;
     
     TransformSystem* transformSystem = new TransformSystem;
     CollisionSystem* collisionSystem = new CollisionSystem;
-    MovementSystem* movementSystem = new MovementSystem;
+    MovementSystem* movementSystem = new MovementSystem(&this);
     SpriteSystem* spriteSystem = new SpriteSystem;
     
 public:
 
-    int CreateEntity(Float2 position, bool addTransform = true,
-        bool addCollider = true, Float2 size = Float2(4, 4));
+    int CreateEntity();
+    Entity* GetEntity(int entityID) {return &entities[entityID];}
     void DestroyEntity(int entityID);
     void AddTransform(int entityID, Float2 position, Float2 size);
     void AddCollider(int entityID);

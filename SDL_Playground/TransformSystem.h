@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <vector>
+
+#include "Components.h"
 struct Float2;
 struct Transform;
 
@@ -13,6 +15,8 @@ public:
     int Register(int EntityID, Float2 position, Float2 size);
     void Unregister(int transformID);
     void Destructor();
-    Transform* GetTransform(int id);
+    Transform* GetPosition(int id);
+    void SetPosition(int transformID, Float2 position) {transforms[transformID].Position = position;}
+    void AddOffset(int transformID, Float2 offset) {transforms[transformID].Position += offset;}
     
 };
