@@ -35,7 +35,7 @@ void TransformSystem::Destructor()
     transforms.clear();
 }
 
-Transform* TransformSystem::GetTransform(int id)
+Transform* TransformSystem::GetPosition(int id)
 {
     return &transforms[id];
 }
