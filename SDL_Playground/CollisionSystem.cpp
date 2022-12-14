@@ -1,28 +1,36 @@
 ﻿#include "CollisionSystem.h"
 
+#include "EntitySystem.h"
+
 
 void CollisionSystem::Update()
 {
 }
 
-bool CollisionSystem::CheckAgainstAll(int colliderID)
+void CollisionSystem::Sweep(int entityID, int colliderID, Float2 offset)
 {
-    bool collision = false;
-    // for (int i = 0; i < MemberCount; ++i)
-    // {
-    //     if (!colliders[i].ID == -1) { continue; }
-    //     
-    //     if (colliders[colliderID].Right < colliders[i].Left ||
-    //         colliders[colliderID].Left > colliders[i].Right ||
-    //         colliders[colliderID].Lower < colliders[i].Upper ||
-    //         colliders[colliderID].Upper > colliders[i].Lower)
-    //     {
-    //         continue;
-    //     }
-    //     collision = true;
-    //     break;
-    // }
-    return collision;
+    // bool collision = false;
+    float minX = colliders[colliderID].minX() + offset.x;
+    float maxX = colliders[colliderID].maxX() + offset.x;
+    float minY = colliders[colliderID].minY() + offset.y;
+    float maxY = colliders[colliderID].maxY() + offset.y;
+    
+    for (int i = 0; i < colliders.size(); ++i)
+    {
+        if (i == colliderID) { continue; }
+
+        if (minX > colliders[i].maxX() ||
+            maxX < colliders[i].minX() ||
+            minY > colliders[i].maxY() ||
+            maxY < colliders[i].minY() )
+        {
+            continue;
+        }
+
+        // collision = true;
+        entitySystem->DestroyEntity(entityID);
+        entitySystem->DestroyEntity(colliders[i].entityID);
+    }
 }
 
 int CollisionSystem::Register(int EntityID, Float2 position, Float2 size)

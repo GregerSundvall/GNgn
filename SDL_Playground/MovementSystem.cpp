@@ -3,15 +3,12 @@
 #include "Engine.h"
 
 
-void MovementSystem::Update(TransformSystem& transformSystem)
+void MovementSystem::Update()
 {
     for (int i = 0; i < movements.size(); ++i)
     {
-        Entity* entity = entitySystem->GetEntity(movements[i].EntityID);
-        transformSystem.AddOffset(entity->TransformID, movements[i].Velocity);
-        
+        entitySystem->Move(movements[i].EntityID, movements[i].Velocity);
     }
-    
 }
 
 int MovementSystem::Register(int entityID, Float2 size)
@@ -26,12 +23,12 @@ void MovementSystem::Unregister(int spriteID)
     movements.pop_back();
 }
 
-Float2 MovementSystem::Get(int movementID)
+Float2 MovementSystem::GetVelocity(int movementID)
 {
     return movements[movementID].Velocity;
 }
 
-void MovementSystem::Set(int movementID, Float2 newVelocity)
+void MovementSystem::SetVelocity(int movementID, Float2 newVelocity)
 {
     movements[movementID].Velocity = newVelocity;
 }

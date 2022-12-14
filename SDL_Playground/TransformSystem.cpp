@@ -4,17 +4,7 @@
 
 void TransformSystem::Update()
 {
-    // Update positions
-    for (int i = 0; i < transforms.size(); ++i)
-    {
-        // If index is not in use, skip.
-        // if (transforms[i].ID == -1)  { continue;  }
-        //
-        // transforms[i].Position.X += transforms[i].Velocity.X * dTime;   
-        // transforms[i].Position.Y += transforms[i].Velocity.Y * dTime;  
-    }
 
-    // Let Game handle entity going out of bounds?
 }
 
 int TransformSystem::Register(int EntityID, Float2 position, Float2 size)
@@ -30,12 +20,12 @@ void TransformSystem::Unregister(int transformID)
     transforms.pop_back();
 }
 
-void TransformSystem::Destructor()
-{
-    transforms.clear();
-}
-
 Transform* TransformSystem::GetPosition(int id)
 {
     return &transforms[id];
+}
+
+void TransformSystem::Destructor()
+{
+    transforms.clear();
 }

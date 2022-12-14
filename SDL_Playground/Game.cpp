@@ -5,7 +5,7 @@
 
 void Game::Start()
 {
-    PlayerEntityID = entitySystem->CreateEntity(Float2(400, 900));
+    PlayerEntityID = entitySystem->CreateEntity();
 }
 
 void Game::SpawnEnemy()
@@ -25,6 +25,7 @@ void Game::Update()
     // }
     //
     // entitySystem->Update();
+    drawSystem->DrawAll();
 }
 
 void Game::Destroy()

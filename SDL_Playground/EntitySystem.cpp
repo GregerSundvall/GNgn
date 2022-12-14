@@ -10,6 +10,22 @@ int EntitySystem::CreateEntity()
     return entities.size() -1;
 }
 
+void EntitySystem::Move(int entityID, Float2 offset)
+{
+    transformSystem->AddOffset(entities[entityID].TransformID, offset);
+}
+
+void EntitySystem::MoveTo(int entityID, Float2 position)
+{
+    transformSystem->SetPosition(entities[entityID].TransformID, position);
+}
+
+void EntitySystem::SweepAndMove(int entityID, Float2 offset)
+{
+    collisionSystem->Sweep(entityID, entities[entityID].CollisionID,
+        movementSystem->GetVelocity(entities[entityID].MovementID));
+}
+
 void EntitySystem::DestroyEntity(int entityID)
 {
     RemoveTransform(entityID);

@@ -14,9 +14,9 @@ public:
     void Update();
     int Register(int EntityID, Float2 position, Float2 size);
     void Unregister(int transformID);
-    void Destructor();
     Transform* GetPosition(int id);
     void SetPosition(int transformID, Float2 position) {transforms[transformID].Position = position;}
     void AddOffset(int transformID, Float2 offset) {transforms[transformID].Position += offset;}
+    void Destructor();
     
 };
