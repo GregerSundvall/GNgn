@@ -31,7 +31,7 @@ class EntitySystem
     std::vector<Entity> entities;
     
     TransformSystem* transformSystem = new TransformSystem;
-    CollisionSystem* collisionSystem = new CollisionSystem;
+    CollisionSystem* collisionSystem = new CollisionSystem(&this);
     MovementSystem* movementSystem = new MovementSystem(&this);
     SpriteSystem* spriteSystem = new SpriteSystem;
     
@@ -39,6 +39,9 @@ public:
 
     int CreateEntity();
     Entity* GetEntity(int entityID) {return &entities[entityID];}
+    void Move(int entityID, Float2 offset);
+    void MoveTo(int entityID, Float2 position);
+    void SweepAndMove(int entityID, Float2 offset);
     void DestroyEntity(int entityID);
     void AddTransform(int entityID, Float2 position, Float2 size);
     void AddCollider(int entityID);
@@ -51,6 +54,8 @@ public:
     void Update();
     void Destructor();
 };
+
+
 
 
 

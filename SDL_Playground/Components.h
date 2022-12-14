@@ -32,6 +32,11 @@ struct Collider
     int entityID;
     Float2 Position;
     Float2 Size;
+
+    float minX() { return Position.x - Size.x * 0.5; }
+    float maxX() { return Position.x + Size.x * 0.5; }
+    float minY() { return Position.y - Size.y * 0.5; }
+    float maxY() { return Position.y + Size.y * 0.5; }
 };
 
 struct Movement

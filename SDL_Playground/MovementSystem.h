@@ -19,10 +19,10 @@ class MovementSystem
     }
 
 public:
-    void Update(TransformSystem& transformSystem);
+    void Update();
     int Register(int entityID, Float2 size);
     void Unregister(int spriteID);
-    Float2 Get(int movementID);
-    void Set(int movementID, Float2 newVelocity);
+    Float2 GetVelocity(int movementID);
+    void SetVelocity(int movementID, Float2 newVelocity);
     void Destructor() {movements.clear();}
 };
