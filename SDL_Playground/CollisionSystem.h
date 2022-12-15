@@ -11,13 +11,10 @@ class CollisionSystem
     EntitySystem* entitySystem;
     
 public:
-    CollisionSystem(EntitySystem* entitySystem)
-    {
-        this->entitySystem = entitySystem;
-    }
+    CollisionSystem(EntitySystem* entitySystem) { this->entitySystem = entitySystem; }
 
     void Update();
-    void Sweep(int entityID, int colliderID, Float2 offset);
+    int Sweep(int colliderID, Float2 velocity);
     int Register(int EntityID, Float2 position, Float2 size);
     void Unregister(int index);
     void Destructor();

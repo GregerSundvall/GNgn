@@ -8,6 +8,7 @@ Game::Game()
     drawSystem = new DrawSystem;
     entitySystem = new EntitySystem(drawSystem);
     SpawnPlayer();
+    SpawnEnemy();
 }
 
 void Game::Start()
@@ -32,7 +33,11 @@ void Game::SpawnEnemy()
 {
     // std::uniform_int_distribution<int> distribution(0, 8000);
     // auto randomX = static_cast<float>(distribution(generator)) / 10;
-    // EnemyEntityIDs.push_back(entitySystem->CreateEntity(Float2(randomX, 0)));
+    EnemyEntityIDs.push_back(entitySystem->CreateEntity());
+    entitySystem->AddTransform(EnemyEntityIDs[0], Float2(400, 0), Float2(24, 24));
+    entitySystem->AddCollider(EnemyEntityIDs[0]);
+    entitySystem->AddMovement(EnemyEntityIDs[0], Float2(0, 1.f));
+    entitySystem->AddSprite(EnemyEntityIDs[0], Color(150, 50, 100));
 }
 
 void Game::SpawnPlayer()

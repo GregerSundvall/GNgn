@@ -31,10 +31,10 @@ void EntitySystem::MoveTo(int entityID, Float2 position)
     transformSystem->SetPosition(entities[entityID].TransformID, position);
 }
 
-void EntitySystem::SweepAndMove(int entityID, Float2 offset)
+int EntitySystem::Sweep(int entityID, Float2 velocity)
 {
-    collisionSystem->Sweep(entityID, entities[entityID].CollisionID,
-        movementSystem->GetVelocity(entities[entityID].MovementID));
+    int collidingEntityID = collisionSystem->Sweep(entities[entityID].CollisionID, velocity);
+    return collidingEntityID;
 }
 
 void EntitySystem::DestroyEntity(int entityID)
@@ -115,10 +115,10 @@ void EntitySystem::RemoveSprite(int entityID)
 
 void EntitySystem::Update()
 {
-    // movementSystem->Update();
-    // collisionSystem->Update();
     transformSystem->Update();
     spriteSystem->Update();
+    collisionSystem->Update();
+    movementSystem->Update();
 }
 
 void EntitySystem::Destructor()
