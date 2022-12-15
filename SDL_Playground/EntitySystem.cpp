@@ -21,6 +21,15 @@ int EntitySystem::CreateEntity()
     return static_cast<int>(entities.size()) -1;
 }
 
+void EntitySystem::SetVelocity(int entityID, Float2 velocity)
+{
+    movementSystem->SetVelocity(entities[entityID].MovementID, velocity);
+}
+
+void EntitySystem::EntitiesColliding(int entityID1, int entityID2)
+{
+}
+
 void EntitySystem::Move(int entityID, Float2 offset)
 {
     transformSystem->AddOffset(entities[entityID].TransformID, offset);

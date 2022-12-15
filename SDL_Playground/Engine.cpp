@@ -6,7 +6,6 @@
 SDL_Renderer* renderer;
 Input* input;
 float dTime = 0.0f;
-// std::vector<std::vector*> stuffToDraw;
 std::default_random_engine generator;
 
 

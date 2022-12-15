@@ -10,6 +10,7 @@ void Input::Reset()
     S = 0;
     A = 0;
     D = 0;
+    Space = 0;
 }
 
 void Input::Update()
@@ -17,7 +18,15 @@ void Input::Update()
     Reset();
     
     SDL_Event event;
-    while (SDL_PollEvent(&event)) { if (event.type == SDL_QUIT) { Esc = true; } }
+    while (SDL_PollEvent(&event))
+    {
+        if (event.type == SDL_QUIT) { Esc = true; }
+        if (event.type == SDL_KEYDOWN &&
+            event.key.keysym.scancode == SDL_SCANCODE_SPACE)
+        {
+            Space = 1;
+        }
+    }
 
     const Uint8* keyStates = SDL_GetKeyboardState(NULL);
     if (keyStates[SDL_SCANCODE_ESCAPE]) { Esc = 1; }

@@ -23,6 +23,7 @@ class EntitySystem
     DrawSystem* drawSystem; // Being forwarded to spritesystem in constructor. May not need to save?
     //InputSystem
     //HealthSystem
+    //ScoreSystem?
     
 public:
     EntitySystem(DrawSystem* drawSystem);
@@ -30,6 +31,8 @@ public:
     Entity* GetEntity(int entityID) { return &entities[entityID]; }
     Float2* GetPosition(int entityID) { return transformSystem->GetPosition(entities[entityID].TransformID); }
     Transform* GetTransform(int entityID) { return transformSystem->GetTransform(entities[entityID].TransformID); }
+    void SetVelocity(int entityID, Float2 velocity);
+    void EntitiesColliding(int entityID1, int entityID2);
     void Move(int entityID, Float2 offset);
     void MoveTo(int entityID, Float2 position);
     int Sweep(int entityID, Float2 velocity);

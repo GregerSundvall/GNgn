@@ -2,7 +2,7 @@
 
 struct Input
 {
-    int Esc, W, S, A, D;
+    int Esc, W, S, A, D, Space;
     // int W = 0;
     // int S = 0;
     // int A = 0;

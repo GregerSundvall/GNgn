@@ -5,6 +5,7 @@
 class DrawSystem
 {
     std::vector<DrawObject> objectsToDraw;
+    // Split to two or three vectors, for Z prioritization?
 
 public:
     DrawSystem()

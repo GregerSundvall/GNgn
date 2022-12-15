@@ -25,16 +25,9 @@ int CollisionSystem::Sweep(int colliderID, Float2 velocity)
             maxY < colliders[i].minY() )
         {
 
-        // std::cout << "A x" << colliders[i].Position.x << std::endl;
-        std::cout << "A y " << colliders[i].Position.y << std::endl;
-        // std::cout << "B x" << colliders[colliderID].Position.x << std::endl;
-        std::cout << "B y " << colliders[colliderID].Position.y << std::endl;
-        std::cout << "" << std::endl;
-        
         colliders[colliderID].Position += velocity;
         continue;
         }
-        std::cout << "collision" << std::endl;
         return colliders[i].entityID; // Collision. Return other part's entity ID
     }
     
