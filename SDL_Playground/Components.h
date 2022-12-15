@@ -60,7 +60,7 @@ struct Movement
 
 struct Entity
 {
-    int ID;
+    // int ID;
     int TransformID = -1;
     int MovementID = -1;
     int CollisionID = -1;

@@ -11,17 +11,18 @@ class Game
     int EnemiesToSpawn = 100;
     std::vector<int> EnemyEntityIDs;
     
-    EntitySystem* entitySystem = new EntitySystem;
-    DrawSystem* drawSystem = new DrawSystem;
+    DrawSystem* drawSystem;
+    EntitySystem* entitySystem;
     // Event system?
     // Move input system here?
     // Move SDL stuff here?
     // Move all in this class to main?
 
 public:
-
+    Game();
     void Start();
-    void SpawnEnemy();
     void Update();
+    void SpawnEnemy();
+    void SpawnPlayer();
     void Destroy();
 };

@@ -12,6 +12,8 @@ std::default_random_engine generator;
 
 Engine::Engine()
 {
+    game = new Game;
+    
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow(
         "SDL2 Test",

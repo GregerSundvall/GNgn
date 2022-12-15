@@ -16,14 +16,20 @@ void DrawSystem::DrawAll()
 {
     for (int i = 0; i < objectsToDraw.size(); ++i)
     {
-        Draw(objectsToDraw[i]);
+        SDL_SetRenderDrawColor(renderer,
+        objectsToDraw[i].sprite.Color.R,
+        objectsToDraw[i].sprite.Color.G,
+        objectsToDraw[i].sprite.Color.B,
+        objectsToDraw[i].sprite.Color.A);
+        SDL_RenderFillRect(renderer, &objectsToDraw[i].rect);
     }
     objectsToDraw.clear();
 }
 
 void DrawSystem::Draw(DrawObject& drawObject)
 {
-    SDL_SetRenderDrawColor(renderer, drawObject.sprite.Color.R,
+    SDL_SetRenderDrawColor(renderer,
+        drawObject.sprite.Color.R,
         drawObject.sprite.Color.G,
         drawObject.sprite.Color.B,
         drawObject.sprite.Color.A);

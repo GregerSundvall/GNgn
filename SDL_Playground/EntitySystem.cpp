@@ -5,19 +5,20 @@
 #include "SpriteSystem.h"
 
 
-EntitySystem::EntitySystem()
+EntitySystem::EntitySystem(DrawSystem* drawSystem)
 {
     transformSystem = new TransformSystem;
     collisionSystem = new CollisionSystem(this);
     movementSystem = new MovementSystem(this);
-    spriteSystem = new SpriteSystem;
+    spriteSystem = new SpriteSystem(this, drawSystem);
+    this->drawSystem = drawSystem;
 }
 
 int EntitySystem::CreateEntity()
 {
-    entities.push_back(Entity(entities.size()));
+    entities.push_back(Entity());
 
-    return entities.size() -1;
+    return static_cast<int>(entities.size()) -1;
 }
 
 void EntitySystem::Move(int entityID, Float2 offset)
@@ -58,7 +59,7 @@ void EntitySystem::AddCollider(int entityID) // Creates collider with same posit
 {
     if (entities[entityID].CollisionID != -1) { RemoveCollider(entityID); } // Remove old, if already present
     
-    Transform* transform = transformSystem->GetPosition(entities[entityID].TransformID);
+    Transform* transform = transformSystem->GetTransform(entities[entityID].TransformID);
     entities[entityID].CollisionID = collisionSystem->Register(entityID, transform->Position, transform->Size);
 }
 
@@ -114,9 +115,10 @@ void EntitySystem::RemoveSprite(int entityID)
 
 void EntitySystem::Update()
 {
-    movementSystem->Update();
-    collisionSystem->Update();
+    // movementSystem->Update();
+    // collisionSystem->Update();
     transformSystem->Update();
+    spriteSystem->Update();
 }
 
 void EntitySystem::Destructor()

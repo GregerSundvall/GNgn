@@ -37,7 +37,7 @@ int CollisionSystem::Register(int EntityID, Float2 position, Float2 size)
 {
     colliders.push_back(Collider(EntityID, position, size));
     
-    return colliders.size() -1;
+    return static_cast<int>(colliders.size()) -1;
 }
 
 void CollisionSystem::Unregister(int colliderID)

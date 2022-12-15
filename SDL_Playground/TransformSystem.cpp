@@ -11,7 +11,7 @@ int TransformSystem::Register(int EntityID, Float2 position, Float2 size)
 {
     transforms.push_back(Transform(EntityID, position, size));
     
-    return transforms.size() -1;
+    return static_cast<int>(transforms.size()) -1;
 }
 
 void TransformSystem::Unregister(int transformID)
@@ -20,9 +20,14 @@ void TransformSystem::Unregister(int transformID)
     transforms.pop_back();
 }
 
-Transform* TransformSystem::GetPosition(int id)
+Float2* TransformSystem::GetPosition(int transformID)
 {
-    return &transforms[id];
+    return &transforms[transformID].Position;
+}
+
+Transform* TransformSystem::GetTransform(int transformID)
+{
+    return &transforms[transformID];
 }
 
 void TransformSystem::Destructor()

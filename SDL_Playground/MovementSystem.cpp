@@ -1,6 +1,5 @@
 ﻿#include "MovementSystem.h"
 
-#include "Engine.h"
 
 
 void MovementSystem::Update()
@@ -14,7 +13,7 @@ void MovementSystem::Update()
 int MovementSystem::Register(int entityID, Float2 size)
 {
     movements.push_back(Movement(entityID, size));
-    return movements.size() -1;
+    return static_cast<int>(movements.size()) -1;
 }
 
 void MovementSystem::Unregister(int spriteID)

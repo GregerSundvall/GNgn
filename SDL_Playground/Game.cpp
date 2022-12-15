@@ -3,9 +3,29 @@
 #include "Engine.h"
 
 
+Game::Game()
+{
+    drawSystem = new DrawSystem;
+    entitySystem = new EntitySystem(drawSystem);
+    SpawnPlayer();
+}
+
 void Game::Start()
 {
-    // PlayerEntityID = entitySystem->CreateEntity();
+    
+}
+
+void Game::Update()
+{
+    if (!isRunning) { return; }
+    
+    // if (EnemiesToSpawn > 0)
+    // {
+    //     SpawnEnemy();
+    // }
+    
+    entitySystem->Update();
+    drawSystem->DrawAll();
 }
 
 void Game::SpawnEnemy()
@@ -15,17 +35,12 @@ void Game::SpawnEnemy()
     // EnemyEntityIDs.push_back(entitySystem->CreateEntity(Float2(randomX, 0)));
 }
 
-void Game::Update()
+void Game::SpawnPlayer()
 {
-    // if (!isRunning) { return; }
-    //
-    // if (EnemiesToSpawn > 0)
-    // {
-    //     SpawnEnemy();
-    // }
-    //
-    // entitySystem->Update();
-    drawSystem->DrawAll();
+    PlayerEntityID = entitySystem->CreateEntity();
+    entitySystem->AddTransform(PlayerEntityID, Float2(400, 900), Float2(32, 32));
+    entitySystem->AddCollider(PlayerEntityID);
+    entitySystem->AddSprite(PlayerEntityID, Color(100, 100, 100));
 }
 
 void Game::Destroy()
