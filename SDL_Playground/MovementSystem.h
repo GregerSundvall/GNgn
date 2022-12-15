@@ -13,12 +13,12 @@ class MovementSystem
     std::vector<Movement> movements;
     EntitySystem* entitySystem;
     
+public:
     MovementSystem(EntitySystem* entitySystem)
     {
         this->entitySystem = entitySystem;
     }
 
-public:
     void Update();
     int Register(int entityID, Float2 size);
     void Unregister(int spriteID);

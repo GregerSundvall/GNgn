@@ -10,11 +10,11 @@ class CollisionSystem
     std::vector<Collider> colliders;
     EntitySystem* entitySystem;
     
+public:
     CollisionSystem(EntitySystem* entitySystem)
     {
         this->entitySystem = entitySystem;
     }
-public:
 
     void Update();
     void Sweep(int entityID, int colliderID, Float2 offset);
