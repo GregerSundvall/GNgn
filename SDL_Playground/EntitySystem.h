@@ -2,28 +2,12 @@
 #include "Components.h"
 #include "CollisionSystem.h"
 #include "MovementSystem.h"
+#include "SpriteSystem.h"
 #include "TransformSystem.h"
 struct Collider;
 struct Transform;
 
 
-
-class SpriteSystem
-{
-    std::vector<Sprite> sprites;
-public:
-    int Register(int entityID, Color color)
-    {
-        sprites.push_back(Sprite(entityID, color));
-        return sprites.size() -1;
-    }
-    void Unregister(int spriteID)
-    {
-        sprites[spriteID] = sprites[sprites.size() -1];
-        sprites.pop_back();
-    }
-    void Destructor() {sprites.clear();}
-};
 
 
 class EntitySystem
@@ -31,11 +15,11 @@ class EntitySystem
     std::vector<Entity> entities;
     
     TransformSystem* transformSystem = new TransformSystem;
-    CollisionSystem* collisionSystem = new CollisionSystem(&this);
-    MovementSystem* movementSystem = new MovementSystem(&this);
+    CollisionSystem* collisionSystem = new CollisionSystem(this);
+    MovementSystem* movementSystem = new MovementSystem(this);
     SpriteSystem* spriteSystem = new SpriteSystem;
-    
 public:
+    
 
     int CreateEntity();
     Entity* GetEntity(int entityID) {return &entities[entityID];}
