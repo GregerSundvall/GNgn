@@ -1,7 +1,7 @@
 ﻿#include "CollisionSystem.h"
-
 #include "EntitySystem.h"
 
+#include <iostream>
 
 void CollisionSystem::Update()
 {
@@ -24,8 +24,10 @@ int CollisionSystem::Sweep(int colliderID, Float2 velocity)
             minY > colliders[i].maxY() ||
             maxY < colliders[i].minY() )
         {
+        std::cout << "no collision" << std::endl;
             continue;
         }
+        std::cout << "collision" << std::endl;
         return colliders[i].entityID; // Collision. Return other part's entity ID
     }
     
