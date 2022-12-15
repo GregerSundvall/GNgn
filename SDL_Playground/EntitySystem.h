@@ -1,12 +1,12 @@
 ﻿#pragma once
+#include <vector>
 #include "Components.h"
-#include "CollisionSystem.h"
-#include "MovementSystem.h"
-#include "SpriteSystem.h"
-#include "TransformSystem.h"
-struct Collider;
-struct Transform;
-
+class TransformSystem;
+class CollisionSystem;
+class MovementSystem;
+class SpriteSystem;
+// struct Collider;
+// struct Transform;
 
 
 
@@ -14,13 +14,13 @@ class EntitySystem
 {
     std::vector<Entity> entities;
     
-    TransformSystem* transformSystem = new TransformSystem;
-    CollisionSystem* collisionSystem = new CollisionSystem(this);
-    MovementSystem* movementSystem = new MovementSystem(this);
-    SpriteSystem* spriteSystem = new SpriteSystem;
-public:
+    TransformSystem* transformSystem;
+    CollisionSystem* collisionSystem;
+    MovementSystem* movementSystem;
+    SpriteSystem* spriteSystem;
     
-
+public:
+    EntitySystem();
     int CreateEntity();
     Entity* GetEntity(int entityID) {return &entities[entityID];}
     void Move(int entityID, Float2 offset);

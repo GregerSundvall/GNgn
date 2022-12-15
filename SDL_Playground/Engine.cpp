@@ -10,6 +10,21 @@ float dTime = 0.0f;
 std::default_random_engine generator;
 
 
+Engine::Engine()
+{
+    SDL_Init(SDL_INIT_VIDEO);
+    window = SDL_CreateWindow(
+        "SDL2 Test",
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        width, height,
+        SDL_WINDOW_SHOWN);
+        
+    renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
+
+    Run();
+};
+
 void Engine::Run()
 {
     Uint64 previousTicks = SDL_GetPerformanceCounter();

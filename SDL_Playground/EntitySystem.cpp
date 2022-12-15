@@ -1,7 +1,17 @@
 ﻿#include "EntitySystem.h"
-
 #include "TransformSystem.h"
+#include "CollisionSystem.h"
+#include "MovementSystem.h"
+#include "SpriteSystem.h"
 
+
+EntitySystem::EntitySystem()
+{
+    transformSystem = new TransformSystem;
+    collisionSystem = new CollisionSystem(this);
+    movementSystem = new MovementSystem(this);
+    spriteSystem = new SpriteSystem;
+}
 
 int EntitySystem::CreateEntity()
 {
