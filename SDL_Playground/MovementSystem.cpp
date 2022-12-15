@@ -4,30 +4,28 @@
 
 void MovementSystem::Update()
 {
-    for (int i = movements.size() - 1; i >= 0; --i)
+    for (int i = 0; i < movements.size(); ++i)
     {
         int eID = movements[i].EntityID;
         auto entity = entitySystem->GetEntity(eID);
         
         if (entity->CollisionID == -1) // Entity itself does not have a collider
-            {
+        {
             entitySystem->Move(eID, movements[i].Velocity);
             continue;
-            }
+        }
 
         // Check collision against all other colliders
         int sweepResponse = entitySystem->Sweep(eID, movements[i].Velocity); 
         if (sweepResponse == -1) // No collision
-            {
+        {
             entitySystem->Move(eID, movements[i].Velocity);
             continue;
-            }
-        //Collision, kill both.
-        entitySystem->DestroyEntity(eID);
-        entitySystem->DestroyEntity(sweepResponse);
-        
+        }
+        //Move to collisionSystem:
+        entitySystem->AddCollidingEntity(eID);
+        entitySystem->AddCollidingEntity(sweepResponse);
     }
-
 }
 
 int MovementSystem::Register(int entityID, Float2 size)

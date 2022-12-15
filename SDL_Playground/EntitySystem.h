@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <set>
 #include <vector>
 #include "Components.h"
 #include "TransformSystem.h"
@@ -15,6 +16,7 @@ class DrawSystem;
 class EntitySystem
 {
     std::vector<Entity> entities;
+    std::set<int> collidingIDs;
     
     TransformSystem* transformSystem;
     CollisionSystem* collisionSystem;
@@ -32,7 +34,8 @@ public:
     Float2* GetPosition(int entityID) { return transformSystem->GetPosition(entities[entityID].TransformID); }
     Transform* GetTransform(int entityID) { return transformSystem->GetTransform(entities[entityID].TransformID); }
     void SetVelocity(int entityID, Float2 velocity);
-    void EntitiesColliding(int entityID1, int entityID2);
+    void AddCollidingEntity(int entityID);
+    std::set<int>* GetCollidingIDs();
     void Move(int entityID, Float2 offset);
     void MoveTo(int entityID, Float2 position);
     int Sweep(int entityID, Float2 velocity);

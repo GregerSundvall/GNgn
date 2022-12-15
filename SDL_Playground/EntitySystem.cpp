@@ -26,8 +26,14 @@ void EntitySystem::SetVelocity(int entityID, Float2 velocity)
     movementSystem->SetVelocity(entities[entityID].MovementID, velocity);
 }
 
-void EntitySystem::EntitiesColliding(int entityID1, int entityID2)
+void EntitySystem::AddCollidingEntity(int entityID)
 {
+    collidingIDs.insert(entityID);
+}
+
+std::set<int>* EntitySystem::GetCollidingIDs()
+{
+    return &collidingIDs;
 }
 
 void EntitySystem::Move(int entityID, Float2 offset)
