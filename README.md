@@ -1,6 +1,9 @@
 # SDL_Playground
 Assignment "Performance-aware space shooter"
 
+IMPORTANT: because of git trouble the master branch is not up to speed. See "Components" branch!
+
+
 As usual, time passed a little bit too fast. A hospital visit with surgery that required pretty much
 not eating for a week, and one of the kids getting an emergency appendix removal surgery, both during 
 the project, probably didn't help... 
