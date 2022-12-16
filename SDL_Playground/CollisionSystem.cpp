@@ -28,6 +28,11 @@ int CollisionSystem::Sweep(int colliderID, Float2 velocity)
         colliders[colliderID].Position += velocity;
         continue;
         }
+        std::cout << colliders[colliderID].Position.y << std::endl;
+        std::cout << entitySystem->GetPosition(colliders[colliderID].entityID)->y << std::endl;
+        std::cout << colliders[i].Position.y << std::endl;
+        std::cout << entitySystem->GetPosition(colliders[i].entityID)->y << std::endl;
+        std::cout << " " << std::endl;
         return colliders[i].entityID; // Collision. Return other part's entity ID
     }
     

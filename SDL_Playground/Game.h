@@ -7,7 +7,7 @@
 class Game
 {
     bool isRunning = true;
-    int PlayerEntityID = -1;
+    int PlayerEntityID = -1; // Will need updates on ID changes.
     int EnemiesToSpawn = 100;
     // std::vector<int> EnemyEntityIDs; // Needs updates on entity ID changes.
     
