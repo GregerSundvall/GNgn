@@ -80,15 +80,27 @@ void EntitySystem::Sweep(int entityID, Float2 velocity)
 
 void EntitySystem::DestroyEntity(int entityID)
 {
+    std::cout << "Destroying" << std::endl;
+    std::cout << "E " << entityID << std::endl;
+    std::cout << "T " << entities[entityID].transformID << std::endl;
+    std::cout << "C " << entities[entityID].collisionID << std::endl;
+    std::cout << "M " << entities[entityID].movementID << std::endl;
+    std::cout << "S " << entities[entityID].spriteID << std::endl;
     RemoveTransform(entityID);
     RemoveCollider(entityID);
     RemoveMovement(entityID);
     RemoveSprite(entityID);
+    game->NotifyEntityDestroyed(entityID);
 
     game->NotifyIdChanged(entities.size() -1, entityID);
     entities[entityID] = entities[entities.size() -1];
     entities.pop_back();
-    game->NotifyEntityDestroyed(entityID);
+    std::cout << "After destruction" << std::endl;
+    std::cout << "E " << entityID << std::endl;
+    std::cout << "T " << entities[entityID].transformID << std::endl;
+    std::cout << "C " << entities[entityID].collisionID << std::endl;
+    std::cout << "M " << entities[entityID].movementID << std::endl;
+    std::cout << "S " << entities[entityID].spriteID << std::endl;
 }
 
 // void EntitySystem::DestroyEntities(std::vector<int> entityIDs)

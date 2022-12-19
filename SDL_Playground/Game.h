@@ -29,6 +29,6 @@ public:
     void SpawnEnemy(float xPos);
     void SpawnPlayer();
     void NotifyIdChanged(int oldEntityID, int newEntityID) { if (oldEntityID == PlayerEntityID){ PlayerEntityID = newEntityID;}; }
-    void NotifyEntityDestroyed(int eID) { if (eID == PlayerEntityID) { std::cout << "game over" << std::endl; } }
+    void NotifyEntityDestroyed(int eID) { if (eID == PlayerEntityID) { PlayerEntityID = -1; std::cout << "game over" << std::endl; } }
     void Destroy();
 };

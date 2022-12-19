@@ -7,7 +7,7 @@ void CollisionSystem::Update()
 {
     for (int i = 0; i < colliders.size(); ++i)
     {
-        ScanOverlaps(colliders[i].entityID);
+        ScanOverlaps(i);
     }
     HandleOverlaps();
 }
@@ -39,6 +39,7 @@ void CollisionSystem::HandleOverlaps()
 {
     if (collidingIDs.size() > 0)
     {
+        std::cout << "colliding IDs count is " << collidingIDs.size() << std::endl;
         std::vector<int> entityIDs;
         for (int entityID : collidingIDs)
         {
