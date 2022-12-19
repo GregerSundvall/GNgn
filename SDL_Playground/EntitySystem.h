@@ -35,10 +35,12 @@ public:
     Transform* GetTransform(int entityID) { return transformSystem->GetTransform(entities[entityID].TransformID); }
     void SetVelocity(int entityID, Float2 velocity);
     void AddCollidingEntity(int entityID);
+    void AddOffset(int entityID, Float2 velocity);
     std::set<int>* GetCollidingIDs();
     void Move(int entityID, Float2 offset);
     void MoveTo(int entityID, Float2 position);
-    int Sweep(int entityID, Float2 velocity);
+    // int Sweep(int entityID, Float2 velocity);
+    void Sweep(int entityID, Float2 velocity);
     void DestroyEntity(int entityID);
     void AddTransform(int entityID, Float2 position, Float2 size);
     void AddCollider(int entityID);

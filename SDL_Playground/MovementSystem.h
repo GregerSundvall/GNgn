@@ -24,5 +24,6 @@ public:
     void Unregister(int spriteID);
     Float2 GetVelocity(int movementID);
     void SetVelocity(int movementID, Float2 newVelocity);
+    int Size() { return movements.size(); }
     void Destructor() {movements.clear();}
 };

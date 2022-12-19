@@ -6,25 +6,37 @@ void MovementSystem::Update()
 {
     for (int i = 0; i < movements.size(); ++i)
     {
-        int eID = movements[i].EntityID;
-        auto entity = entitySystem->GetEntity(eID);
-        
-        if (entity->CollisionID == -1) // Entity itself does not have a collider
-        {
-            entitySystem->Move(eID, movements[i].Velocity);
-            continue;
-        }
+        entitySystem->AddOffset(movements[i].EntityID, movements[i].Velocity);
 
-        // Check collision against all other colliders
-        int sweepResponse = entitySystem->Sweep(eID, movements[i].Velocity); 
-        if (sweepResponse == -1) // No collision
-        {
-            entitySystem->Move(eID, movements[i].Velocity);
-            continue;
-        }
-        //Move to collisionSystem:
-        entitySystem->AddCollidingEntity(eID);
-        entitySystem->AddCollidingEntity(sweepResponse);
+        
+        // auto ent = entitySystem->GetEntity(movements[i].EntityID);
+        // // auto pos = entitySystem->GetPosition() ;
+        //
+        // int eID = movements[i].EntityID;
+        // Entity* entity = entitySystem->GetEntity(eID);
+        //
+        // if (entity->CollisionID == -1) // Entity itself does not have a collider, move along.
+        // {
+        //     entitySystem->Move(eID, movements[i].Velocity);
+        //     continue;
+        // }
+        //
+        // entitySystem->Sweep(eID, movements[i].Velocity);
+        // entitySystem->Move(eID, movements[i].Velocity);
+
+        // Invert code above to simplify?
+
+        
+        // // Check collision against all other colliders
+        // int sweepResponse = entitySystem->Sweep(eID, movements[i].Velocity); 
+        // if (sweepResponse == -1) // No collision
+        // {
+        //     entitySystem->Move(eID, movements[i].Velocity);
+        //     continue;
+        // }
+        // //Add to collisionSystem:
+        // entitySystem->AddCollidingEntity(eID);
+        // entitySystem->AddCollidingEntity(sweepResponse);
     }
 }
 

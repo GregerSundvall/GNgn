@@ -46,10 +46,6 @@ struct Collider
     Float2 Position;
     Float2 Size;
 
-    float minX() { return Position.x - Size.x * 0.5f; }
-    float maxX() { return Position.x + Size.x * 0.5f; }
-    float minY() { return Position.y - Size.y * 0.5f; }
-    float maxY() { return Position.y + Size.y * 0.5f; }
 };
 
 struct Movement

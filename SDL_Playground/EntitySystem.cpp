@@ -31,6 +31,18 @@ void EntitySystem::AddCollidingEntity(int entityID)
     collidingIDs.insert(entityID);
 }
 
+void EntitySystem::AddOffset(int entityID, Float2 velocity)
+{
+    if (entities[entityID].TransformID != -1)
+    {
+        transformSystem->AddOffset(entities[entityID].TransformID, velocity);
+    }
+    if (entities[entityID].CollisionID != -1)
+    {
+        collisionSystem->AddOffset(entities[entityID].CollisionID, velocity);
+    }
+}
+
 std::set<int>* EntitySystem::GetCollidingIDs()
 {
     return &collidingIDs;
@@ -38,7 +50,18 @@ std::set<int>* EntitySystem::GetCollidingIDs()
 
 void EntitySystem::Move(int entityID, Float2 offset)
 {
-    transformSystem->AddOffset(entities[entityID].TransformID, offset);
+    for (int i = 0; i < movementSystem->Size(); ++i)
+    {
+        // transformSystem
+    }
+    if (entities[entityID].TransformID != -1)
+    {
+        transformSystem->AddOffset(entities[entityID].TransformID, offset);
+    }
+    if (entities[entityID].CollisionID != -1)
+    {
+        collisionSystem->AddOffset(entities[entityID].CollisionID, offset);
+    }
 }
 
 void EntitySystem::MoveTo(int entityID, Float2 position)
@@ -46,10 +69,11 @@ void EntitySystem::MoveTo(int entityID, Float2 position)
     transformSystem->SetPosition(entities[entityID].TransformID, position);
 }
 
-int EntitySystem::Sweep(int entityID, Float2 velocity)
+void EntitySystem::Sweep(int entityID, Float2 velocity)
 {
-    int collidingEntityID = collisionSystem->Sweep(entities[entityID].CollisionID, velocity);
-    return collidingEntityID;
+    // collisionSystem->Sweep(entities[entityID].CollisionID, velocity);
+    // int collidingEntityID = collisionSystem->Sweep(entities[entityID].CollisionID, velocity);
+    // return collidingEntityID;
 }
 
 void EntitySystem::DestroyEntity(int entityID)
@@ -131,9 +155,9 @@ void EntitySystem::RemoveSprite(int entityID)
 void EntitySystem::Update()
 {
     transformSystem->Update();
+    movementSystem->Update();
     spriteSystem->Update();
     collisionSystem->Update();
-    movementSystem->Update();
 }
 
 void EntitySystem::Destructor()

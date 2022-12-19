@@ -5,38 +5,44 @@
 
 void CollisionSystem::Update()
 {
-
+    for (int i = 0; i < colliders.size(); ++i)
+    {
+        ScanOverlaps(colliders[i].entityID);
+    }
 }
 
-int CollisionSystem::Sweep(int colliderID, Float2 velocity)
+void CollisionSystem::ScanOverlaps(int colliderID) // Scan for overlap, 1 vs all other colliders
 {
-    float minX = colliders[colliderID].minX() + velocity.x;
-    float maxX = colliders[colliderID].maxX() + velocity.x;
-    float minY = colliders[colliderID].minY() + velocity.y;
-    float maxY = colliders[colliderID].maxY() + velocity.y;
+    auto position = colliders[colliderID].Position;
+    auto size = colliders[colliderID].Size;
     
     for (int i = 0; i < colliders.size(); ++i)
     {
         if (i == colliderID) { continue; } // Dont check against self.
 
-        if (minX > colliders[i].maxX() ||
-            maxX < colliders[i].minX() ||
-            minY > colliders[i].maxY() ||
-            maxY < colliders[i].minY() )
+        auto otherPos = colliders[i].Position;
+        auto otherSize = colliders[i].Size;
+        if (position.x          > otherPos.x + otherSize.x  ||
+            position.x + size.x < otherPos.x                ||
+            position.y          > otherPos.y + otherSize.y  ||
+            position.y + size.y < otherPos.y )
         {
-
-        colliders[colliderID].Position += velocity;
-        continue;
+            continue;
         }
-        std::cout << colliders[colliderID].Position.y << std::endl;
-        std::cout << entitySystem->GetPosition(colliders[colliderID].entityID)->y << std::endl;
-        std::cout << colliders[i].Position.y << std::endl;
-        std::cout << entitySystem->GetPosition(colliders[i].entityID)->y << std::endl;
-        std::cout << " " << std::endl;
-        return colliders[i].entityID; // Collision. Return other part's entity ID
+
+        entitySystem->AddCollidingEntity(colliderID);
+        entitySystem->AddCollidingEntity(colliders[colliderID].entityID);
+        
+        // std::cout << colliders[colliderID].Position.y << std::endl;
+        // std::cout << entitySystem->GetPosition(colliders[colliderID].entityID)->y << std::endl;
+        // std::cout << colliders[i].Position.y << std::endl;
+        // std::cout << entitySystem->GetPosition(colliders[i].entityID)->y << std::endl;
+        // std::cout << " " << std::endl;
+        
+        // return colliders[i].entityID; // Collision. Return other part's entity ID
     }
     
-    return -1; // No collision
+    // return -1; // No collision
 }
 
 int CollisionSystem::Register(int EntityID, Float2 position, Float2 size)

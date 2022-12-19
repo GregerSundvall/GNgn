@@ -24,7 +24,7 @@ public:
     void Update();
     void HandleCollisions();
     void SpawnBullet();    
-    void SpawnEnemy();
+    void SpawnEnemy(float xPos);
     void SpawnPlayer();
     void Destroy();
 };
