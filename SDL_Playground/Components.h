@@ -4,14 +4,14 @@
 
 struct Color
 {
-    int R, G, B;
-    int A = 255;
+    int r, g, b;
+    int a = 255;
 };
 
 struct Sprite
 {
     int entityID;
-    Color Color;
+    Color color;
 };
 
 struct DrawObject
@@ -35,30 +35,30 @@ public:
 
 struct Transform
 {
-    int EntityID;
-    Float2 Position;
-    Float2 Size;
+    int entityID;
+    Float2 position;
+    Float2 size;
 };
 
 struct Collider
 {
     int entityID;
-    Float2 Position;
-    Float2 Size;
+    Float2 position;
+    Float2 size;
 
 };
 
 struct Movement
 {
-    int EntityID;
-    Float2 Velocity;
+    int entityID;
+    Float2 velocity;
 };
 
 struct Entity
 {
     // int ID;
-    int TransformID = -1;
-    int MovementID = -1;
-    int CollisionID = -1;
-    int SpriteID = -1;
+    int transformID = -1;
+    int movementID = -1;
+    int collisionID = -1;
+    int spriteID = -1;
 };

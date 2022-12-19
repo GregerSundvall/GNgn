@@ -1,8 +1,7 @@
 ﻿#include "DrawSystem.h"
-
 #include <SDL_render.h>
-
 #include "Engine.h"
+
 
 void DrawSystem::Add(Float2 position, Float2 size, Sprite sprite)
 {
@@ -17,10 +16,10 @@ void DrawSystem::DrawAll()
     for (int i = 0; i < objectsToDraw.size(); ++i)
     {
         SDL_SetRenderDrawColor(renderer,
-        objectsToDraw[i].sprite.Color.R,
-        objectsToDraw[i].sprite.Color.G,
-        objectsToDraw[i].sprite.Color.B,
-        objectsToDraw[i].sprite.Color.A);
+        objectsToDraw[i].sprite.color.r,
+        objectsToDraw[i].sprite.color.g,
+        objectsToDraw[i].sprite.color.b,
+        objectsToDraw[i].sprite.color.a);
         SDL_RenderFillRect(renderer, &objectsToDraw[i].rect);
     }
     objectsToDraw.clear();
@@ -29,9 +28,9 @@ void DrawSystem::DrawAll()
 void DrawSystem::Draw(DrawObject& drawObject)
 {
     SDL_SetRenderDrawColor(renderer,
-        drawObject.sprite.Color.R,
-        drawObject.sprite.Color.G,
-        drawObject.sprite.Color.B,
-        drawObject.sprite.Color.A);
+        drawObject.sprite.color.r,
+        drawObject.sprite.color.g,
+        drawObject.sprite.color.b,
+        drawObject.sprite.color.a);
     SDL_RenderFillRect(renderer, &drawObject.rect);
 }

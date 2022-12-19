@@ -8,7 +8,7 @@
 Game::Game()
 {
     drawSystem = new DrawSystem;
-    entitySystem = new EntitySystem(drawSystem);
+    entitySystem = new EntitySystem(drawSystem, this);
     SpawnPlayer();
     SpawnEnemy(400);
     SpawnEnemy(300);
@@ -46,30 +46,30 @@ void Game::Update()
         }
     }
     
-    HandleCollisions();
+    // HandleCollisions();
 }
 
-void Game::HandleCollisions()
-{
-    std::set<int>* set = entitySystem->GetCollidingIDs();
-
-    for (int i = 0; i < set->size(); ++i)
-    {
-        int eID = *set->rbegin();
-
-        if (eID == PlayerEntityID)
-        {
-            std::cout << "Game over" << std::endl;
-            isRunning = false;
-        }
-        else
-        {
-            entitySystem->DestroyEntity(eID);
-        }
-        
-        set->erase(std::prev(set->end()));
-    }
-}
+// void Game::HandleCollisions()
+// {
+//     std::set<int>* set = entitySystem->GetCollidingIDs();
+//
+//     for (int i = 0; i < set->size(); ++i)
+//     {
+//         int eID = *set->rbegin();
+//
+//         if (eID == PlayerEntityID)
+//         {
+//             std::cout << "Game over" << std::endl;
+//             isRunning = false;
+//         }
+//         else
+//         {
+//             entitySystem->DestroyEntity(eID);
+//         }
+//         
+//         set->erase(std::prev(set->end()));
+//     }
+// }
 
 
 void Game::SpawnBullet()

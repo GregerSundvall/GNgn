@@ -1,17 +1,19 @@
 ﻿#include "EntitySystem.h"
-#include "TransformSystem.h"
+// #include "TransformSystem.h"
 #include "CollisionSystem.h"
+#include "Game.h"
 #include "MovementSystem.h"
 #include "SpriteSystem.h"
 
 
-EntitySystem::EntitySystem(DrawSystem* drawSystem)
+EntitySystem::EntitySystem(DrawSystem* drawSystem, Game* game)
 {
-    transformSystem = new TransformSystem;
+    transformSystem = new TransformSystem(this);
     collisionSystem = new CollisionSystem(this);
     movementSystem = new MovementSystem(this);
     spriteSystem = new SpriteSystem(this, drawSystem);
     this->drawSystem = drawSystem;
+    this->game = game;
 }
 
 int EntitySystem::CreateEntity()
@@ -23,30 +25,30 @@ int EntitySystem::CreateEntity()
 
 void EntitySystem::SetVelocity(int entityID, Float2 velocity)
 {
-    movementSystem->SetVelocity(entities[entityID].MovementID, velocity);
+    movementSystem->SetVelocity(entities[entityID].movementID, velocity);
 }
 
-void EntitySystem::AddCollidingEntity(int entityID)
-{
-    collidingIDs.insert(entityID);
-}
+// void EntitySystem::AddCollidingEntity(int entityID)
+// {
+//     collidingIDs.insert(entityID);
+// }
 
 void EntitySystem::AddOffset(int entityID, Float2 velocity)
 {
-    if (entities[entityID].TransformID != -1)
+    if (entities[entityID].transformID != -1)
     {
-        transformSystem->AddOffset(entities[entityID].TransformID, velocity);
+        transformSystem->AddOffset(entities[entityID].transformID, velocity);
     }
-    if (entities[entityID].CollisionID != -1)
+    if (entities[entityID].collisionID != -1)
     {
-        collisionSystem->AddOffset(entities[entityID].CollisionID, velocity);
+        collisionSystem->AddOffset(entities[entityID].collisionID, velocity);
     }
 }
 
-std::set<int>* EntitySystem::GetCollidingIDs()
-{
-    return &collidingIDs;
-}
+// std::set<int>* EntitySystem::GetCollidingIDs()
+// {
+//     return &collidingIDs;
+// }
 
 void EntitySystem::Move(int entityID, Float2 offset)
 {
@@ -54,19 +56,19 @@ void EntitySystem::Move(int entityID, Float2 offset)
     {
         // transformSystem
     }
-    if (entities[entityID].TransformID != -1)
+    if (entities[entityID].transformID != -1)
     {
-        transformSystem->AddOffset(entities[entityID].TransformID, offset);
+        transformSystem->AddOffset(entities[entityID].transformID, offset);
     }
-    if (entities[entityID].CollisionID != -1)
+    if (entities[entityID].collisionID != -1)
     {
-        collisionSystem->AddOffset(entities[entityID].CollisionID, offset);
+        collisionSystem->AddOffset(entities[entityID].collisionID, offset);
     }
 }
 
 void EntitySystem::MoveTo(int entityID, Float2 position)
 {
-    transformSystem->SetPosition(entities[entityID].TransformID, position);
+    transformSystem->SetPosition(entities[entityID].transformID, position);
 }
 
 void EntitySystem::Sweep(int entityID, Float2 velocity)
@@ -82,73 +84,88 @@ void EntitySystem::DestroyEntity(int entityID)
     RemoveCollider(entityID);
     RemoveMovement(entityID);
     RemoveSprite(entityID);
-    
+
+    game->NotifyIdChanged(entities.size() -1, entityID);
     entities[entityID] = entities[entities.size() -1];
     entities.pop_back();
+    game->NotifyEntityDestroyed(entityID);
+}
+
+// void EntitySystem::DestroyEntities(std::vector<int> entityIDs)
+// {
+//     for (int i = entityIDs.size() - 1; i >= 0; --i) { DestroyEntity(entityIDs[i]); }
+// }
+
+void EntitySystem::NotifyOverlap(std::vector<int> collidingEntities)
+{
+    for (int entityID : collidingEntities)
+    {
+        DestroyEntity(entityID);
+    }
 }
 
 void EntitySystem::AddTransform(int entityID, Float2 position, Float2 size)
 {
-    if (entities[entityID].TransformID != -1) { RemoveTransform(entityID); } // Remove old, if already present
+    if (entities[entityID].transformID != -1) { RemoveTransform(entityID); } // Remove old, if already present
     
-    entities[entityID].TransformID = transformSystem->Register(entityID, position, size);
+    entities[entityID].transformID = transformSystem->Register(entityID, position, size);
 }
 
 void EntitySystem::AddCollider(int entityID) // Creates collider with same position/size as transform.
 {
-    if (entities[entityID].CollisionID != -1) { RemoveCollider(entityID); } // Remove old, if already present
+    if (entities[entityID].collisionID != -1) { RemoveCollider(entityID); } // Remove old, if already present
     
-    Transform* transform = transformSystem->GetTransform(entities[entityID].TransformID);
-    entities[entityID].CollisionID = collisionSystem->Register(entityID, transform->Position, transform->Size);
+    Transform* transform = transformSystem->GetTransform(entities[entityID].transformID);
+    entities[entityID].collisionID = collisionSystem->Register(entityID, transform->position, transform->size);
 }
 
 void EntitySystem::AddMovement(int entityID, Float2 velocity)
 {
-    if (entities[entityID].MovementID != -1) { RemoveMovement(entityID); } // Remove old, if already present
+    if (entities[entityID].movementID != -1) { RemoveMovement(entityID); } // Remove old, if already present
     
-    entities[entityID].MovementID = movementSystem->Register(entityID, velocity);
+    entities[entityID].movementID = movementSystem->Register(entityID, velocity);
 }
 
 void EntitySystem::AddSprite(int entityID, Color color)
 {
-    if (entities[entityID].SpriteID != -1) { RemoveSprite(entityID); } // Remove old, if already present
+    if (entities[entityID].spriteID != -1) { RemoveSprite(entityID); } // Remove old, if already present
     
-    entities[entityID].SpriteID = spriteSystem->Register(entityID, color);
+    entities[entityID].spriteID = spriteSystem->Register(entityID, color);
 }
 
 void EntitySystem::RemoveTransform(int entityID)
 {
-    if (entities[entityID].TransformID != -1)
+    if (entities[entityID].transformID != -1)
     {
-        transformSystem->Unregister(entities[entityID].TransformID);
-        entities[entityID].TransformID = -1;
+        transformSystem->Unregister(entities[entityID].transformID);
+        entities[entityID].transformID = -1;
     }
 }
 
 void EntitySystem::RemoveCollider(int entityID)
 {
-    if (entities[entityID].CollisionID != -1)
+    if (entities[entityID].collisionID != -1)
     {
-        collisionSystem->Unregister(entities[entityID].CollisionID);
-        entities[entityID].CollisionID = -1;
+        collisionSystem->Unregister(entities[entityID].collisionID);
+        entities[entityID].collisionID = -1;
     }
 }
 
 void EntitySystem::RemoveMovement(int entityID)
 {
-    if (entities[entityID].MovementID != -1)
+    if (entities[entityID].movementID != -1)
     {
-        movementSystem->Unregister(entities[entityID].MovementID);
-        entities[entityID].MovementID = -1;
+        movementSystem->Unregister(entities[entityID].movementID);
+        entities[entityID].movementID = -1;
     }
 }
 
 void EntitySystem::RemoveSprite(int entityID)
 {
-    if (entities[entityID].SpriteID != -1)
+    if (entities[entityID].spriteID != -1)
     {
-        spriteSystem->Unregister(entities[entityID].SpriteID);
-        entities[entityID].SpriteID = -1;
+        spriteSystem->Unregister(entities[entityID].spriteID);
+        entities[entityID].spriteID = -1;
     }
 }
 

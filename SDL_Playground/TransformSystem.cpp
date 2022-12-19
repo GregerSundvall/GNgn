@@ -1,6 +1,7 @@
 ﻿#include "TransformSystem.h"
 #include "Engine.h"
 #include "Components.h"
+#include "EntitySystem.h"
 
 void TransformSystem::Update()
 {
@@ -16,13 +17,14 @@ int TransformSystem::Register(int EntityID, Float2 position, Float2 size)
 
 void TransformSystem::Unregister(int transformID)
 {
+    entitySystem->UpdateTransformID(transforms[transforms.size() -1].entityID, transformID);
     transforms[transformID] = transforms[transforms.size() -1];
     transforms.pop_back();
 }
 
 Float2* TransformSystem::GetPosition(int transformID)
 {
-    return &transforms[transformID].Position;
+    return &transforms[transformID].position;
 }
 
 Transform* TransformSystem::GetTransform(int transformID)
