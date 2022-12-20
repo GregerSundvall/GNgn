@@ -16,8 +16,11 @@ int SpriteSystem::Register(int entityID, Color color)
 
 void SpriteSystem::Unregister(int spriteID)
 {
-    entitySystem->UpdateSpriteID(sprites[sprites.size() -1].entityID, spriteID);
-    sprites[spriteID] = sprites[sprites.size() -1];
+    if (spriteID < sprites.size() -1)
+    {
+        entitySystem->UpdateSpriteID(sprites[sprites.size() -1].entityID, spriteID);
+        sprites[spriteID] = sprites[sprites.size() -1];
+    }
     sprites.pop_back();
 }
 

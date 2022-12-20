@@ -80,7 +80,7 @@ void Game::SpawnBullet()
     int eID = entitySystem->CreateEntity();
     entitySystem->AddTransform(eID, Float2(x, y), Float2(8, 8));
     entitySystem->AddCollider(eID);
-    entitySystem->AddMovement(eID, Float2(0, -3.f));
+    entitySystem->AddMovement(eID, Float2(0, -10.0f));
     entitySystem->AddSprite(eID, Color(200, 200, 0));
 }
 

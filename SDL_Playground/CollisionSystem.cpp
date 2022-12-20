@@ -1,7 +1,6 @@
 ﻿#include "CollisionSystem.h"
 #include "EntitySystem.h"
 
-#include <iostream>
 
 void CollisionSystem::Update()
 {
@@ -12,7 +11,7 @@ void CollisionSystem::Update()
     HandleOverlaps();
 }
 
-void CollisionSystem::ScanOverlaps(int colliderID) // Scan for overlap, 1 vs all other colliders
+void CollisionSystem::ScanOverlaps(int colliderID) // Scan for overlap, "this" vs all other colliders
 {
     auto position = colliders[colliderID].position;
     auto size = colliders[colliderID].size;
@@ -31,7 +30,7 @@ void CollisionSystem::ScanOverlaps(int colliderID) // Scan for overlap, 1 vs all
             continue;
         }
         collidingIDs.insert(colliderID);
-        collidingIDs.insert(colliders[i].entityID);
+        collidingIDs.insert(i);
     }
 }
 
@@ -39,13 +38,11 @@ void CollisionSystem::HandleOverlaps()
 {
     if (collidingIDs.size() > 0)
     {
-        std::cout << "colliding IDs count is " << collidingIDs.size() << std::endl;
-        std::vector<int> entityIDs;
-        for (int entityID : collidingIDs)
+        std::set<int> entityIDs;
+        for (int cID : collidingIDs)
         {
-            entityIDs.push_back(entityID);
+            entityIDs.insert(colliders[cID].entityID);
         }
-
         collidingIDs.clear();
         entitySystem->NotifyOverlap(entityIDs);
     }
@@ -60,9 +57,12 @@ int CollisionSystem::Register(int EntityID, Float2 position, Float2 size)
 
 void CollisionSystem::Unregister(int colliderID)
 {
-    entitySystem->UpdateColliderID(colliders[colliders.size() -1].entityID, colliderID);
-    Collider temp = colliders[colliders.size() -1];
-    colliders[colliderID] = temp;
+    if (colliderID < colliders.size() -1)
+    {
+        entitySystem->UpdateColliderID(colliders[colliders.size() -1].entityID, colliderID);
+        colliders[colliderID] = colliders[colliders.size() -1];
+    }
+    
     colliders.pop_back();
 }
 

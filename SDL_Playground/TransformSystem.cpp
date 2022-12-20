@@ -17,8 +17,12 @@ int TransformSystem::Register(int EntityID, Float2 position, Float2 size)
 
 void TransformSystem::Unregister(int transformID)
 {
-    entitySystem->UpdateTransformID(transforms[transforms.size() -1].entityID, transformID);
-    transforms[transformID] = transforms[transforms.size() -1];
+    if (transformID < transforms.size() -1)
+    {
+        entitySystem->UpdateTransformID(transforms[transforms.size() -1].entityID, transformID);
+        transforms[transformID] = transforms[transforms.size() -1];
+    }
+    
     transforms.pop_back();
 }
 

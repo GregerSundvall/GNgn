@@ -16,7 +16,6 @@ public:
     CollisionSystem(EntitySystem* entitySystem) { this->entitySystem = entitySystem; }
 
     void Update();
-    // int Sweep(int colliderID, Float2 velocity);
     void ScanOverlaps(int colliderID);
     void HandleOverlaps();
     void AddOffset(int colliderID, Float2 offset) {colliders[colliderID].position += offset;}

@@ -36,16 +36,11 @@ public:
     Float2* GetPosition(int entityID) { return transformSystem->GetPosition(entities[entityID].transformID); }
     Transform* GetTransform(int entityID) { return transformSystem->GetTransform(entities[entityID].transformID); }
     void SetVelocity(int entityID, Float2 velocity);
-    // void AddCollidingEntity(int entityID);
     void AddOffset(int entityID, Float2 velocity);
-    // std::set<int>* GetCollidingIDs();
     void Move(int entityID, Float2 offset);
     void MoveTo(int entityID, Float2 position);
-    // int Sweep(int entityID, Float2 velocity);
-    void Sweep(int entityID, Float2 velocity);
     void DestroyEntity(int entityID);
-    // void DestroyEntities(std::vector<int> entityIDs);
-    void NotifyOverlap(std::vector<int> collidingEntities);
+    void NotifyOverlap(std::set<int> collidingEntities);
     void UpdateTransformID(int eID, int newTransformID) { entities[eID].transformID = newTransformID; }
     void UpdateMovementID(int eID, int newMovementID) { entities[eID].movementID = newMovementID; }
     void UpdateColliderID(int eID, int newColliderID) { entities[eID].collisionID = newColliderID; }

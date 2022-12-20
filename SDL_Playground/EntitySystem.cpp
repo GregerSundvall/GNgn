@@ -1,5 +1,4 @@
 ﻿#include "EntitySystem.h"
-// #include "TransformSystem.h"
 #include "CollisionSystem.h"
 #include "Game.h"
 #include "MovementSystem.h"
@@ -19,7 +18,6 @@ EntitySystem::EntitySystem(DrawSystem* drawSystem, Game* game)
 int EntitySystem::CreateEntity()
 {
     entities.push_back(Entity());
-
     return static_cast<int>(entities.size()) -1;
 }
 
@@ -27,11 +25,6 @@ void EntitySystem::SetVelocity(int entityID, Float2 velocity)
 {
     movementSystem->SetVelocity(entities[entityID].movementID, velocity);
 }
-
-// void EntitySystem::AddCollidingEntity(int entityID)
-// {
-//     collidingIDs.insert(entityID);
-// }
 
 void EntitySystem::AddOffset(int entityID, Float2 velocity)
 {
@@ -44,11 +37,6 @@ void EntitySystem::AddOffset(int entityID, Float2 velocity)
         collisionSystem->AddOffset(entities[entityID].collisionID, velocity);
     }
 }
-
-// std::set<int>* EntitySystem::GetCollidingIDs()
-// {
-//     return &collidingIDs;
-// }
 
 void EntitySystem::Move(int entityID, Float2 offset)
 {
@@ -71,48 +59,32 @@ void EntitySystem::MoveTo(int entityID, Float2 position)
     transformSystem->SetPosition(entities[entityID].transformID, position);
 }
 
-void EntitySystem::Sweep(int entityID, Float2 velocity)
-{
-    // collisionSystem->Sweep(entities[entityID].CollisionID, velocity);
-    // int collidingEntityID = collisionSystem->Sweep(entities[entityID].CollisionID, velocity);
-    // return collidingEntityID;
-}
-
 void EntitySystem::DestroyEntity(int entityID)
 {
-    std::cout << "Destroying" << std::endl;
-    std::cout << "E " << entityID << std::endl;
-    std::cout << "T " << entities[entityID].transformID << std::endl;
-    std::cout << "C " << entities[entityID].collisionID << std::endl;
-    std::cout << "M " << entities[entityID].movementID << std::endl;
-    std::cout << "S " << entities[entityID].spriteID << std::endl;
     RemoveTransform(entityID);
     RemoveCollider(entityID);
     RemoveMovement(entityID);
     RemoveSprite(entityID);
     game->NotifyEntityDestroyed(entityID);
 
-    game->NotifyIdChanged(entities.size() -1, entityID);
-    entities[entityID] = entities[entities.size() -1];
+    if (entityID < entities.size() -1)
+    {
+        game->NotifyIdChanged(entities.size() -1, entityID);
+        entities[entityID] = entities[entities.size() -1];
+    }
+    
     entities.pop_back();
-    std::cout << "After destruction" << std::endl;
-    std::cout << "E " << entityID << std::endl;
-    std::cout << "T " << entities[entityID].transformID << std::endl;
-    std::cout << "C " << entities[entityID].collisionID << std::endl;
-    std::cout << "M " << entities[entityID].movementID << std::endl;
-    std::cout << "S " << entities[entityID].spriteID << std::endl;
 }
 
-// void EntitySystem::DestroyEntities(std::vector<int> entityIDs)
-// {
-//     for (int i = entityIDs.size() - 1; i >= 0; --i) { DestroyEntity(entityIDs[i]); }
-// }
-
-void EntitySystem::NotifyOverlap(std::vector<int> collidingEntities)
+void EntitySystem::NotifyOverlap(std::set<int> collidingEntities)
 {
-    for (int entityID : collidingEntities)
+    while (collidingEntities.size() > 0)
     {
-        DestroyEntity(entityID);
+        DestroyEntity(*collidingEntities.rbegin());
+        std::cout << collidingEntities.size() << std::endl;
+        collidingEntities.erase(*collidingEntities.rbegin());
+        std::cout << collidingEntities.size() << std::endl;
+        std::cout << std::endl;
     }
 }
 

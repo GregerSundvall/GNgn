@@ -19,8 +19,12 @@ int MovementSystem::Register(int entityID, Float2 size)
 
 void MovementSystem::Unregister(int movementID)
 {
-    entitySystem->UpdateMovementID(movements[movements.size() -1].entityID, movementID);
-    movements[movementID] = movements[movements.size() -1];
+    if (movementID < movements.size() -1)
+    {
+        entitySystem->UpdateMovementID(movements[movements.size() -1].entityID, movementID);
+        movements[movementID] = movements[movements.size() -1];
+    }
+    
     movements.pop_back();
 }
 
