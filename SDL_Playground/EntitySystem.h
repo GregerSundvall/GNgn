@@ -40,7 +40,7 @@ public:
     void Move(int entityID, Float2 offset);
     void MoveTo(int entityID, Float2 position);
     void DestroyEntity(int entityID);
-    void NotifyOverlap(std::set<int> collidingEntities);
+    void NotifyOverlap(std::vector<int> collidingEntities);
     void UpdateTransformID(int eID, int newTransformID) { entities[eID].transformID = newTransformID; }
     void UpdateMovementID(int eID, int newMovementID) { entities[eID].movementID = newMovementID; }
     void UpdateColliderID(int eID, int newColliderID) { entities[eID].collisionID = newColliderID; }

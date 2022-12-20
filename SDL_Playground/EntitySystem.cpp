@@ -76,16 +76,30 @@ void EntitySystem::DestroyEntity(int entityID)
     entities.pop_back();
 }
 
-void EntitySystem::NotifyOverlap(std::set<int> collidingEntities)
+void EntitySystem::NotifyOverlap(std::vector<int> collidingEntities)
 {
-    while (collidingEntities.size() > 0)
+    // Just destroy them, for now.
+    std::cout << "NotifyOverlap run. Overlaps: " << collidingEntities.size() << std::endl;
+
+    for (int i = collidingEntities.size() - 1; i >= 0; --i)
     {
-        DestroyEntity(*collidingEntities.rbegin());
-        std::cout << collidingEntities.size() << std::endl;
-        collidingEntities.erase(*collidingEntities.rbegin());
-        std::cout << collidingEntities.size() << std::endl;
-        std::cout << std::endl;
+        std::cout << "In loop, i = : " << i << std::endl;
+        std::cout << "In loop, overlaps = " << collidingEntities.size() << std::endl;
+        DestroyEntity(collidingEntities[i]);
+        collidingEntities.pop_back();
+        std::cout << "End of loop iteration, overlaps = " << collidingEntities.size() << std::endl;
     }
+    std::cout << "NotifyOverlap out of loop. Overlaps: " << collidingEntities.size() << std::endl;
+    
+    // while (collidingEntities.size() > 1)
+    // {
+    //     DestroyEntity(*collidingEntities.rbegin());
+    //     std::cout << collidingEntities.size() << std::endl;
+    //     std::cout << *collidingEntities.rbegin() << std::endl;
+    //     collidingEntities.erase(*collidingEntities.rbegin());
+    //     std::cout << collidingEntities.size() << std::endl;
+    //     std::cout << std::endl;
+    // }
 }
 
 void EntitySystem::AddTransform(int entityID, Float2 position, Float2 size)

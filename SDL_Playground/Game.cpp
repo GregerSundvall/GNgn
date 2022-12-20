@@ -91,7 +91,7 @@ void Game::SpawnEnemy(float xPos)
     // auto randomX = static_cast<float>(distribution(generator)) / 10;
     // EnemyEntityIDs.push_back(entitySystem->CreateEntity());
     int eID = entitySystem->CreateEntity();
-    entitySystem->AddTransform(eID, Float2(xPos, 0), Float2(24, 24));
+    entitySystem->AddTransform(eID, Float2(xPos, 0), Float2(48, 24));
     entitySystem->AddCollider(eID);
     entitySystem->AddMovement(eID, Float2(0, 1.f));
     entitySystem->AddSprite(eID, Color(150, 50, 100));

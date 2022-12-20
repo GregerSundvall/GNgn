@@ -1,4 +1,7 @@
 ﻿#include "CollisionSystem.h"
+
+#include <iostream>
+
 #include "EntitySystem.h"
 
 
@@ -31,21 +34,29 @@ void CollisionSystem::ScanOverlaps(int colliderID) // Scan for overlap, "this" v
         }
         collidingIDs.insert(colliderID);
         collidingIDs.insert(i);
+        std::cout << "Inserted " << colliderID << " and " << i << " into collidingIDs" << std::endl;
+        std::cout << colliderID << " (this) position: " << colliders[colliderID].position.y << std::endl;
+        std::cout << i << " (other) position: " << colliders[i].position.y << std::endl;
     }
 }
 
 void CollisionSystem::HandleOverlaps()
 {
-    if (collidingIDs.size() > 0)
+    if (collidingIDs.size() == 0) { return; }
+    std::cout << "HandleOverlaps start. Count = " << collidingIDs.size() << std::endl;
+    std::cout << "ID " << *collidingIDs.begin() << std::endl;
+    std::cout << "ID " << *collidingIDs.rbegin() << std::endl;
+    
+    std::vector<int> entityIDs;
+    for (int cID : collidingIDs)
     {
-        std::set<int> entityIDs;
-        for (int cID : collidingIDs)
-        {
-            entityIDs.insert(colliders[cID].entityID);
-        }
-        collidingIDs.clear();
-        entitySystem->NotifyOverlap(entityIDs);
+        entityIDs.push_back(colliders[cID].entityID);
     }
+    collidingIDs.clear();
+    std::cout << "HandleOverlaps sending " << entityIDs.size() << " ID's to NotifyOverlap" << std::endl;
+    entitySystem->NotifyOverlap(entityIDs);
+    std::cout << "HandleOverlaps end" << std::endl;
+    std::cout << "HandleOverlaps end. " << collidingIDs.size() << " ID's in collidingIDs" << std::endl;
 }
 
 int CollisionSystem::Register(int EntityID, Float2 position, Float2 size)
