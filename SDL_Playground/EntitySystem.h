@@ -1,23 +1,17 @@
 ﻿#pragma once
-#include <set>
 #include <vector>
 #include "Components.h"
 #include "TransformSystem.h"
-// class TransformSystem;
 class CollisionSystem;
 class MovementSystem;
 class SpriteSystem;
 class DrawSystem;
 class Game;
-// struct Collider;
-// struct Transform;
-
 
 
 class EntitySystem
 {
     std::vector<Entity> entities;
-    // std::set<int> collidingIDs;
     
     TransformSystem* transformSystem;
     CollisionSystem* collisionSystem;

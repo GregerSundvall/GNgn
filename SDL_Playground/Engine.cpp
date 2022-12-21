@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "iostream"
 
+
 SDL_Renderer* renderer;
 Input* input;
 float dTime = 0.0f;

@@ -1,8 +1,4 @@
 ﻿#include "TransformSystem.h"
-
-#include <iostream>
-
-#include "Engine.h"
 #include "Components.h"
 #include "EntitySystem.h"
 
@@ -20,7 +16,6 @@ int TransformSystem::Register(int EntityID, Float2 position, Float2 size)
 
 void TransformSystem::Unregister(int transformID)
 {
-    std::cout << "Unregister start. transforms.size = " << transforms.size() << std::endl;
     if (transformID < transforms.size() -1)
     {
         entitySystem->UpdateTransformID(transforms[transforms.size() -1].entityID, transformID);
@@ -30,7 +25,6 @@ void TransformSystem::Unregister(int transformID)
     }
     
     transforms.pop_back();
-    std::cout << "Unregister end. transforms.size = " << transforms.size() << std::endl;
 }
 
 void TransformSystem::AssignNewEntityID(int transformID, int newEntityID) //Used when destroying an entity

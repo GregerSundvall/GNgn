@@ -77,23 +77,17 @@ void EntitySystem::DestroyEntity(int entityID)
     RemoveCollider(entityID);
     RemoveMovement(entityID);
     RemoveSprite(entityID);
-    {
-        std::cout << "Components should be -1 now: " << entities[entityID].transformID << " "
-       << entities[entityID].movementID << " "
-       << entities[entityID].collisionID << " "
-       << entities[entityID].spriteID<< std::endl;
-    }
 
     if (entityID < entities.size() -1) // Move last entity back to newly freed index. Notify Game.
     {
         game->NotifyIdChanged(entities.size() -1, entityID);
         entities[entityID].transformID = entities[entities.size() -1].transformID;
-        transformSystem->AssignNewEntityID(entities[entityID].transformID, entityID);
         entities[entityID].movementID = entities[entities.size() -1].movementID;
-        movementSystem->AssignNewEntityID(entities[entityID].movementID, entityID);
         entities[entityID].collisionID = entities[entities.size() -1].collisionID;
-        collisionSystem->AssignNewEntityID(entities[entityID].collisionID, entityID);
         entities[entityID].spriteID = entities[entities.size() -1].spriteID;
+        transformSystem->AssignNewEntityID(entities[entityID].transformID, entityID);
+        movementSystem->AssignNewEntityID(entities[entityID].movementID, entityID);
+        collisionSystem->AssignNewEntityID(entities[entityID].collisionID, entityID);
         spriteSystem->AssignNewEntityID(entities[entityID].spriteID, entityID);
     }
     

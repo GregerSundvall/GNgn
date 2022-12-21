@@ -1,17 +1,15 @@
 ﻿#pragma once
 #include <iostream>
-
 #include "DrawSystem.h"
-#include "Engine.h"
 #include "EntitySystem.h"
 
 
 class Game
 {
     bool isRunning = true;
-    int PlayerEntityID = -1; // Will need updates on ID changes.
+    int PlayerEntityID = -1;
     int EnemiesToSpawn = 100;
-    // std::vector<int> EnemyEntityIDs; // Needs updates on entity ID changes.
+    // std::vector<int> EnemyEntityIDs; 
     
     DrawSystem* drawSystem;
     EntitySystem* entitySystem;
@@ -24,7 +22,6 @@ public:
     Game();
     void Start();
     void Update();
-    // void HandleCollisions();
     void SpawnBullet();    
     void SpawnEnemy(float xPos);
     void SpawnPlayer();

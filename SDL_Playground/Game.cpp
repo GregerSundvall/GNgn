@@ -10,9 +10,11 @@ Game::Game()
     drawSystem = new DrawSystem;
     entitySystem = new EntitySystem(drawSystem, this);
     SpawnPlayer();
-    SpawnEnemy(400);
+    SpawnEnemy(200);
     SpawnEnemy(300);
+    SpawnEnemy(400);
     SpawnEnemy(500);
+    SpawnEnemy(600);
 }
 
 void Game::Start()
@@ -23,12 +25,6 @@ void Game::Start()
 void Game::Update()
 {
     if (!isRunning) { return; }
-    
-    // if (EnemiesToSpawn > 0)
-    // {
-    //     SpawnEnemy();
-    // }
-
     
     entitySystem->Update();
     drawSystem->DrawAll();
@@ -45,31 +41,7 @@ void Game::Update()
             }
         }
     }
-    
-    // HandleCollisions();
 }
-
-// void Game::HandleCollisions()
-// {
-//     std::set<int>* set = entitySystem->GetCollidingIDs();
-//
-//     for (int i = 0; i < set->size(); ++i)
-//     {
-//         int eID = *set->rbegin();
-//
-//         if (eID == PlayerEntityID)
-//         {
-//             std::cout << "Game over" << std::endl;
-//             isRunning = false;
-//         }
-//         else
-//         {
-//             entitySystem->DestroyEntity(eID);
-//         }
-//         
-//         set->erase(std::prev(set->end()));
-//     }
-// }
 
 
 void Game::SpawnBullet()
@@ -82,7 +54,6 @@ void Game::SpawnBullet()
     entitySystem->AddCollider(eID);
     entitySystem->AddMovement(eID, Float2(0, -10.0f));
     entitySystem->AddSprite(eID, Color(200, 200, 0));
-    std::cout << "Bullet spawned, EID = " << eID << ". x = " << x << ", y = " << y << std::endl;
 }
 
 
@@ -94,7 +65,7 @@ void Game::SpawnEnemy(float xPos)
     int eID = entitySystem->CreateEntity();
     entitySystem->AddTransform(eID, Float2(xPos, 0), Float2(48, 24));
     entitySystem->AddCollider(eID);
-    entitySystem->AddMovement(eID, Float2(0, 1.f));
+    entitySystem->AddMovement(eID, Float2(0, 0.5f));
     entitySystem->AddSprite(eID, Color(150, 50, 100));
 }
 

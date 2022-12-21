@@ -1,6 +1,6 @@
 ﻿#include "SpriteSystem.h"
-
 #include "EntitySystem.h"
+
 
 SpriteSystem::SpriteSystem(EntitySystem* entitySystem, DrawSystem* drawSystem)
 {

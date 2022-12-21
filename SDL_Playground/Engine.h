@@ -4,6 +4,7 @@
 #include "Input.h"
 class Game;
 
+
 extern SDL_Renderer* renderer;
 extern Input* input;
 extern float dTime;
