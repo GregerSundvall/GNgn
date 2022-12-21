@@ -61,19 +61,56 @@ void EntitySystem::MoveTo(int entityID, Float2 position)
 
 void EntitySystem::DestroyEntity(int entityID)
 {
+    std::cout <<std::endl << "DestroyEntity start" << std::endl;
+    for (int i = 0; i < entities.size(); ++i)
+    {
+        std::cout << "EntityID " << i << " ";
+        std::cout << "x = " << transformSystem->GetPosition(entities[i].transformID)->x << " ";
+        std::cout << "y = " << transformSystem->GetPosition(entities[i].transformID)->y << " ";
+        std::cout << "TransformID " << entities.at(i).transformID << " ";
+        std::cout << "MovementID " << entities.at(i).movementID << " ";
+        std::cout << "ColliderID " << entities.at(i).collisionID << " ";
+        std::cout << "SpriteID " << entities.at(i).spriteID << " " <<std::endl;
+    }
+    
     RemoveTransform(entityID);
     RemoveCollider(entityID);
     RemoveMovement(entityID);
     RemoveSprite(entityID);
-    game->NotifyEntityDestroyed(entityID);
+    {
+        std::cout << "Components should be -1 now: " << entities[entityID].transformID << " "
+       << entities[entityID].movementID << " "
+       << entities[entityID].collisionID << " "
+       << entities[entityID].spriteID<< std::endl;
+    }
 
-    if (entityID < entities.size() -1)
+    if (entityID < entities.size() -1) // Move last entity back to newly freed index. Notify Game.
     {
         game->NotifyIdChanged(entities.size() -1, entityID);
-        entities[entityID] = entities[entities.size() -1];
+        entities[entityID].transformID = entities[entities.size() -1].transformID;
+        transformSystem->AssignNewEntityID(entities[entityID].transformID, entityID);
+        entities[entityID].movementID = entities[entities.size() -1].movementID;
+        movementSystem->AssignNewEntityID(entities[entityID].movementID, entityID);
+        entities[entityID].collisionID = entities[entities.size() -1].collisionID;
+        collisionSystem->AssignNewEntityID(entities[entityID].collisionID, entityID);
+        entities[entityID].spriteID = entities[entities.size() -1].spriteID;
+        spriteSystem->AssignNewEntityID(entities[entityID].spriteID, entityID);
     }
     
     entities.pop_back();
+    game->NotifyEntityDestroyed(entityID);
+
+    std::cout <<std::endl << "DestroyEntity end" << std::endl;
+    for (int i = 0; i < entities.size(); ++i)
+    {
+        std::cout << "EntityID " << i << " ";
+        std::cout << "x = " << transformSystem->GetPosition(entities[i].transformID)->x << " ";
+        std::cout << "y = " << transformSystem->GetPosition(entities[i].transformID)->y << " ";
+        std::cout << "TransformID " << entities.at(i).transformID << " ";
+        std::cout << "MovementID " << entities.at(i).movementID << " ";
+        std::cout << "ColliderID " << entities.at(i).collisionID << " ";
+        std::cout << "SpriteID " << entities.at(i).spriteID << " " <<std::endl;
+    }
 }
 
 void EntitySystem::NotifyOverlap(std::vector<int> collidingEntities)
@@ -90,45 +127,7 @@ void EntitySystem::NotifyOverlap(std::vector<int> collidingEntities)
         std::cout << "End of loop iteration, overlaps = " << collidingEntities.size() << std::endl;
     }
     std::cout << "NotifyOverlap out of loop. Overlaps: " << collidingEntities.size() << std::endl;
-    
-    // while (collidingEntities.size() > 1)
-    // {
-    //     DestroyEntity(*collidingEntities.rbegin());
-    //     std::cout << collidingEntities.size() << std::endl;
-    //     std::cout << *collidingEntities.rbegin() << std::endl;
-    //     collidingEntities.erase(*collidingEntities.rbegin());
-    //     std::cout << collidingEntities.size() << std::endl;
-    //     std::cout << std::endl;
-    // }
-}
 
-void EntitySystem::AddTransform(int entityID, Float2 position, Float2 size)
-{
-    if (entities[entityID].transformID != -1) { RemoveTransform(entityID); } // Remove old, if already present
-    
-    entities[entityID].transformID = transformSystem->Register(entityID, position, size);
-}
-
-void EntitySystem::AddCollider(int entityID) // Creates collider with same position/size as transform.
-{
-    if (entities[entityID].collisionID != -1) { RemoveCollider(entityID); } // Remove old, if already present
-    
-    Transform* transform = transformSystem->GetTransform(entities[entityID].transformID);
-    entities[entityID].collisionID = collisionSystem->Register(entityID, transform->position, transform->size);
-}
-
-void EntitySystem::AddMovement(int entityID, Float2 velocity)
-{
-    if (entities[entityID].movementID != -1) { RemoveMovement(entityID); } // Remove old, if already present
-    
-    entities[entityID].movementID = movementSystem->Register(entityID, velocity);
-}
-
-void EntitySystem::AddSprite(int entityID, Color color)
-{
-    if (entities[entityID].spriteID != -1) { RemoveSprite(entityID); } // Remove old, if already present
-    
-    entities[entityID].spriteID = spriteSystem->Register(entityID, color);
 }
 
 void EntitySystem::RemoveTransform(int entityID)
@@ -165,6 +164,35 @@ void EntitySystem::RemoveSprite(int entityID)
         spriteSystem->Unregister(entities[entityID].spriteID);
         entities[entityID].spriteID = -1;
     }
+}
+
+void EntitySystem::AddTransform(int entityID, Float2 position, Float2 size)
+{
+    if (entities[entityID].transformID != -1) { RemoveTransform(entityID); } // Remove old, if already present
+    
+    entities[entityID].transformID = transformSystem->Register(entityID, position, size);
+}
+
+void EntitySystem::AddCollider(int entityID) // Creates collider with same position/size as transform.
+{
+    if (entities[entityID].collisionID != -1) { RemoveCollider(entityID); } // Remove old, if already present
+    
+    Transform* transform = transformSystem->GetTransform(entities[entityID].transformID);
+    entities[entityID].collisionID = collisionSystem->Register(entityID, transform->position, transform->size);
+}
+
+void EntitySystem::AddMovement(int entityID, Float2 velocity)
+{
+    if (entities[entityID].movementID != -1) { RemoveMovement(entityID); } // Remove old, if already present
+    
+    entities[entityID].movementID = movementSystem->Register(entityID, velocity);
+}
+
+void EntitySystem::AddSprite(int entityID, Color color)
+{
+    if (entities[entityID].spriteID != -1) { RemoveSprite(entityID); } // Remove old, if already present
+    
+    entities[entityID].spriteID = spriteSystem->Register(entityID, color);
 }
 
 void EntitySystem::Update()

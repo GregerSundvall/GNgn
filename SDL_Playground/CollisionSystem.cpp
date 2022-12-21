@@ -71,10 +71,17 @@ void CollisionSystem::Unregister(int colliderID)
     if (colliderID < colliders.size() -1)
     {
         entitySystem->UpdateColliderID(colliders[colliders.size() -1].entityID, colliderID);
-        colliders[colliderID] = colliders[colliders.size() -1];
+        colliders[colliderID].position = colliders[colliders.size() -1].position;
+        colliders[colliderID].size = colliders[colliders.size() -1].size;
+        colliders[colliderID].entityID = colliders[colliders.size() -1].entityID;
     }
     
     colliders.pop_back();
+}
+
+void CollisionSystem::AssignNewEntityID(int colliderID, int newEntityID) //Used when destroying an entity
+{
+    colliders[colliderID].entityID = newEntityID;
 }
 
 void CollisionSystem::Destructor()

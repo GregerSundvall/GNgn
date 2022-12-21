@@ -42,9 +42,9 @@ public:
     void DestroyEntity(int entityID);
     void NotifyOverlap(std::vector<int> collidingEntities);
     void UpdateTransformID(int eID, int newTransformID) { entities[eID].transformID = newTransformID; }
-    void UpdateMovementID(int eID, int newMovementID) { entities[eID].movementID = newMovementID; }
-    void UpdateColliderID(int eID, int newColliderID) { entities[eID].collisionID = newColliderID; }
-    void UpdateSpriteID(int eID, int newSpriteID) { entities[eID].spriteID = newSpriteID; }
+    void UpdateMovementID(int eID, int newMovementID)   { entities[eID].movementID = newMovementID; }
+    void UpdateColliderID(int eID, int newColliderID)   { entities[eID].collisionID = newColliderID; }
+    void UpdateSpriteID(int eID, int newSpriteID)       { entities[eID].spriteID = newSpriteID; }
     void AddTransform(int entityID, Float2 position, Float2 size);
     void AddCollider(int entityID);
     void AddMovement(int entityID, Float2 velocity);

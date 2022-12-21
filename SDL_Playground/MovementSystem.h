@@ -18,6 +18,7 @@ public:
     void Update();
     int Register(int entityID, Float2 size);
     void Unregister(int movementID);
+    void AssignNewEntityID(int movementID, int newEntityID);
     Float2 GetVelocity(int movementID);
     void SetVelocity(int movementID, Float2 newVelocity);
     int Size() { return movements.size(); }

@@ -22,10 +22,16 @@ void MovementSystem::Unregister(int movementID)
     if (movementID < movements.size() -1)
     {
         entitySystem->UpdateMovementID(movements[movements.size() -1].entityID, movementID);
-        movements[movementID] = movements[movements.size() -1];
+        movements[movementID].velocity = movements[movements.size() -1].velocity;
+        movements[movementID].entityID = movements[movements.size() -1].entityID;
     }
     
     movements.pop_back();
+}
+
+void MovementSystem::AssignNewEntityID(int movementID, int newEntityID) //Used when destroying an entity
+{
+    movements[movementID].entityID = newEntityID;
 }
 
 Float2 MovementSystem::GetVelocity(int movementID)

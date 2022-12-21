@@ -82,6 +82,7 @@ void Game::SpawnBullet()
     entitySystem->AddCollider(eID);
     entitySystem->AddMovement(eID, Float2(0, -10.0f));
     entitySystem->AddSprite(eID, Color(200, 200, 0));
+    std::cout << "Bullet spawned, EID = " << eID << ". x = " << x << ", y = " << y << std::endl;
 }
 
 

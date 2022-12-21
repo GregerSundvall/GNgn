@@ -19,9 +19,15 @@ void SpriteSystem::Unregister(int spriteID)
     if (spriteID < sprites.size() -1)
     {
         entitySystem->UpdateSpriteID(sprites[sprites.size() -1].entityID, spriteID);
-        sprites[spriteID] = sprites[sprites.size() -1];
+        sprites[spriteID].color = sprites[sprites.size() -1].color;
+        sprites[spriteID].entityID = sprites[sprites.size() -1].entityID;
     }
     sprites.pop_back();
+}
+
+void SpriteSystem::AssignNewEntityID(int spriteID, int newEntityID) //Used when destroying an entity
+{
+    sprites[spriteID].entityID = newEntityID;
 }
 
 void SpriteSystem::Update()
