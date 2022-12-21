@@ -22,6 +22,7 @@ class EntitySystem
     //InputSystem
     //HealthSystem
     //ScoreSystem?
+    //Add position adjustment "somewhere". Affects sprite and collider... And movement? (for edge of windows handling)
     
 public:
     EntitySystem(DrawSystem* drawSystem, Game* game);

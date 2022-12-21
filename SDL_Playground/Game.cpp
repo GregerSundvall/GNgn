@@ -1,6 +1,4 @@
 ﻿#include "Game.h"
-
-#include <iostream>
 #include <random>
 #include "Engine.h"
 
@@ -47,10 +45,12 @@ void Game::Update()
 void Game::SpawnBullet()
 {
     float x = entitySystem->GetPosition(PlayerEntityID)->x;
-    float y = entitySystem->GetPosition(PlayerEntityID)->y -24;
+    float y = entitySystem->GetPosition(PlayerEntityID)->y -2;
+    float size = 8;
+    float playerSize = 32;
     
     int eID = entitySystem->CreateEntity();
-    entitySystem->AddTransform(eID, Float2(x, y), Float2(8, 8));
+    entitySystem->AddTransform(eID, Float2(x - size/2.f + playerSize/2.f, y), Float2(size, size));
     entitySystem->AddCollider(eID);
     entitySystem->AddMovement(eID, Float2(0, -10.0f));
     entitySystem->AddSprite(eID, Color(200, 200, 0));
@@ -62,8 +62,9 @@ void Game::SpawnEnemy(float xPos)
     // std::uniform_int_distribution<int> distribution(0, 8000);
     // auto randomX = static_cast<float>(distribution(generator)) / 10;
     // EnemyEntityIDs.push_back(entitySystem->CreateEntity());
+    float size = 24;
     int eID = entitySystem->CreateEntity();
-    entitySystem->AddTransform(eID, Float2(xPos, 0), Float2(48, 24));
+    entitySystem->AddTransform(eID, Float2(xPos - size/2.f, 0), Float2(size, size));
     entitySystem->AddCollider(eID);
     entitySystem->AddMovement(eID, Float2(0, 0.5f));
     entitySystem->AddSprite(eID, Color(150, 50, 100));
@@ -71,8 +72,9 @@ void Game::SpawnEnemy(float xPos)
 
 void Game::SpawnPlayer()
 {
+    float size = 32;
     PlayerEntityID = entitySystem->CreateEntity();
-    entitySystem->AddTransform(PlayerEntityID, Float2(400, 900), Float2(32, 32));
+    entitySystem->AddTransform(PlayerEntityID, Float2(400 - size/2.f, 900), Float2(size, size));
     entitySystem->AddCollider(PlayerEntityID);
     entitySystem->AddSprite(PlayerEntityID, Color(100, 100, 100));
     entitySystem->AddMovement(PlayerEntityID, Float2(0, 0));

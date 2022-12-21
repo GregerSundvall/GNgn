@@ -80,7 +80,7 @@ void EntitySystem::DestroyEntity(int entityID)
 
     if (entityID < entities.size() -1) // Move last entity back to newly freed index. Notify Game.
     {
-        game->NotifyIdChanged(entities.size() -1, entityID);
+        game->NotifyIdChanged(static_cast<int>(entities.size()) -1, entityID);
         entities[entityID].transformID = entities[entities.size() -1].transformID;
         entities[entityID].movementID = entities[entities.size() -1].movementID;
         entities[entityID].collisionID = entities[entities.size() -1].collisionID;
@@ -112,7 +112,7 @@ void EntitySystem::NotifyOverlap(std::vector<int> collidingEntities)
     // Just destroy them, for now.
     std::cout << "NotifyOverlap run. Overlaps: " << collidingEntities.size() << std::endl;
 
-    for (int i = collidingEntities.size() - 1; i >= 0; --i)
+    for (int i = static_cast<int>(collidingEntities.size()) - 1; i >= 0; --i)
     {
         std::cout << "In loop, i = : " << i << std::endl;
         std::cout << "In loop, overlaps = " << collidingEntities.size() << std::endl;

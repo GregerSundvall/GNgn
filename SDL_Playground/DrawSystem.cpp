@@ -5,8 +5,8 @@
 
 void DrawSystem::Add(Float2 position, Float2 size, Sprite sprite)
 {
-    SDL_Rect rect = {static_cast<int>(position.x - size.x * 0.5),
-                    static_cast<int>(position.y - size.y * 0.5),
+    SDL_Rect rect = {static_cast<int>(position.x),
+                    static_cast<int>(position.y),
                     static_cast<int>(size.x), static_cast<int>(size.y)};
     objectsToDraw.push_back(DrawObject(sprite, rect));
 }

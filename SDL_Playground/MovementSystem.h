@@ -21,6 +21,6 @@ public:
     void AssignNewEntityID(int movementID, int newEntityID);
     Float2 GetVelocity(int movementID);
     void SetVelocity(int movementID, Float2 newVelocity);
-    int Size() { return movements.size(); }
+    int Size() { return static_cast<int>(movements.size()); }
     void Destructor() {movements.clear();}
 };
