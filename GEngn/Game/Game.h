@@ -1,18 +1,16 @@
 ﻿#pragma once
 #include <iostream>
-#include "../Engine/DrawSystem.h"
-#include "../Engine/EntitySystem.h"
-
+class Player;
 
 class Game
 {
     bool isRunning = true;
-    int PlayerEntityID = -1;
-    int EnemiesToSpawn = 100;
+    Player* player;
+    // int PlayerEntityID = -1;
+    // int EnemiesToSpawn = 100;
     // std::vector<int> EnemyEntityIDs; 
     
-    DrawSystem* drawSystem;
-    EntitySystem* entitySystem;
+    
     // Event system!
     // Move input system here?
     // Move SDL stuff here?
@@ -24,8 +22,7 @@ public:
     void Update();
     void SpawnBullet();    
     void SpawnEnemy(float xPos);
-    void SpawnPlayer();
-    void NotifyIdChanged(int oldEntityID, int newEntityID) { if (oldEntityID == PlayerEntityID){ PlayerEntityID = newEntityID;}; }
-    void NotifyEntityDestroyed(int eID) { if (eID == PlayerEntityID) { PlayerEntityID = -1; std::cout << "GAME OVER" << std::endl; } }
-    void Destroy();
+    void NotifyIdChanged(int oldEntityID, int newEntityID);
+    void NotifyEntityDestroyed(int eID);
+    void Destructor();
 };

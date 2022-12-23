@@ -1,18 +1,17 @@
 ﻿#include "EntitySystem.h"
 #include "CollisionSystem.h"
+#include "Engine.h"
 #include "../Game/Game.h"
 #include "MovementSystem.h"
 #include "SpriteSystem.h"
 
 
-EntitySystem::EntitySystem(DrawSystem* drawSystem, Game* game)
+EntitySystem::EntitySystem()
 {
     transformSystem = new TransformSystem(this);
     collisionSystem = new CollisionSystem(this);
     movementSystem = new MovementSystem(this);
-    spriteSystem = new SpriteSystem(this, drawSystem);
-    this->drawSystem = drawSystem;
-    this->game = game;
+    spriteSystem = new SpriteSystem();
 }
 
 int EntitySystem::CreateEntity()

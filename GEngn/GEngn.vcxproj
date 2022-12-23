@@ -144,6 +144,7 @@
     <ClInclude Include="Engine\TransformSystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\Player.h" />
     <ClInclude Include="GEngn.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -815,6 +816,7 @@
       <AdditionalIncludeDirectories>D:\Code\C++\GEngine\SDL2\include;;C:\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="GEngn.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

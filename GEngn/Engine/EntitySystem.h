@@ -5,8 +5,6 @@
 class CollisionSystem;
 class MovementSystem;
 class SpriteSystem;
-class DrawSystem;
-class Game;
 
 
 class EntitySystem
@@ -17,15 +15,13 @@ class EntitySystem
     CollisionSystem* collisionSystem;
     MovementSystem* movementSystem;
     SpriteSystem* spriteSystem;
-    DrawSystem* drawSystem; // Being forwarded to spritesystem in constructor. May not need to save?
-    Game* game;
     //InputSystem
     //HealthSystem
     //ScoreSystem?
     //Add position adjustment "somewhere". Affects sprite and collider... And movement? (for edge of windows handling)
     
 public:
-    EntitySystem(DrawSystem* drawSystem, Game* game);
+    EntitySystem();
     int CreateEntity();
     Entity* GetEntity(int entityID) { return &entities[entityID]; }
     Float2* GetPosition(int entityID) { return transformSystem->GetPosition(entities[entityID].transformID); }

@@ -1,14 +1,15 @@
 ﻿#include "Engine.h"
 #include <random>
-#include "../Game/Game.h"
 #include "iostream"
+#include "../Game/Game.h"
 
 
-SDL_Renderer* renderer;
+DrawSystem* drawSystem;
 Input* input;
+Game* game;
+EntitySystem* entitySystem;
 float dTime = 0.0f;
 std::default_random_engine generator;
-
 
 Engine::Engine()
 {
@@ -16,7 +17,7 @@ Engine::Engine()
     
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow(
-        "SDL2 Test",
+        "GEngn",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
         width, height,
@@ -34,8 +35,10 @@ void Engine::Run()
     int nextFPSIndex = 0;
     float accumulatedFPS = 0;
 
+    drawSystem = new DrawSystem(renderer);
     input = new Input();
     game = new Game();
+    entitySystem = new EntitySystem();
     game->Start();
     
     while (SDLisRunning)
@@ -76,7 +79,7 @@ void Engine::Run()
         SDL_Delay(6);
     }
 
-    game->Destroy();
+    game->Destructor();
     
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

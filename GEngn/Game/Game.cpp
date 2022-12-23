@@ -1,23 +1,22 @@
 ﻿#include "Game.h"
 #include <random>
 #include "../Engine/Engine.h"
+#include "Player.h"
 
 
 Game::Game()
 {
-    drawSystem = new DrawSystem;
-    entitySystem = new EntitySystem(drawSystem, this);
-    SpawnPlayer();
+
+}
+
+void Game::Start()
+{
+    player = new Player("greg", 32);
     SpawnEnemy(200);
     SpawnEnemy(300);
     SpawnEnemy(400);
     SpawnEnemy(500);
     SpawnEnemy(600);
-}
-
-void Game::Start()
-{
-    
 }
 
 void Game::Update()
@@ -28,10 +27,10 @@ void Game::Update()
     drawSystem->DrawAll();
     
     {   // Temporary player input
-        if (PlayerEntityID >= 0)
+        if (player->isAlive)
         {
             Float2 velocity = Float2(input->A * -1.0f + input->D * 1.0f, 0);
-            entitySystem->SetVelocity(PlayerEntityID, velocity);
+            player->SetVelocity(velocity);
     
             if (input->Space == 1)
             {
@@ -44,8 +43,9 @@ void Game::Update()
 
 void Game::SpawnBullet()
 {
-    float x = entitySystem->GetPosition(PlayerEntityID)->x;
-    float y = entitySystem->GetPosition(PlayerEntityID)->y -2;
+    Float2* playerPos = player->GetPosition();
+    float x = playerPos->x;
+    float y = playerPos->y -2;
     float size = 8;
     float playerSize = 32;
     
@@ -70,17 +70,13 @@ void Game::SpawnEnemy(float xPos)
     entitySystem->AddSprite(eID, Color(150, 50, 100));
 }
 
-void Game::SpawnPlayer()
-{
-    float size = 32;
-    PlayerEntityID = entitySystem->CreateEntity();
-    entitySystem->AddTransform(PlayerEntityID, Float2(400 - size/2.f, 900), Float2(size, size));
-    entitySystem->AddCollider(PlayerEntityID);
-    entitySystem->AddSprite(PlayerEntityID, Color(100, 100, 100));
-    entitySystem->AddMovement(PlayerEntityID, Float2(0, 0));
-}
+void Game::NotifyIdChanged(int oldEntityID, int newEntityID)
+{ if (oldEntityID == player->EID()){ player->UpdateEID(newEntityID); } }
 
-void Game::Destroy()
+void Game::NotifyEntityDestroyed(int eID)
+{ if (eID == player->EID()) { player->WasKilled(); std::cout << "GAME OVER" << std::endl; } }
+
+void Game::Destructor()
 {
-    entitySystem->Destructor();
+    
 }

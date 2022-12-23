@@ -1,19 +1,23 @@
 ﻿#pragma once
 #include <random>
 #include <SDL.h>
-#include "Input.h"
+#include "DrawSystem.h"
+#include "EntitySystem.h"
 class Game;
+#include "Input.h"
 
 
-extern SDL_Renderer* renderer;
+extern DrawSystem* drawSystem;
 extern Input* input;
-extern float dTime;
+extern Game* game;
+extern EntitySystem* entitySystem;
 extern std::default_random_engine generator;
+extern float dTime;
 
 class Engine
 {
     SDL_Window* window;
-    Game* game;
+    SDL_Renderer* renderer;
     const int width = 800;
     const int height = 1000;
     bool SDLisRunning = true;

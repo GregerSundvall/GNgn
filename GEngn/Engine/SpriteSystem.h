@@ -1,19 +1,16 @@
 ﻿#pragma once
 #include <vector>
-#include "Components.h"
-#include "DrawSystem.h"
 struct Color;
+struct Sprite;
 class EntitySystem;
 
 
 class SpriteSystem
 {
     std::vector<Sprite> sprites;
-    EntitySystem* entitySystem;
-    DrawSystem* drawSystem;
     
 public:
-    SpriteSystem(EntitySystem* entitySystem, DrawSystem* drawSystem);
+    SpriteSystem();
     
     int Register(int entityID, Color color);
     void Unregister(int spriteID);

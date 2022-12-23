@@ -1,11 +1,11 @@
-﻿#include "SpriteSystem.h"
+﻿#include "Engine.h"
+#include "SpriteSystem.h"
 #include "EntitySystem.h"
 
 
-SpriteSystem::SpriteSystem(EntitySystem* entitySystem, DrawSystem* drawSystem)
+SpriteSystem::SpriteSystem()
 {
-    this->entitySystem = entitySystem;
-    this->drawSystem = drawSystem;
+
 }
 
 int SpriteSystem::Register(int entityID, Color color)
