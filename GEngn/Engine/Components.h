@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <SDL_rect.h>
+#include <SDL_render.h>
 
 
 struct Color
@@ -12,6 +13,7 @@ struct Sprite
 {
     int entityID;
     Color color;
+    SDL_Texture* texture;
 };
 
 struct DrawObject

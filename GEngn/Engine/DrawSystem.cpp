@@ -21,8 +21,11 @@ void DrawSystem::DrawAll()
         objectsToDraw[i].sprite.color.b,
         objectsToDraw[i].sprite.color.a);
         SDL_RenderFillRect(renderer, &objectsToDraw[i].rect);
+        
     }
     objectsToDraw.clear();
+
+    // TODO Draw the other vectors
 }
 
 void DrawSystem::Draw(DrawObject& drawObject)

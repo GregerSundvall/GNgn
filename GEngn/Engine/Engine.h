@@ -4,7 +4,6 @@
 #include "DrawSystem.h"
 #include "EntitySystem.h"
 #include "Input.h"
-#include "SDL_ttf.h"
 class Game;
 
 

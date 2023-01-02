@@ -5,9 +5,12 @@
 
 class DrawSystem
 {
-    std::vector<DrawObject> objectsToDraw;
     SDL_Renderer* renderer;
-    // Split to two or three vectors, for Z prioritization?
+    std::vector<DrawObject> objectsToDraw;
+    std::vector<DrawObject> lvl0StuffToDraw; // Background objects
+    std::vector<DrawObject> lvl1StuffToDraw; // Enemies?
+    std::vector<DrawObject> lvl2StuffToDraw; // Player?
+    std::vector<SDL_Texture*> lvl3StuffToDraw; // UI
 
 public:
     DrawSystem(SDL_Renderer* renderer)
