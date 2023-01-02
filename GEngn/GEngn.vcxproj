@@ -110,7 +110,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)SDL2\AdditionalDeps\SDL2.lib;$(SolutionDir)SDL2\AdditionalDeps\SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)SDL2\AdditionalDeps\SDL2.lib;$(SolutionDir)SDL2\AdditionalDeps\SDL2_ttf.lib;$(SolutionDir)SDL2\AdditionalDeps\SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

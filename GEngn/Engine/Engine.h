@@ -3,8 +3,9 @@
 #include <SDL.h>
 #include "DrawSystem.h"
 #include "EntitySystem.h"
-class Game;
 #include "Input.h"
+#include "SDL_ttf.h"
+class Game;
 
 
 extern DrawSystem* drawSystem;
