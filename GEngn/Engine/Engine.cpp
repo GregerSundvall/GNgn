@@ -85,3 +85,8 @@ void Engine::Run()
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
+
+SDL_Renderer* Engine::GetRenderer()
+{
+    return renderer;
+}

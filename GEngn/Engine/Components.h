@@ -14,6 +14,8 @@ struct Sprite
     int entityID;
     Color color;
     SDL_Texture* texture;
+
+    ~Sprite() { if (texture) {SDL_DestroyTexture(texture);} }
 };
 
 struct DrawObject
@@ -24,7 +26,6 @@ struct DrawObject
 
 struct Float2
 {
-public:
     float x;
     float y;
     Float2& operator += (const Float2& other)

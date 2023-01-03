@@ -183,9 +183,32 @@ void EntitySystem::AddMovement(int entityID, Float2 velocity)
 
 void EntitySystem::AddSprite(int entityID, Color color)
 {
-    if (entities[entityID].spriteID != -1) { RemoveSprite(entityID); } // Remove old, if already present
+    if (entities[entityID].spriteID == -1) // Add sprite component if needed
+    {
+        entities[entityID].spriteID = spriteSystem->Register(entityID, color);
+    }
     
-    entities[entityID].spriteID = spriteSystem->Register(entityID, color);
+    spriteSystem->SetColor(entities[entityID].spriteID, color);
+}
+
+void EntitySystem::AddSprite(int entityID, std::string filePath)
+{
+    if (entities[entityID].spriteID == -1) // Add sprite component if needed
+    {
+        entities[entityID].spriteID = spriteSystem->Register(entityID, {255, 255, 255, 255});
+    }
+
+    spriteSystem->SetTexture(entities[entityID].spriteID, filePath);
+}
+
+void EntitySystem::AddSprite(int entityID, std::string text, std::string font)
+{
+    if (entities[entityID].spriteID == -1) // Add sprite component if needed
+        {
+        entities[entityID].spriteID = spriteSystem->Register(entityID, {255, 255, 255, 255});
+        }
+
+    spriteSystem->SetTexture(entities[entityID].spriteID, text, font);
 }
 
 void EntitySystem::Update()

@@ -2,7 +2,7 @@
 #include "SDL.h"
 #include "GEngn.h"
 
-extern Engine* engine = new Engine();
+Engine* engine = new Engine();
 
 int main( int argc, char* argv[] )
 {

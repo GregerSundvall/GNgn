@@ -25,4 +25,5 @@ class Engine
 public:
     Engine();
     void Run();
+    SDL_Renderer* GetRenderer();
 };

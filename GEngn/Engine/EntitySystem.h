@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <string>
 #include <vector>
 #include "Components.h"
 #include "TransformSystem.h"
@@ -39,7 +40,9 @@ public:
     void AddTransform(int entityID, Float2 position, Float2 size);
     void AddCollider(int entityID);
     void AddMovement(int entityID, Float2 velocity);
-    void AddSprite(int entityID, Color color);
+    void AddSprite(int entityID, Color color); // Set color sprite
+    void AddSprite(int entityID, std::string filePath); // Set image sprite
+    void AddSprite(int entityID, std::string text, std::string font); // Set text sprite
     void RemoveTransform(int entityID);
     void RemoveCollider(int entityID);
     void RemoveMovement(int entityID);
