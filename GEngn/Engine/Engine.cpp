@@ -1,5 +1,8 @@
 ﻿#include "Engine.h"
 #include <random>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
 #include "iostream"
 #include "../Game/Game.h"
 
@@ -13,9 +16,10 @@ std::default_random_engine generator;
 
 Engine::Engine()
 {
-    // game = new Game;
-    
     SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG);
+    TTF_Init();
+    
     window = SDL_CreateWindow(
         "GEngn",
         SDL_WINDOWPOS_UNDEFINED,

@@ -2,12 +2,10 @@
 #include "SpriteSystem.h"
 
 #include <iostream>
-// #include <SDL.h>
-#include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 
 #include "EntitySystem.h"
-#include "../GEngn.h"
 
 
 SpriteSystem::SpriteSystem(EntitySystem* entitySystem)
@@ -40,31 +38,28 @@ void SpriteSystem::SetColor(int spriteID, Color color)
 
 void SpriteSystem::SetTexture(int spriteID, std::string imagePath) // Create and assign texture from image file.
 {
-    auto surface = IMG_Load(imagePath.c_str());
-    if (!surface)  { std::cerr << "Failed to create surface\n"; }
-    
-    auto texture = SDL_CreateTextureFromSurface(drawSystem->renderer, surface);
-    // std::cout << SDL_GetError() << std::endl;
-    SDL_FreeSurface(surface);
+    auto texture = IMG_LoadTexture(drawSystem->renderer, imagePath.c_str());
+    std::cerr<<SDL_QueryTexture(texture, nullptr, nullptr, nullptr, nullptr);
     if (!texture)
     {
         std::cerr << "Failed to create texture\n";
         return;
     }
-
-    texture = IMG_LoadTexture(drawSystem->renderer, imagePath.c_str());
     
     sprites[spriteID].texture = texture;
 }
 
 void SpriteSystem::SetTexture(int spriteID, const std::string& content, const std::string& fontPath) // Create and assign texture from text.
 {
-    int size = entitySystem->GetTransform(sprites[spriteID].entityID)->size.y;
+    int size = static_cast<int>(entitySystem->GetTransform(sprites[spriteID].entityID)->size.y);
     auto color = sprites[spriteID].color;
     auto sdlColor = SDL_Color(color.r, color.g, color.b, color.a);
-    
+
     TTF_Font* font = TTF_OpenFont(fontPath.c_str(), size);
-    if (!font) { std::cerr << "Failed to load font\n"; }
+    if (!font)
+    {
+        std::cerr << "Failed to load font\n";
+    }
 
     auto surface = TTF_RenderText_Solid(font, content.c_str(), sdlColor);
     if (!surface) { std::cerr << "Failed to create text surface\n"; }

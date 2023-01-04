@@ -6,9 +6,8 @@
 
 void DrawSystem::Add(Float2 position, Float2 size, Sprite sprite)
 {
-    SDL_Rect rect = {static_cast<int>(position.x),
-                    static_cast<int>(position.y),
-                    static_cast<int>(size.x), static_cast<int>(size.y)};
+    SDL_Rect rect = { static_cast<int>(position.x), static_cast<int>(position.y),
+                    static_cast<int>(size.x), static_cast<int>(size.y) };
     // TODO Add offset so position means CENTER position.
     
     lvl3StuffToDraw.push_back(DrawObject(sprite, rect));
@@ -41,7 +40,12 @@ void DrawSystem::DrawAll()
         SDL_RenderFillRect(renderer, &lvl3StuffToDraw[i].rect);
     }
     lvl3StuffToDraw.clear();
-    
+
+    auto texture = IMG_LoadTexture(drawSystem->renderer, "Res/Ships/player.png");
+    SDL_Rect rect = SDL_Rect(32, 32, 32, 32);
+    SDL_RenderCopy(renderer, texture, nullptr, &rect);
+
+
     // TODO Draw the other vectors
 }
 

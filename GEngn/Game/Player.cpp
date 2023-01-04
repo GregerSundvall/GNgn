@@ -8,7 +8,7 @@ Player::Player(std::string name, float size)
     entitySystem->AddTransform(entityID,
         Float2(400 - size/2.f, 900), Float2(size, size));
     entitySystem->AddCollider(entityID);
-    entitySystem->AddSprite(entityID, "Res/Ships/player.bmp");
+    entitySystem->AddSprite(entityID, "Res/Ships/player.png");
     entitySystem->AddMovement(entityID, Float2(0, 0));
 }
 
