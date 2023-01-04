@@ -6,12 +6,13 @@
 #include "SpriteSystem.h"
 
 
-EntitySystem::EntitySystem()
+EntitySystem::EntitySystem(Engine* engine)
 {
+    this->engine = engine;
     transformSystem = new TransformSystem(this);
     collisionSystem = new CollisionSystem(this);
     movementSystem = new MovementSystem(this);
-    spriteSystem = new SpriteSystem();
+    spriteSystem = new SpriteSystem(this);
 }
 
 int EntitySystem::CreateEntity()
@@ -60,18 +61,6 @@ void EntitySystem::MoveTo(int entityID, Float2 position)
 
 void EntitySystem::DestroyEntity(int entityID)
 {
-    std::cout <<std::endl << "DestroyEntity start" << std::endl;
-    for (int i = 0; i < entities.size(); ++i)
-    {
-        std::cout << "EntityID " << i << " ";
-        std::cout << "x = " << transformSystem->GetPosition(entities[i].transformID)->x << " ";
-        std::cout << "y = " << transformSystem->GetPosition(entities[i].transformID)->y << " ";
-        std::cout << "TransformID " << entities.at(i).transformID << " ";
-        std::cout << "MovementID " << entities.at(i).movementID << " ";
-        std::cout << "ColliderID " << entities.at(i).collisionID << " ";
-        std::cout << "SpriteID " << entities.at(i).spriteID << " " <<std::endl;
-    }
-    
     RemoveTransform(entityID);
     RemoveCollider(entityID);
     RemoveMovement(entityID);
@@ -92,34 +81,16 @@ void EntitySystem::DestroyEntity(int entityID)
     
     entities.pop_back();
     game->NotifyEntityDestroyed(entityID);
-
-    std::cout <<std::endl << "DestroyEntity end" << std::endl;
-    for (int i = 0; i < entities.size(); ++i)
-    {
-        std::cout << "EntityID " << i << " ";
-        std::cout << "x = " << transformSystem->GetPosition(entities[i].transformID)->x << " ";
-        std::cout << "y = " << transformSystem->GetPosition(entities[i].transformID)->y << " ";
-        std::cout << "TransformID " << entities.at(i).transformID << " ";
-        std::cout << "MovementID " << entities.at(i).movementID << " ";
-        std::cout << "ColliderID " << entities.at(i).collisionID << " ";
-        std::cout << "SpriteID " << entities.at(i).spriteID << " " <<std::endl;
-    }
 }
 
 void EntitySystem::NotifyOverlap(std::vector<int> collidingEntities)
 {
     // Just destroy them, for now.
-    std::cout << "NotifyOverlap run. Overlaps: " << collidingEntities.size() << std::endl;
-
     for (int i = static_cast<int>(collidingEntities.size()) - 1; i >= 0; --i)
     {
-        std::cout << "In loop, i = : " << i << std::endl;
-        std::cout << "In loop, overlaps = " << collidingEntities.size() << std::endl;
         DestroyEntity(collidingEntities[i]);
         collidingEntities.pop_back();
-        std::cout << "End of loop iteration, overlaps = " << collidingEntities.size() << std::endl;
     }
-    std::cout << "NotifyOverlap out of loop. Overlaps: " << collidingEntities.size() << std::endl;
 
 }
 

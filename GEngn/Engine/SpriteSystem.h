@@ -8,9 +8,10 @@ class EntitySystem;
 class SpriteSystem
 {
     std::vector<Sprite> sprites;
+    EntitySystem* entitySystem;
     
 public:
-    SpriteSystem();
+    SpriteSystem(EntitySystem* entitySystem);
     
     int Register(int entityID, Color color);
     void Unregister(int spriteID);

@@ -2,10 +2,11 @@
 #include "SDL.h"
 #include "GEngn.h"
 
-Engine* engine = new Engine();
+Engine* engine;
 
 int main( int argc, char* argv[] )
 {
+    engine = new Engine();
     engine->Run();
     
     return 0;

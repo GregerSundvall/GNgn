@@ -3,6 +3,7 @@
 #include <vector>
 #include "Components.h"
 #include "TransformSystem.h"
+class Engine;
 class CollisionSystem;
 class MovementSystem;
 class SpriteSystem;
@@ -11,7 +12,8 @@ class SpriteSystem;
 class EntitySystem
 {
     std::vector<Entity> entities;
-    
+
+    Engine* engine;
     TransformSystem* transformSystem;
     CollisionSystem* collisionSystem;
     MovementSystem* movementSystem;
@@ -19,10 +21,10 @@ class EntitySystem
     //InputSystem
     //HealthSystem
     //ScoreSystem?
-    //Add position adjustment "somewhere". Affects sprite and collider... And movement? (for edge of windows handling)
+    //Add position offset "somewhere". Affects sprite and collider... And movement? (for edge of window handling)
     
 public:
-    EntitySystem();
+    EntitySystem(Engine* engine);
     int CreateEntity();
     Entity* GetEntity(int entityID) { return &entities[entityID]; }
     Float2* GetPosition(int entityID) { return transformSystem->GetPosition(entities[entityID].transformID); }

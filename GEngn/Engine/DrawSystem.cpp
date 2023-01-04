@@ -9,9 +9,9 @@ void DrawSystem::Add(Float2 position, Float2 size, Sprite sprite)
     SDL_Rect rect = {static_cast<int>(position.x),
                     static_cast<int>(position.y),
                     static_cast<int>(size.x), static_cast<int>(size.y)};
-    // TODO Add offset so position is CENTER position.
+    // TODO Add offset so position means CENTER position.
     
-    objectsToDraw.push_back(DrawObject(sprite, rect));
+    lvl3StuffToDraw.push_back(DrawObject(sprite, rect));
 }
 
 
@@ -40,7 +40,7 @@ void DrawSystem::DrawAll()
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(renderer, &lvl3StuffToDraw[i].rect);
     }
-
+    lvl3StuffToDraw.clear();
     
     // TODO Draw the other vectors
 }

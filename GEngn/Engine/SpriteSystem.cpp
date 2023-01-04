@@ -2,6 +2,7 @@
 #include "SpriteSystem.h"
 
 #include <iostream>
+// #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
@@ -9,8 +10,9 @@
 #include "../GEngn.h"
 
 
-SpriteSystem::SpriteSystem()
+SpriteSystem::SpriteSystem(EntitySystem* entitySystem)
 {
+    this->entitySystem = entitySystem;
 }
 
 int SpriteSystem::Register(int entityID, Color color)
@@ -40,16 +42,24 @@ void SpriteSystem::SetTexture(int spriteID, std::string imagePath) // Create and
 {
     auto surface = IMG_Load(imagePath.c_str());
     if (!surface)  { std::cerr << "Failed to create surface\n"; }
-
-    auto texture = SDL_CreateTextureFromSurface(engine->GetRenderer(), surface);
-    if (!texture)  { std::cerr << "Failed to create texture\n"; }
-
+    
+    auto texture = SDL_CreateTextureFromSurface(drawSystem->renderer, surface);
+    // std::cout << SDL_GetError() << std::endl;
     SDL_FreeSurface(surface);
+    if (!texture)
+    {
+        std::cerr << "Failed to create texture\n";
+        return;
+    }
+
+    texture = IMG_LoadTexture(drawSystem->renderer, imagePath.c_str());
+    
+    sprites[spriteID].texture = texture;
 }
 
 void SpriteSystem::SetTexture(int spriteID, const std::string& content, const std::string& fontPath) // Create and assign texture from text.
 {
-    auto size = entitySystem->GetTransform(sprites[spriteID].entityID)->size.y;
+    int size = entitySystem->GetTransform(sprites[spriteID].entityID)->size.y;
     auto color = sprites[spriteID].color;
     auto sdlColor = SDL_Color(color.r, color.g, color.b, color.a);
     
@@ -59,11 +69,15 @@ void SpriteSystem::SetTexture(int spriteID, const std::string& content, const st
     auto surface = TTF_RenderText_Solid(font, content.c_str(), sdlColor);
     if (!surface) { std::cerr << "Failed to create text surface\n"; }
 
-    auto texture = SDL_CreateTextureFromSurface(engine->GetRenderer(), surface);
-
+    auto texture = SDL_CreateTextureFromSurface(drawSystem->renderer, surface);
+    
     SDL_FreeSurface(surface);
     
-    if (!texture) { std::cerr << "Failed to create text texture\n"; return; }
+    if (!texture)
+    {
+        std::cerr << "Failed to create text texture\n";
+        return;
+    }
     sprites[spriteID].texture = texture;
 }
 

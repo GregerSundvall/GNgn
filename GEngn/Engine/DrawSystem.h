@@ -6,7 +6,6 @@
 
 class DrawSystem
 {
-    SDL_Renderer* renderer;
     std::vector<DrawObject> objectsToDraw;
     std::vector<DrawObject> lvl0StuffToDraw; // Background objects
     std::vector<DrawObject> lvl1StuffToDraw; // Enemies?
@@ -20,6 +19,7 @@ public:
         this->renderer = renderer;
     }
     
+    SDL_Renderer* renderer;
     void Add(Float2 position, Float2 size, Sprite sprite);
     void DrawAll();
     void Draw(DrawObject& drawObject);

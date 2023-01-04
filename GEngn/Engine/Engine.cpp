@@ -13,7 +13,7 @@ std::default_random_engine generator;
 
 Engine::Engine()
 {
-    game = new Game;
+    // game = new Game;
     
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow(
@@ -38,7 +38,7 @@ void Engine::Run()
     drawSystem = new DrawSystem(renderer);
     input = new Input();
     game = new Game();
-    entitySystem = new EntitySystem();
+    entitySystem = new EntitySystem(this);
     game->Start();
     
     while (SDLisRunning)

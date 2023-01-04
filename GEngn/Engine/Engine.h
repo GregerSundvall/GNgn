@@ -16,8 +16,8 @@ extern float dTime;
 
 class Engine
 {
-    SDL_Window* window;
     SDL_Renderer* renderer;
+    SDL_Window* window;
     const int width = 800;
     const int height = 1000;
     bool SDLisRunning = true;

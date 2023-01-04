@@ -12,6 +12,7 @@ Game::Game()
 void Game::Start()
 {
     player = new Player("greg", 32);
+    
     SpawnEnemy(200);
     SpawnEnemy(300);
     SpawnEnemy(400);
