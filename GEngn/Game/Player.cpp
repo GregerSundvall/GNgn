@@ -34,8 +34,8 @@ void Player::Shoot()
     Float2 offsetY = Float2(0, -2); 
     position += offsetY; //To spawn just ahead of ship
     
-    int playersize = entitySystem->GetTransform(entityID)->size.x;
-    int bulletSize = 8;
+    float playersize = entitySystem->GetTransform(entityID)->size.x;
+    float bulletSize = 8;
     Float2 centeringOffset = Float2(playersize/2 - bulletSize/2, 0);
     position += centeringOffset; // center x pos of ship
     

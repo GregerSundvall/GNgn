@@ -225,6 +225,7 @@
       <AdditionalIncludeDirectories>D:\Code\C++\GEngine\SDL2\include;;C:\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Engine\Components.cpp" />
     <ClCompile Include="Engine\DrawSystem.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

@@ -2,6 +2,8 @@
 #include <string>
 #include <SDL_rect.h>
 
+class EntitySystem;
+
 
 struct Color
 {
@@ -59,9 +61,19 @@ struct Movement
 
 struct Entity
 {
-    // int ID;
+    int eID;
+    EntitySystem* entitySystem;
     int transformID = -1;
     int movementID = -1;
     int collisionID = -1;
     int spriteID = -1;
+
+    void AddTransform(Float2 position, Float2 size);
+    void AddMovement(Float2 velocity);
+    void AddCollision();
+    void AddSprite(Color color);
+    void AddSprite(std::string imagePath);
+    void AddSprite(std::string text, std::string fontPath);
 };
+
+

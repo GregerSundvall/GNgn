@@ -2,6 +2,11 @@
 #include "Components.h"
 #include "EntitySystem.h"
 
+TransformSystem::TransformSystem(EntitySystem* entitySystem)
+{
+    this->entitySystem = entitySystem; 
+}
+
 void TransformSystem::Update()
 {
 
@@ -42,3 +47,12 @@ Transform* TransformSystem::GetTransform(int transformID)
     return &transforms[transformID];
 }
 
+void TransformSystem::SetPosition(int transformID, Float2 position)
+{
+    transforms[transformID].position = position;
+}
+
+void TransformSystem::AddOffset(int transformID, Float2 offset)
+{
+    transforms[transformID].position += offset;
+}

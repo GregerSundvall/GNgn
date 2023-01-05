@@ -24,7 +24,7 @@ void Game::Update()
 }
 
 
-void Game::SpawnBullet(Float2 position, Float2 velocity, int size)
+void Game::SpawnBullet(Float2 position, Float2 velocity, float size)
 {
     int eID = entitySystem->CreateEntity();
     entitySystem->AddTransform(eID, Float2(position), Float2(size, size));

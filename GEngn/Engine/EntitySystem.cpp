@@ -1,4 +1,7 @@
 ﻿#include "EntitySystem.h"
+
+#include <iostream>
+
 #include "CollisionSystem.h"
 #include "Engine.h"
 #include "../Game/Game.h"
@@ -17,8 +20,9 @@ EntitySystem::EntitySystem(Engine* engine)
 
 int EntitySystem::CreateEntity()
 {
-    entities.push_back(Entity());
-    return static_cast<int>(entities.size()) -1;
+    int id = static_cast<int>(entities.size());
+    entities.emplace_back(Entity(id, this));
+    return id;
 }
 
 void EntitySystem::SetVelocity(int entityID, Float2 velocity)
