@@ -1,13 +1,9 @@
 ﻿#include "Game.h"
+#include <iostream>
 #include <random>
 #include "../Engine/Engine.h"
 #include "Player.h"
 
-
-Game::Game()
-{
-
-}
 
 void Game::Start()
 {
@@ -18,14 +14,13 @@ void Game::Start()
     SpawnEnemy(400);
     SpawnEnemy(500);
     SpawnEnemy(600);
+
+    isRunning = true;
 }
 
 void Game::Update()
 {
     if (!isRunning) { return; }
-    
-    entitySystem->Update();
-    drawSystem->Update();
     
     {   // Temporary player input
         if (player->isAlive)
@@ -77,7 +72,4 @@ void Game::NotifyIdChanged(int oldEntityID, int newEntityID)
 void Game::NotifyEntityDestroyed(int eID)
 { if (eID == player->EID()) { player->WasKilled(); std::cout << "GAME OVER" << std::endl; } }
 
-void Game::Destructor()
-{
-    
-}
+

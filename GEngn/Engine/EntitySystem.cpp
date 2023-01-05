@@ -190,11 +190,4 @@ void EntitySystem::Update()
     collisionSystem->Update();
 }
 
-void EntitySystem::Destructor()
-{
-    transformSystem->Destructor();
-    collisionSystem->Destructor();
-    movementSystem->Destructor();
-    spriteSystem->Destructor();
-    entities.clear();
-}
+

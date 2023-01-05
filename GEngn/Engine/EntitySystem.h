@@ -50,7 +50,6 @@ public:
     void RemoveMovement(int entityID);
     void RemoveSprite(int entityID);
     void Update();
-    void Destructor();
 };
 
 

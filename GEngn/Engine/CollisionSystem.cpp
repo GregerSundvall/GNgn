@@ -72,7 +72,4 @@ void CollisionSystem::AssignNewEntityID(int colliderID, int newEntityID) //Used 
     colliders[colliderID].entityID = newEntityID;
 }
 
-void CollisionSystem::Destructor()
-{
-    colliders.clear();
-}
+

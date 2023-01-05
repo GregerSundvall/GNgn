@@ -20,5 +20,4 @@ public:
     void SetTexture(int spriteID, const std::string &text, const std::string &fontPath);
     void AssignNewEntityID(int spriteID, int newEntityID);
     void Update();
-    void Destructor() {sprites.clear();}
 };

@@ -42,7 +42,3 @@ Transform* TransformSystem::GetTransform(int transformID)
     return &transforms[transformID];
 }
 
-void TransformSystem::Destructor()
-{
-    transforms.clear();
-}

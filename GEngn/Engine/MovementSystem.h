@@ -22,5 +22,4 @@ public:
     Float2 GetVelocity(int movementID);
     void SetVelocity(int movementID, Float2 newVelocity);
     int Size() { return static_cast<int>(movements.size()); }
-    void Destructor() {movements.clear();}
 };

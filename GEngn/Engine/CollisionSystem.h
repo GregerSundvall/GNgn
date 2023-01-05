@@ -22,6 +22,5 @@ public:
     int Register(int EntityID, Float2 position, Float2 size);
     void Unregister(int colliderID);
     void AssignNewEntityID(int colliderID, int newEntityID);
-    void Destructor();
     
 };

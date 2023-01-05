@@ -21,6 +21,5 @@ public:
     Transform* GetTransform(int transformID);
     void SetPosition(int transformID, Float2 position) {transforms[transformID].position = position;}
     void AddOffset(int transformID, Float2 offset) {transforms[transformID].position += offset;}
-    void Destructor();
     
 };
