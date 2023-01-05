@@ -1,7 +1,5 @@
 ﻿#include "DrawSystem.h"
-
 #include <iostream>
-#include <SDL.h>
 #include <SDL_render.h>
 #include <SDL_image.h>
 #include "Engine.h"
@@ -14,7 +12,6 @@ void DrawSystem::Add(Float2 position, Float2 size, Sprite& sprite)
     // TODO Add offset so position means CENTER position.
     
     lvl3StuffToDraw.push_back(DrawObject(sprite, rect));
-    // CacheTexture(sprite.imagePath);
 }
 
 void DrawSystem::CacheTexture(std::string imagePath)
@@ -34,7 +31,7 @@ void DrawSystem::CacheTexture(std::string imagePath)
 }
 
 
-void DrawSystem::DrawAll()
+void DrawSystem::Update()
 {
     // for (int i = 0; i < objectsToDraw.size(); ++i)
     // {

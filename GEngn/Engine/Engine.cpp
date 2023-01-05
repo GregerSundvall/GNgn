@@ -8,7 +8,7 @@
 
 
 DrawSystem* drawSystem;
-Input* input;
+InputSystem* input;
 Game* game;
 EntitySystem* entitySystem;
 float dTime = 0.0f;
@@ -40,7 +40,7 @@ void Engine::Run()
     float accumulatedFPS = 0;
 
     drawSystem = new DrawSystem(renderer);
-    input = new Input();
+    input = new InputSystem();
     game = new Game();
     entitySystem = new EntitySystem(this);
     game->Start();

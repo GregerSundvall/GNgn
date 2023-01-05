@@ -138,11 +138,10 @@
     <ClInclude Include="Engine\DrawSystem.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\EntitySystem.h" />
-    <ClInclude Include="Engine\Input.h" />
+    <ClInclude Include="Engine\InputSystem.h" />
     <ClInclude Include="Engine\MovementSystem.h" />
     <ClInclude Include="Engine\SpriteSystem.h" />
     <ClInclude Include="Engine\TransformSystem.h" />
-    <ClInclude Include="Engine\UISystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Player.h" />
@@ -448,7 +447,7 @@
       <AdditionalIncludeDirectories>D:\Code\C++\GEngine\SDL2\include;;C:\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Engine\Input.cpp">
+    <ClCompile Include="Engine\InputSystem.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -744,7 +743,6 @@
       <AdditionalIncludeDirectories>D:\Code\C++\GEngine\SDL2\include;;C:\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Engine\UISystem.cpp" />
     <ClCompile Include="Game\Game.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

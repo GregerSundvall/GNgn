@@ -3,12 +3,12 @@
 #include <SDL.h>
 #include "DrawSystem.h"
 #include "EntitySystem.h"
-#include "Input.h"
+#include "InputSystem.h"
 class Game;
 
 
 extern DrawSystem* drawSystem;
-extern Input* input;
+extern InputSystem* input;
 extern Game* game;
 extern EntitySystem* entitySystem;
 extern std::default_random_engine generator;

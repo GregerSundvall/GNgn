@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <string>
 #include <SDL_rect.h>
-#include <SDL_render.h>
 
 
 struct Color
@@ -17,9 +16,6 @@ struct Sprite
     std::string imagePath;
     std::string text;
     std::string fontPath;
-    SDL_Texture* texture; // TODO Remove
-
-    ~Sprite() { if (texture) {SDL_DestroyTexture(texture);} } // TODO Remove
 };
 
 struct DrawObject

@@ -1,8 +1,8 @@
-﻿#include "Input.h"
+﻿#include "InputSystem.h"
 #include <SDL_events.h>
 
 
-void Input::Reset()
+void InputSystem::Reset()
 {
     Esc = 0;
     W = 0;
@@ -12,7 +12,7 @@ void Input::Reset()
     Space = 0;
 }
 
-void Input::Update()
+void InputSystem::Update()
 {
     Reset();
     
