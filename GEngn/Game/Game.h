@@ -1,4 +1,5 @@
 ﻿#pragma once
+struct Float2;
 class Player;
 
 class Game
@@ -13,7 +14,7 @@ class Game
 public:
     void Start();
     void Update();
-    void SpawnBullet(); // Spawns a moving projectile in front of player
+    void SpawnBullet(Float2 position, Float2 velocity, int size); 
     void SpawnEnemy(float xPos);
     void NotifyIdChanged(int oldEntityID, int newEntityID);
     void NotifyEntityDestroyed(int eID);

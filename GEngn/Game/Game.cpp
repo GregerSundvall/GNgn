@@ -7,7 +7,7 @@
 
 void Game::Start()
 {
-    player = new Player("greg", 32);
+    player = new Player("greg", 32, this);
     
     SpawnEnemy(200);
     SpawnEnemy(300);
@@ -20,35 +20,16 @@ void Game::Start()
 
 void Game::Update()
 {
-    if (!isRunning) { return; }
-    
-    {   // Temporary player input
-        if (player->isAlive)
-        {
-            Float2 velocity = Float2(input->A * -1.0f + input->D * 1.0f, 0);
-            player->SetVelocity(velocity);
-    
-            if (input->Space == 1)
-            {
-                SpawnBullet();
-            }
-        }
-    }
+    player->Update();
 }
 
 
-void Game::SpawnBullet()
+void Game::SpawnBullet(Float2 position, Float2 velocity, int size)
 {
-    Float2* playerPos = player->GetPosition();
-    float x = playerPos->x;
-    float y = playerPos->y -2;
-    float size = 8;
-    float playerSize = 32;
-    
     int eID = entitySystem->CreateEntity();
-    entitySystem->AddTransform(eID, Float2(x - size/2.f + playerSize/2.f, y), Float2(size, size));
+    entitySystem->AddTransform(eID, Float2(position), Float2(size, size));
     entitySystem->AddCollider(eID);
-    entitySystem->AddMovement(eID, Float2(0, -10.0f));
+    entitySystem->AddMovement(eID, velocity);
     entitySystem->AddSprite(eID, Color(200, 200, 0));
 }
 

@@ -8,6 +8,7 @@ class Player
 {
 public:
     bool isAlive = true;
+    Game* game;
     
 private:
     std::string name;
@@ -15,8 +16,10 @@ private:
     int entityID;
 
 public:
-    Player(std::string name, float size);
+    Player(std::string name, float size, Game* game);
 
+    void Update();
+    void Shoot();
     int EID(){ return entityID; }
     void UpdateEID(int eID) { entityID = eID; }
     void WasKilled();
