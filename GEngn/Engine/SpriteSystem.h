@@ -17,7 +17,7 @@ public:
     void Unregister(int spriteID);
     void SetColor(int spriteID, Color color);
     void SetTexture(int spriteID, std::string imagePath);
-    void SetTexture(int spriteID, const std::string &content, const std::string &fontPath);
+    void SetTexture(int spriteID, const std::string &text, const std::string &fontPath);
     void AssignNewEntityID(int spriteID, int newEntityID);
     void Update();
     void Destructor() {sprites.clear();}

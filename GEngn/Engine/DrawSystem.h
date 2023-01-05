@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <map>
 #include <SDL_render.h>
 #include <string>
 #include <vector>
@@ -12,6 +13,10 @@ class DrawSystem
     std::vector<DrawObject> lvl2StuffToDraw; // Player?
     std::vector<DrawObject> lvl3StuffToDraw; // UI
 
+    std::map<std::string, SDL_Texture*> textureCache;
+
+    
+
 public:
     DrawSystem(SDL_Renderer* renderer)
     {
@@ -20,7 +25,8 @@ public:
     }
     
     SDL_Renderer* renderer;
-    void Add(Float2 position, Float2 size, Sprite sprite);
+    void Add(Float2 position, Float2 size, Sprite& sprite);
+    void CacheTexture(std::string imagePath);
     void DrawAll();
     void Draw(DrawObject& drawObject);
 };

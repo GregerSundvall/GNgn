@@ -1,16 +1,36 @@
 ﻿#include "DrawSystem.h"
+
+#include <iostream>
+#include <SDL.h>
 #include <SDL_render.h>
 #include <SDL_image.h>
 #include "Engine.h"
 
 
-void DrawSystem::Add(Float2 position, Float2 size, Sprite sprite)
+void DrawSystem::Add(Float2 position, Float2 size, Sprite& sprite)
 {
     SDL_Rect rect = { static_cast<int>(position.x), static_cast<int>(position.y),
                     static_cast<int>(size.x), static_cast<int>(size.y) };
     // TODO Add offset so position means CENTER position.
     
     lvl3StuffToDraw.push_back(DrawObject(sprite, rect));
+    // CacheTexture(sprite.imagePath);
+}
+
+void DrawSystem::CacheTexture(std::string imagePath)
+{
+    if (textureCache.contains(imagePath))
+    {
+        return;
+    }
+
+    SDL_Texture* texture = IMG_LoadTexture(renderer, imagePath.c_str());
+    if (!texture)
+    {
+        std::cerr << "DrawSystem failed to create texture\n";
+        return;
+    }
+    textureCache.try_emplace(imagePath, texture);
 }
 
 
@@ -30,9 +50,11 @@ void DrawSystem::DrawAll()
 
     for (int i = 0; i < lvl3StuffToDraw.size(); ++i)
     {
-        if (lvl3StuffToDraw[i].sprite.texture != nullptr)
+        if (lvl3StuffToDraw[i].sprite.imagePath != "")
         {
-            SDL_RenderCopy(renderer, lvl3StuffToDraw[i].sprite.texture, nullptr, &lvl3StuffToDraw[i].rect);
+            std::string  path = lvl3StuffToDraw[i].sprite.imagePath;
+            SDL_Texture* texture = textureCache.find(path)->second;
+            SDL_RenderCopy(renderer, texture, nullptr, &lvl3StuffToDraw[i].rect);
             continue;
         }
         auto color = lvl3StuffToDraw[i].sprite.color;
@@ -41,9 +63,10 @@ void DrawSystem::DrawAll()
     }
     lvl3StuffToDraw.clear();
 
-    auto texture = IMG_LoadTexture(drawSystem->renderer, "Res/Ships/player.png");
-    SDL_Rect rect = SDL_Rect(32, 32, 32, 32);
-    SDL_RenderCopy(renderer, texture, nullptr, &rect);
+    // Debug stuff
+    // auto texture = IMG_LoadTexture(drawSystem->renderer, "Res/Ships/player.png");
+    // SDL_Rect rect = SDL_Rect(32, 32, 32, 32);
+    // SDL_RenderCopy(renderer, texture, nullptr, &rect);
 
 
     // TODO Draw the other vectors
