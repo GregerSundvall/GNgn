@@ -4,8 +4,14 @@
 
 UI::UI()
 {
-    framerateBox = new Entity();
-    framerateBox->AddTransform({0}, {64});
-    framerateBox->AddSprite(Color(255, 255,255, 255));
-    // framerateBox->AddSprite("Score", "Res/Fonts/SHOWG.TTF");
+    entityID = entitySystem->CreateEntity();
+    Entity()->AddTransform({10}, {64});
+    // Entity()->AddSprite(Color(255, 255,255, 255));
+    Entity()->AddSprite("Score", "Res/Fonts/SHOWG.TTF");
+}
+
+Entity* UI::Entity()
+{
+    auto entity = entitySystem->GetEntity(entityID);
+    return entity;
 }

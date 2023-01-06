@@ -26,15 +26,23 @@ struct DrawObject
     SDL_Rect rect;
 };
 
-struct Float2
+class Float2
 {
+public:
     float x;
     float y;
+    Float2(float symmetric) { x = symmetric; y = symmetric; }
+    Float2(float x, float y) { this->x = x; this->y = y; }
     Float2& operator += (const Float2& other)
     {
         x += other.x;
         y += other.y;
         return *this;
+    }
+    friend Float2 operator+ (Float2 lhs, Float2 const & rhs)
+    {
+        lhs += rhs;
+        return lhs;
     }
 };
 

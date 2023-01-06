@@ -27,6 +27,7 @@ public:
     SDL_Renderer* renderer;
     void Add(Float2 position, Float2 size, Sprite& sprite);
     void CacheTexture(std::string imagePath);
+    void CacheTexture(std::string text, std::string fontPath);
     void Update();
     void Draw(DrawObject& drawObject);
 };

@@ -41,7 +41,8 @@ void SpriteSystem::SetTexture(int spriteID, const std::string& text, const std::
 {
     sprites[spriteID].text = text;
     sprites[spriteID].fontPath = fontPath;
-
+    sprites[spriteID].color = {0, 100, 100, 255};
+    drawSystem->CacheTexture(text, fontPath);
 }
 
 void SpriteSystem::AssignNewEntityID(int spriteID, int newEntityID) //Used when destroying an entity

@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <vector>
 // #include "Components.h"
-struct Float2;
+class Float2;
 struct Transform;
 class EntitySystem;
 

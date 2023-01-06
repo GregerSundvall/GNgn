@@ -3,6 +3,7 @@
 #include <random>
 #include "../Engine/Engine.h"
 #include "Player.h"
+#include "UI.h"
 
 
 void Game::Start()
@@ -14,6 +15,8 @@ void Game::Start()
     SpawnEnemy(400);
     SpawnEnemy(500);
     SpawnEnemy(600);
+
+    auto ui = new UI();
 
     isRunning = true;
 }

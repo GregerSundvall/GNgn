@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <string>
 #include "../Engine/Engine.h"
-struct Float2;
+class Float2;
 
 
 class Player

@@ -1,11 +1,13 @@
 ﻿#pragma once
+#include "../Engine/Engine.h"
 
 struct Entity;
 
 class UI
 {
-    Entity* framerateBox;
+    int entityID;
 public:
     UI();
+    Entity* Entity();
     
 };
