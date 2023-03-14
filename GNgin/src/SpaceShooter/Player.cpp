@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 
 #include "Game.h"
-#include "../Engine/Components.h"
+//#include "../Engine/Misc/Components.h"
 
 Player::Player(std::string name, float size, Game* game)
 {

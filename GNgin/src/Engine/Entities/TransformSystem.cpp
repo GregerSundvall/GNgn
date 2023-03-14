@@ -1,5 +1,5 @@
 ﻿#include "TransformSystem.h"
-#include "Components.h"
+#include "../Misc/Components.h"
 #include "EntitySystem.h"
 
 TransformSystem::TransformSystem(EntitySystem* entitySystem)

@@ -1,5 +1,5 @@
 ﻿#include "Components.h"
-#include "EntitySystem.h"
+#include "../Entities/EntitySystem.h"
 
 
 void Entity::AddTransform(Float2 position, Float2 size)

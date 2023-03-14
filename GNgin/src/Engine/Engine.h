@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include <random>
 #include <SDL.h>
-#include "DrawSystem.h"
-#include "EntitySystem.h"
-#include "InputSystem.h"
+#include "Graphics/DrawSystem.h"
+#include "Entities/EntitySystem.h"
+#include "Input/InputSystem.h"
 class Game;
 
 

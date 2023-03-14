@@ -20,7 +20,7 @@ Engine::Engine()
     IMG_Init(IMG_INIT_PNG);
     TTF_Init();
     
-    window = SDL_CreateWindow("GEngn", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+    window = SDL_CreateWindow("GNgin", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         width, height, SDL_WINDOW_SHOWN);
         
     renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);

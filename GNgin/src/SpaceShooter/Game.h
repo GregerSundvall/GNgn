@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "../Engine/Engine.h"
-class Float2;
+//class Float2;
 class Player;
 
 class Game

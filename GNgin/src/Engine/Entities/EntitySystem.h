@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <string>
 #include <vector>
-#include "Components.h"
+#include "../Misc/Components.h"
 #include "TransformSystem.h"
 class Engine;
 class CollisionSystem;

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <vector>
-#include "Components.h"
+#include "../Misc/Components.h"
 class TransformSystem;
 struct Movement;
 class EntitySystem;

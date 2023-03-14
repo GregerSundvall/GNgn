@@ -3,8 +3,8 @@
 #include <iostream>
 
 #include "CollisionSystem.h"
-#include "Engine.h"
-#include "../SpaceShooter/Game.h"
+#include "../Engine.h"
+#include "../../SpaceShooter/Game.h" // Change notifyIDchange so this wont be needed
 #include "MovementSystem.h"
 #include "SpriteSystem.h"
 

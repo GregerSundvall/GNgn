@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <string>
 #include <vector>
-#include "Components.h"
+#include "../Misc/Components.h"
 
 class DrawSystem
 {

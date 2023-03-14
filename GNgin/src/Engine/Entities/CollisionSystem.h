@@ -1,7 +1,9 @@
 ﻿#pragma once
 #include <set>
 #include <vector>
-#include "Components.h"
+#include "../Misc/Components.h"
+
+// Will this be used by entities not using physics? 
 
 class EntitySystem;
 
