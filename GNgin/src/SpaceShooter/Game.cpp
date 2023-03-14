@@ -47,7 +47,7 @@ void Game::SpawnEnemy(float xPos)
     entitySystem->AddTransform(eID, Float2(xPos - size/2.f, 0), Float2(size, size));
     entitySystem->AddCollider(eID);
     entitySystem->AddMovement(eID, Float2(0, 0.5f));
-    entitySystem->AddSprite(eID, "Res/Ships/enemy1.png");
+    entitySystem->AddSprite(eID, "assets/Ships/enemy1.png");
 }
 
 void Game::NotifyIdChanged(int oldEntityID, int newEntityID)

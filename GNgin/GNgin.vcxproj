@@ -142,19 +142,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="assets\basketball.png" />
-    <Image Include="assets\bowlingball.png" />
-    <Image Include="assets\crate.png" />
-    <Image Include="assets\metal.png" />
-    <Image Include="Res\Ships\enemy1.png" />
-    <Image Include="Res\Ships\player.bmp" />
-    <Image Include="Res\Ships\player.png" />
+    <Image Include="assets\Ships\enemy1.png" />
+    <Image Include="assets\Ships\player.bmp" />
+    <Image Include="assets\Ships\player.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\SDL2_gfx\SDL2_gfxPrimitives.c" />
     <ClCompile Include="lib\SDL2_gfx\SDL2_imageFilter.c" />
     <ClCompile Include="lib\SDL2_gfx\SDL2_rotozoom.c" />
-    <ClCompile Include="src\Testing\Application.cpp" />
     <ClCompile Include="src\Engine\CollisionSystem.cpp" />
     <ClCompile Include="src\Engine\Components.cpp" />
     <ClCompile Include="src\Engine\DrawSystem.cpp" />
@@ -167,25 +162,13 @@
     <ClCompile Include="src\SpaceShooter\Game.cpp" />
     <ClCompile Include="src\SpaceShooter\Player.cpp" />
     <ClCompile Include="src\SpaceShooter\UI.cpp" />
-    <ClCompile Include="src\Engine\Graphics.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Engine\Physics\Body.cpp" />
-    <ClCompile Include="src\Engine\Physics\CollisionDetection.cpp" />
-    <ClCompile Include="src\Engine\Physics\Constraint.cpp" />
-    <ClCompile Include="src\Engine\Physics\Force.cpp" />
-    <ClCompile Include="src\Engine\Physics\MatMN.cpp" />
-    <ClCompile Include="src\Engine\Physics\Particle.cpp" />
-    <ClCompile Include="src\Engine\Physics\Shape.cpp" />
-    <ClCompile Include="src\Engine\Physics\Vec2.cpp" />
-    <ClCompile Include="src\Engine\Physics\VecN.cpp" />
-    <ClCompile Include="src\Engine\Physics\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\SDL2_gfx\SDL2_gfxPrimitives.h" />
     <ClInclude Include="lib\SDL2_gfx\SDL2_gfxPrimitives_font.h" />
     <ClInclude Include="lib\SDL2_gfx\SDL2_imageFilter.h" />
     <ClInclude Include="lib\SDL2_gfx\SDL2_rotozoom.h" />
-    <ClInclude Include="src\Testing\Application.h" />
     <ClInclude Include="src\Engine\CollisionSystem.h" />
     <ClInclude Include="src\Engine\Components.h" />
     <ClInclude Include="src\Engine\DrawSystem.h" />
@@ -198,19 +181,6 @@
     <ClInclude Include="src\SpaceShooter\Game.h" />
     <ClInclude Include="src\SpaceShooter\Player.h" />
     <ClInclude Include="src\SpaceShooter\UI.h" />
-    <ClInclude Include="src\Engine\Graphics.h" />
-    <ClInclude Include="src\Engine\Physics\Body.h" />
-    <ClInclude Include="src\Engine\Physics\CollisionDetection.h" />
-    <ClInclude Include="src\Engine\Physics\Constants.h" />
-    <ClInclude Include="src\Engine\Physics\Constraint.h" />
-    <ClInclude Include="src\Engine\Physics\Contact.h" />
-    <ClInclude Include="src\Engine\Physics\Force.h" />
-    <ClInclude Include="src\Engine\Physics\MatMN.h" />
-    <ClInclude Include="src\Engine\Physics\Particle.h" />
-    <ClInclude Include="src\Engine\Physics\Shape.h" />
-    <ClInclude Include="src\Engine\Physics\Vec2.h" />
-    <ClInclude Include="src\Engine\Physics\VecN.h" />
-    <ClInclude Include="src\Engine\Physics\World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -222,7 +192,7 @@
     <Library Include="SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Res\Fonts\SHOWG.TTF" />
+    <Font Include="assets\Fonts\SHOWG.TTF" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
