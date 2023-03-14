@@ -8,19 +8,20 @@ SpriteSystem::SpriteSystem(EntitySystem* entitySystem)
     this->entitySystem = entitySystem;
 }
 
-int SpriteSystem::Register(int entityID, Color color)
+int SpriteSystem::Register(int entityID, int textureID) // Returns a spriteID
 {
-    sprites.push_back(Sprite(entityID, color));
+    sprites.push_back(Sprite(entityID, textureID));
     return static_cast<int>(sprites.size()) -1;
 }
 
-void SpriteSystem::Unregister(int spriteID)
+void SpriteSystem::Unregister(int spriteID) 
 {
     if (spriteID < sprites.size() -1)
     {
         entitySystem->UpdateSpriteID(sprites[sprites.size() -1].entityID, spriteID);
+        sprites[spriteID].entityID = sprites[sprites.size() - 1].entityID;
+        sprites[spriteID].textureID = sprites[sprites.size() - 1].textureID;
         sprites[spriteID].color = sprites[sprites.size() -1].color;
-        sprites[spriteID].entityID = sprites[sprites.size() -1].entityID;
     }
     sprites.pop_back();
 }
@@ -31,10 +32,9 @@ void SpriteSystem::SetColor(int spriteID, Color color)
 }
 
 
-void SpriteSystem::SetTexture(int spriteID, std::string imagePath) // Create and assign texture from image file.
+void SpriteSystem::SetTexture(int spriteID, int textureID)
 {
-    sprites[spriteID].imagePath = imagePath;
-    drawSystem->CacheTexture(imagePath);
+    sprites[spriteID].textureID = textureID;
 }
 
 void SpriteSystem::SetTexture(int spriteID, const std::string& text, const std::string& fontPath) // Create and assign texture from text.

@@ -3,6 +3,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "../Misc/Components.h"
+#include <vector>
+
 struct GraphicsSystem
 {
 private:
@@ -10,15 +12,20 @@ private:
 	static int windowHeight;
 	static SDL_Window* window;
 	static SDL_Renderer* renderer;
-	static Color color;
+	static Color backgroundColor; 
+	static std::vector<Sprite> sprites;
+	static std::vector<SDL_Texture*> textures;
 
 public:
 	static int WindowWidth;
 	static int WindowHeight;
-	static bool Start();
-	static void Stop();
-	static void ClearScreen();
-	static void SetBGColor(Color& newColor);
+
+	static int AddTexture(std::string filepath);
+	static bool Start(); // Starts SDL etc
+	static void Stop(); // Stops SDL
+	static void ClearScreen(); // Fills screen with 'color'
+	static void SetBGColor(Color& newColor); // Change background color
 	//static SDL_Renderer* GetRenderer();
+	static void Update(float dt);
 };
 

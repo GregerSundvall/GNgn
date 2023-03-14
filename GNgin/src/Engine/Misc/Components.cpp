@@ -22,7 +22,7 @@ void Entity::AddSprite(Color color)
     entitySystem->AddSprite(eID, color);
 }
 
-void Entity::AddSprite(std::string imagePath)
+void Entity::AddSprite(int textureID)
 {
     entitySystem->AddSprite(eID, imagePath);
 }

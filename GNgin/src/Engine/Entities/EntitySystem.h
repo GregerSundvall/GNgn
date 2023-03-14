@@ -18,10 +18,6 @@ class EntitySystem
     CollisionSystem* collisionSystem;
     MovementSystem* movementSystem;
     SpriteSystem* spriteSystem;
-    //InputSystem
-    //HealthSystem
-    //ScoreSystem?
-    //Add position offset "somewhere". Affects sprite and collider... And movement? (for edge of window handling)
     
 public:
     EntitySystem(Engine* engine);
@@ -43,7 +39,7 @@ public:
     void AddCollider(int entityID);
     void AddMovement(int entityID, Float2 velocity);
     void AddSprite(int entityID, Color color); // Set color sprite
-    void AddSprite(int entityID, std::string filePath); // Set image sprite
+    void AddSprite(int entityID, int textureID); // Add sprite component and set sprite.
     void AddSprite(int entityID, std::string text, std::string font); // Set text sprite
     void RemoveTransform(int entityID);
     void RemoveCollider(int entityID);

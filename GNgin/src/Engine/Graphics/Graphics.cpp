@@ -1,9 +1,17 @@
 #include "Graphics.h"
 #include <iostream>
 
+
+int GraphicsSystem::AddTexture(std::string filepath) // Returns texture's index in textures array (textureID)
+{
+	SDL_Texture* texture = IMG_LoadTexture(renderer, filepath.c_str());
+	textures.push_back(texture);
+	return textures.size() - 1;
+}
+
 bool GraphicsSystem::Start()
 {
-	color = Color();
+	backgroundColor = Color();
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) 
 	{
@@ -39,16 +47,21 @@ void GraphicsSystem::Stop()
 
 void GraphicsSystem::ClearScreen()
 {
-	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+	SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
 	SDL_RenderClear(renderer);
 }
 
 void GraphicsSystem::SetBGColor(Color& newColor)
 {
-	color = newColor;
+	backgroundColor = newColor;
 }
 
 //SDL_Renderer* GraphicsSystem::GetRenderer()
 //{
 //	return renderer;
 //}
+
+void GraphicsSystem::Update(float dt)
+{
+
+}

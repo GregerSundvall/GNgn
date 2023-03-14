@@ -19,6 +19,7 @@ struct Color
 struct Sprite
 {
     int entityID;
+    int textureID;
     Color color;
     std::string imagePath;
     std::string text;
@@ -85,7 +86,7 @@ struct Entity
     void AddMovement(Float2 velocity);
     void AddCollision();
     void AddSprite(Color color);
-    void AddSprite(std::string imagePath);
+    void AddSprite(int textureID);
     void AddSprite(std::string text, std::string fontPath);
 };
 
