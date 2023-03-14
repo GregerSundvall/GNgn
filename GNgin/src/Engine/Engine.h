@@ -2,6 +2,7 @@
 #include <random>
 #include <SDL.h>
 #include "Graphics/DrawSystem.h"
+#include "Graphics/Graphics.h"
 #include "Entities/EntitySystem.h"
 #include "Input/InputSystem.h"
 class Game;
@@ -16,6 +17,7 @@ extern float dTime;
 
 class Engine
 {
+    GraphicsSystem* graphics;
     SDL_Renderer* renderer;
     SDL_Window* window;
     const int width = 800;

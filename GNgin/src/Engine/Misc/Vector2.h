@@ -14,7 +14,7 @@ struct Vector2
 	void Scale(const float scalar);
 	Vector2 GetRotatedBy(const float angle) const;
 
-	float Magnitude()
+	float Magnitude();
 
 
 };

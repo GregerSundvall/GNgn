@@ -2,10 +2,8 @@
 #include <random>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-
 #include "iostream"
 #include "../SpaceShooter/Game.h"
-
 
 DrawSystem* drawSystem;
 InputSystem* input;
@@ -16,15 +14,8 @@ std::default_random_engine generator;
 
 Engine::Engine()
 {
-    SDL_Init(SDL_INIT_VIDEO);
-    IMG_Init(IMG_INIT_PNG);
-    TTF_Init();
-    
-    window = SDL_CreateWindow("GNgin", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        width, height, SDL_WINDOW_SHOWN);
-        
-    renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
-    
+    graphics = new GraphicsSystem();
+    graphics->Start;
     drawSystem = new DrawSystem(renderer);
     input = new InputSystem();
     game = new Game();
@@ -33,9 +24,7 @@ Engine::Engine()
 
     MainLoop();
         
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    graphics->Stop;
 };
 
 void Engine::MainLoop()
@@ -43,8 +32,7 @@ void Engine::MainLoop()
     while (isRunning)
     {
         // Clear screen
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
+        graphics->ClearScreen;
 
         // Run update methods
         input->Update();

@@ -151,6 +151,7 @@
     <ClCompile Include="lib\SDL2_gfx\SDL2_imageFilter.c" />
     <ClCompile Include="lib\SDL2_gfx\SDL2_rotozoom.c" />
     <ClCompile Include="src\Engine\Entities\CollisionSystem.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Engine\Misc\Components.cpp" />
     <ClCompile Include="src\Engine\Graphics\DrawSystem.cpp" />
     <ClCompile Include="src\Engine\Engine.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="lib\SDL2_gfx\SDL2_imageFilter.h" />
     <ClInclude Include="lib\SDL2_gfx\SDL2_rotozoom.h" />
     <ClInclude Include="src\Engine\Entities\CollisionSystem.h" />
+    <ClInclude Include="src\Engine\Graphics\Graphics.h" />
     <ClInclude Include="src\Engine\Misc\Components.h" />
     <ClInclude Include="src\Engine\Graphics\DrawSystem.h" />
     <ClInclude Include="src\Engine\Engine.h" />

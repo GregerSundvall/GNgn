@@ -7,8 +7,13 @@ class EntitySystem;
 
 struct Color
 {
-    int r, g, b;
-    int a = 255;
+    int r, g, b, a;
+
+    Color(int r = 0, int g = 0, int b = 0, int a = 255) 
+    {
+        this->r = r; this->g = g; this->g = g; this->a = a;
+    };
+    ~Color() = default;  
 };
 
 struct Sprite
