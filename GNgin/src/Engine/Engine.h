@@ -9,6 +9,7 @@ class Game;
 
 
 extern DrawSystem* drawSystem;
+extern GraphicsSystem* graphicsSystem;
 extern InputSystem* input;
 extern Game* game;
 extern EntitySystem* entitySystem;
@@ -17,11 +18,6 @@ extern float dTime;
 
 class Engine
 {
-    GraphicsSystem* graphics;
-    SDL_Renderer* renderer;
-    SDL_Window* window;
-    const int width = 800;
-    const int height = 1000;
     bool isRunning = true;
 
     //TODO Event system

@@ -4,6 +4,7 @@
 #include <SDL_ttf.h>
 #include "../Misc/Components.h"
 #include <vector>
+#include "../Misc/Vector2.h"
 
 struct GraphicsSystem
 {
@@ -20,7 +21,9 @@ public:
 	static int WindowWidth;
 	static int WindowHeight;
 
+	GraphicsSystem(int width, int height);
 	static int AddTexture(std::string filepath);
+	static void DrawTexture(Vector2 position, Vector2 size, int textureID);
 	static bool Start(); // Starts SDL etc
 	static void Stop(); // Stops SDL
 	static void ClearScreen(); // Fills screen with 'color'

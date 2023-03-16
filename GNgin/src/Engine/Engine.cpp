@@ -5,7 +5,8 @@
 #include "iostream"
 #include "../SpaceShooter/Game.h"
 
-DrawSystem* drawSystem;
+//DrawSystem* drawSystem;
+GraphicsSystem* graphicsSystem;
 InputSystem* input;
 Game* game;
 EntitySystem* entitySystem;
@@ -14,9 +15,9 @@ std::default_random_engine generator;
 
 Engine::Engine()
 {
-    graphics = new GraphicsSystem();
-    graphics->Start;
-    drawSystem = new DrawSystem(renderer);
+    graphicsSystem = new GraphicsSystem(800, 600);
+    graphicsSystem->Start();
+    //drawSystem = new DrawSystem(renderer);
     input = new InputSystem();
     game = new Game();
     entitySystem = new EntitySystem(this);
@@ -24,30 +25,20 @@ Engine::Engine()
 
     MainLoop();
         
-    graphics->Stop;
+    graphicsSystem->Stop();
 };
 
 void Engine::MainLoop()
 {
     while (isRunning)
     {
-        // Clear screen
-        graphics->ClearScreen;
-
         // Run update methods
         input->Update();
         if (input->Esc) { isRunning = false; continue; } // Stop engine on Esc
         game->Update();
         entitySystem->Update();
-        drawSystem->Update();
-    
-        // Draw
-        SDL_RenderPresent(renderer);
-
-        // Gimme a reasonable framerate (not like 2000fps)
-        SDL_Delay(6);
-    
-        CalculateFPS();
+        graphicsSystem->Update(1.0f); // TODO deltatime here!!!!
+        //drawSystem->Update();
     }
 }
 
@@ -75,7 +66,7 @@ void Engine::CalculateFPS()
 
 int Engine::FrameRate()
 {
-    return frameRate;
+    return 1.0f;
 }
 
 

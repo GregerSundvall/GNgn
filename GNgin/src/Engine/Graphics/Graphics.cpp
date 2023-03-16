@@ -2,11 +2,25 @@
 #include <iostream>
 
 
+GraphicsSystem::GraphicsSystem(int width, int height)
+{
+	windowWidth = width;
+	windowHeight = height;
+
+}
+
 int GraphicsSystem::AddTexture(std::string filepath) // Returns texture's index in textures array (textureID)
 {
 	SDL_Texture* texture = IMG_LoadTexture(renderer, filepath.c_str());
 	textures.push_back(texture);
 	return textures.size() - 1;
+}
+
+void GraphicsSystem::DrawTexture(Vector2 position, Vector2 size, int textureID)
+{
+	SDL_Rect rect = SDL_Rect(position.x, position.y, size.x, size.y);
+	SDL_Texture* texture = textures[textureID];
+	SDL_RenderCopy(renderer, texture, nullptr, &rect);
 }
 
 bool GraphicsSystem::Start()
@@ -63,5 +77,13 @@ void GraphicsSystem::SetBGColor(Color& newColor)
 
 void GraphicsSystem::Update(float dt)
 {
+	ClearScreen();
 
+	// Draw
+	SDL_RenderPresent(renderer);
+
+	// Gimme a reasonable framerate (not like 2000fps)
+	SDL_Delay(6);
+
+	//CalculateFPS();
 }

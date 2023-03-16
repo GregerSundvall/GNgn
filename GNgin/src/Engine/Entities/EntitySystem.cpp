@@ -178,12 +178,12 @@ void EntitySystem::AddSprite(int entityID, int textureID)
 
 void EntitySystem::AddSprite(int entityID, std::string text, std::string font)
 {
-    if (entities[entityID].spriteID == -1) // Add sprite component if needed
-        {
-        entities[entityID].spriteID = spriteSystem->Register(entityID, {255, 255, 255, 255});
-        }
+    //if (entities[entityID].spriteID == -1) // Add sprite component if needed
+    //    {
+    //    entities[entityID].spriteID = spriteSystem->Register(entityID, {255, 255, 255, 255});
+    //    }
 
-    spriteSystem->SetTexture(entities[entityID].spriteID, text, font);
+    //spriteSystem->SetTexture(entities[entityID].spriteID, text, font);
 }
 
 void EntitySystem::Update()
