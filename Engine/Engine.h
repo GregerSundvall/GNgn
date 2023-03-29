@@ -2,9 +2,9 @@
 #include "Input.h"
 #include "Graphics/Graphics.h"
 
-class Engine
-{
-	{ {double x;double y;}Graphics* graphics;
+class Engine{
+	double x;double y;
+	Graphics* graphics;
 	// static Input* input;
 	
 public:

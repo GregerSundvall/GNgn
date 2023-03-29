@@ -11,6 +11,7 @@ struct Contact {
 
 	Vector2 normal;
 	double depth;
+	Contact();
 	Contact(RigidBody* rigidBodyA, RigidBody* rigidBodyB) {
 		a = rigidBodyA;
 		b = rigidBodyB;
@@ -25,5 +26,5 @@ public:
 	static bool IsColliding(RigidBody* a, RigidBody* b, std::vector<Contact>& contacts);
 	static bool CircleCircleCollision(RigidBody* a, RigidBody* b, std::vector<Contact>& contacts);
 	static bool PolygonPolygonCollision(RigidBody* a, RigidBody* b, std::vector<Contact>& contacts);
-	static bool PolygonCircleCollision(RigidBody* polygon, RigidBody* circle, std::vector<Contact>& contacts);
+	static bool PolygonCircleCollision(RigidBody* polygonRB, RigidBody* circleRB, std::vector<Contact>& contacts);
 };

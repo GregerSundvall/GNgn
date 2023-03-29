@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\SDL2\include;D:\SDL2_image\include;$(SolutionDir)Engine/Graphics/lib/SDL2_gfx</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);D:\SDL2\lib\x64;D:\SDL2_image\lib\x64;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\SDL2\include;D:\SDL2_image\include;D:\SDL2_gfx</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);D:\SDL2\lib\x64;D:\SDL2_image\lib\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -162,9 +162,6 @@
     <ClCompile Include="Engine\Entity\Entity.cpp" />
     <ClCompile Include="Engine\Entity\EntitySystem.cpp" />
     <ClCompile Include="Engine\Graphics\Graphics.cpp" />
-    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives.c" />
-    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_imageFilter.c" />
-    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_rotozoom.c" />
     <ClCompile Include="Engine\Input.cpp" />
     <ClCompile Include="Engine\Physics\Collisions.cpp" />
     <ClCompile Include="Engine\Physics\RigidBody.cpp" />
@@ -177,10 +174,6 @@
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Engine\Entity\EntitySystem.h" />
     <ClInclude Include="Engine\Graphics\Graphics.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives_font.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_imageFilter.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_rotozoom.h" />
     <ClInclude Include="Engine\Input.h" />
     <ClInclude Include="Engine\Physics\Collisions.h" />
     <ClInclude Include="Engine\Physics\RigidBody.h" />

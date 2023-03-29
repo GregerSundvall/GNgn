@@ -103,7 +103,111 @@ bool Collisions::PolygonPolygonCollision(RigidBody* a, RigidBody* b, std::vector
 	return true;
 }
 
-bool Collisions::PolygonCircleCollision(RigidBody* polygon, RigidBody* circle, std::vector<Contact>& contacts) {
+bool Collisions::PolygonCircleCollision(RigidBody* polygonRB, RigidBody* circleRB, std::vector<Contact>& contacts) {
+	const Polygon* polygon = (Polygon*)polygonRB->shape;
+	const Circle* circle = (Circle*)circleRB->shape;
+	const std::vector<Vector2>& polygonVertices = polygon->worldVertices;
+
+	bool isOutside = false;
+	Vector2 minCurrentVertex;
+	Vector2 minNextVertex;
+	double distanceCircleEdge = std::numeric_limits<double>::lowest();
+
+	// Find the edge nearest to circle center
+	for (int i = 0; i < polygonVertices.size(); ++i)
+	{
+		int currentVertex = i;
+		int nextVertex = (i + 1) % polygonVertices.size();
+		Vector2 edge = polygon->EdgeAt(currentVertex);
+		Vector2 normal = edge.Normal();
+
+		Vector2 vertexToCircleCenter = circleRB->position - polygonVertices[currentVertex]; 
+		double projection = vertexToCircleCenter.Dot(normal);
+
+		if (projection > 0) {
+			// Circle center is outside polygon
+			distanceCircleEdge = projection;
+			minCurrentVertex = polygonVertices[currentVertex];
+			minNextVertex = polygonVertices[nextVertex];
+			isOutside = true;
+			break;
+		}
+		if (projection > distanceCircleEdge) {
+			// Circle center is inside polygon. Continue checking to find least negative projection.
+			// But is this really getting the "nearest" one?
+			distanceCircleEdge = projection;
+			minCurrentVertex = polygonVertices[currentVertex];
+			minNextVertex = polygonVertices[nextVertex];
+		}
+	}
+
+	// TODO Refactor below
+
+	Contact contact;
+	if (isOutside) {
+        // Check if we are inside region A:
+        Vector2 v1 = circleRB->position - minCurrentVertex; 
+        Vector2 v2 = minNextVertex - minCurrentVertex; // the nearest edge (from curr vertex to next vertex)
+        if (v1.Dot(v2) < 0) {
+            // Distance from vertex to circle center is greater than radius... no collision
+            if (v1.Magnitude() > circle->radius) {
+                return false;
+            } else {
+                // Detected collision in region A:
+                contact.a = polygonRB;
+                contact.b = circleRB;
+                contact.depth = circle->radius - v1.Magnitude();
+                contact.normal = v1.Normalize();
+                contact.start = circleRB->position + (contact.normal * -circle->radius);
+                contact.end = contact.start + (contact.normal * contact.depth);
+            }
+        } else {
+            // Check if we are inside region B:
+            v1 = circleRB->position - minNextVertex; 
+            v2 = minCurrentVertex - minNextVertex;   // the nearest edge
+            if (v1.Dot(v2) < 0) {
+	            if (v1.Magnitude() > circle->radius) {
+		            // No collision
+		            return false;
+                } else {
+                    // Detected collision in region B:
+                    contact.a = polygonRB;
+                    contact.b = circleRB;
+                    contact.depth = circle->radius - v1.Magnitude();
+                    contact.normal = v1.Normalize();
+                    contact.start = circleRB->position + (contact.normal * -circle->radius);
+                    contact.end = contact.start + (contact.normal * contact.depth);
+                }
+            } else {
+                // We are inside region C:
+                if (distanceCircleEdge > circle->radius) {
+                    // No collision
+                    return false;
+                } else {
+                    // Detected collision in region C:
+                    contact.a = polygonRB;
+                    contact.b = circleRB;
+                    contact.depth = circle->radius - distanceCircleEdge;
+                    contact.normal = (minNextVertex - minCurrentVertex).Normal();
+                    contact.start = circleRB->position - (contact.normal * circle->radius);
+                    contact.end = contact.start + (contact.normal * contact.depth);
+                }
+            }
+        }
+    } else {
+        // The center of circle is inside the polygon... it is definitely colliding!
+        contact.a = polygonRB;
+        contact.b = circleRB;
+        contact.depth = circle->radius - distanceCircleEdge;
+        contact.normal = (minNextVertex - minCurrentVertex).Normal();
+        contact.start = circleRB->position - (contact.normal * circle->radius);
+        contact.end = contact.start + (contact.normal * contact.depth);
+    }
+
+    contacts.push_back(contact);
+
+    return true;
+	
 	
 }
 
