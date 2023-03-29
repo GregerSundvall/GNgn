@@ -3,6 +3,7 @@
 
 class RigidBody
 {
+public:
 	Vector2 position;
 	Vector2 velocity;
 	Vector2 acceleration;
@@ -21,6 +22,7 @@ class RigidBody
 
 	float restitution;
 	float friction;
+
 	
 	
 public:
