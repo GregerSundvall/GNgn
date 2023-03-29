@@ -1,5 +1,10 @@
 #pragma once
 
+
+
+
+
+
 class Vector2 {
 public:
     double x;
@@ -18,6 +23,7 @@ public:
     double MagnitudeSquared() const;
 
     Vector2& Normalize();
+    Vector2 Normalized() const;
     Vector2 UnitVector() const;
     Vector2 Normal() const;
 
@@ -37,8 +43,6 @@ public:
     Vector2& operator -= (const Vector2& other);
     Vector2& operator *= (const double scalar);
     Vector2& operator /= (const double divisor);
-    
-    
 };
 
     

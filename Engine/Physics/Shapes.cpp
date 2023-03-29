@@ -179,7 +179,7 @@ ShapeType Box::GetType() const { return BOX; }
 Shape* Box::Clone() const { return new Box(width, height); }
 
 double Box::GetMomentOfInertia() const {
-	// TODO should also be multiplied by the RB's mass?
+	// TODO should also be multiplied by the RB's mass I guess?
 	return 0.083333 * (width * width + height * height);
 }
 
