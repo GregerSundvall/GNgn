@@ -11,20 +11,20 @@ public:
 	Vector2 velocity;
 	Vector2 acceleration;
 
-	float rotation;
-	float angularVelocity;
-	float angularAcceleration;
+	double rotation;
+	double angularVelocity;
+	double angularAcceleration;
 
 	Vector2 sumOfForces;
-	float sumOfTorques;
+	double sumOfTorque;
 
-	float mass;
-	float inverseMass;
-	float momentOfInertia;
-	float inverseMomentOfInertia;
+	double mass;
+	double inverseMass;
+	double momentOfInertia;
+	double inverseMomentOfInertia;
 
-	float restitution;
-	float friction;
+	double restitution;
+	double friction;
 
 	Shape* shape = nullptr;
 	SDL_Texture* texture = nullptr;

@@ -9,13 +9,14 @@ class Sprite
 
 class Graphics
 {
-	SDL_Renderer* renderer;
 	SDL_Window* window;
 	bool running = false;
 
 	SDL_Texture* texture;
-	
+
 public:
+	static SDL_Renderer* renderer;
+	
 	Graphics();
 	~Graphics();
 	void Draw();
