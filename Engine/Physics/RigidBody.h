@@ -16,7 +16,7 @@ public:
 	double angularAcceleration;
 
 	Vector2 sumOfForces;
-	double sumOfTorque;
+	double sumOfAllTorque;
 
 	double mass;
 	double inverseMass;
@@ -44,10 +44,10 @@ public:
 	Vector2 LocalToWorldSpace(const Vector2& point) const;
 	Vector2 WorldToLocalSpace(const Vector2& point) const;
 
-	void ApplyImpulseLinear(const Vector2& j);
-	void ApplyImpulseAngular(const double j);
+	void ApplyLinearImpulse(const Vector2& j);
+	void ApplyAngularImpulse(const double j);
 	void ApplyImpulseAtPoint(const Vector2& j, const Vector2& r);
 
-	void integrateLinear(double deltaTime);
-	void integrateVelocities(const double deltaTime);
+	void IntegrateForces(const double deltaTime);
+	void IntegrateVelocities(const double deltaTime);
 };

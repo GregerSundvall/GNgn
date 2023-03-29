@@ -1,6 +1,7 @@
 #pragma once
 
 class Vector2 {
+public:
     double x;
     double y;
 
