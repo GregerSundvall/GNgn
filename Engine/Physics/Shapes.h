@@ -10,8 +10,7 @@ enum ShapeType
 };
 
 
-class Shape
-{
+class Shape {
 public:
 	virtual ~Shape() = default;
 	virtual ShapeType GetType() const = 0;
@@ -20,8 +19,7 @@ public:
 	virtual double GetMomentOfInertia() const = 0;
 };
 
-class Circle : public Shape
-{
+class Circle : public Shape {
 public:
 	float radius;
 
@@ -34,10 +32,13 @@ public:
 };
 
 
-class Polygon : public Shape
-{
+class Polygon : public Shape {
+public:
 	double width;
 	double height;
+
+	std::vector<Vector2> localVertices;
+	std::vector<Vector2> worldVertices;
 
 	Polygon() = default;
 	Polygon(const std::vector<Vector2> vertices);
@@ -47,7 +48,7 @@ class Polygon : public Shape
 	Vector2 EdgeAt(int index) const;
 	double FindMinSeparation(const Polygon* other, int& indexReferenceEdge, Vector2& supportPoint) const;
 	int FindIncidentEdge(const Vector2& normal) const;
-	int ClipSegmentToLine(const std::vector<Vector2>& constactsIn, std::vector<Vector2>& constactsOut,
+	int ClipSegmentToLine(const std::vector<Vector2>& contactsIn, std::vector<Vector2>& contactsOut,
 		const Vector2& c0, const Vector2& c1) const;
 	double PolygonArea() const;
 	Vector2 PolygonCentroid() const;
@@ -55,8 +56,8 @@ class Polygon : public Shape
 	void UpdateVertices(double angle, const Vector2& position) override;
 };
 
-class Box : public Polygon
-{
+class Box : public Polygon {
+public:
 	Box(double width, double height);
 	virtual ~Box();
 	ShapeType GetType() const override;
