@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <vector>
+
 #include "../Misc.h"
 
 
@@ -14,7 +16,50 @@ public:
 	virtual ~Shape() = default;
 	virtual ShapeType GetType() const = 0;
 	virtual Shape* Clone() const = 0;
-	virtual void UpdateVertices(float angle,  const Vector2& position) = 0;
-	virtual float GetMomentOfInertia() const = 0;
+	virtual void UpdateVertices(double angle,  const Vector2& position) = 0;
+	virtual double GetMomentOfInertia() const = 0;
 };
 
+class Circle : public Shape
+{
+public:
+	float radius;
+
+	Circle(const double radius);
+	virtual ~Circle();
+	ShapeType GetType() const override;
+	Shape* Clone() const override;
+	void UpdateVertices(double angle, const Vector2& position) override;
+	double GetMomentOfInertia() const override;
+};
+
+
+class Polygon : public Shape
+{
+	double width;
+	double height;
+
+	Polygon() = default;
+	Polygon(const std::vector<Vector2> vertices);
+	virtual ~Polygon();
+	ShapeType GetType() const override;
+	Shape* Clone() const override;
+	Vector2 EdgeAt(int index) const;
+	double FindMinSeparation(const Polygon* other, int& indexReferenceEdge, Vector2& supportPoint) const;
+	int FindIncidentEdge(const Vector2& normal) const;
+	int ClipSegmentToLine(const std::vector<Vector2>& constactsIn, std::vector<Vector2>& constactsOut,
+		const Vector2& c0, const Vector2& c1) const;
+	double PolygonArea() const;
+	Vector2 PolygonCentroid() const;
+	double GetMomentOfInertia() const override;
+	void UpdateVertices(double angle, const Vector2& position) override;
+};
+
+class Box : public Polygon
+{
+	Box(double width, double height);
+	virtual ~Box();
+	ShapeType GetType() const override;
+	Shape* Clone() const override;
+	double GetMomentOfInertia() const override;
+};
