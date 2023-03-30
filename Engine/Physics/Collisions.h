@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include "RigidBody.h"
+#include "../Misc/Vector2.h"
 
-
-struct Contact {
+struct Contact
+{
 	RigidBody* a;
 	RigidBody* b;
 
@@ -11,12 +12,6 @@ struct Contact {
 
 	Vector2 normal;
 	double depth;
-	Contact();
-	Contact(RigidBody* rigidBodyA, RigidBody* rigidBodyB) {
-		a = rigidBodyA;
-		b = rigidBodyB;
-		normal = (b->position - a->position).Normalized();
-	}
 };
 
 

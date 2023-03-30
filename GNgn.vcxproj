@@ -111,6 +111,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,9 +163,16 @@
     <ClCompile Include="Engine\Entity\Entity.cpp" />
     <ClCompile Include="Engine\Entity\EntitySystem.cpp" />
     <ClCompile Include="Engine\Graphics\Graphics.cpp" />
+    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives.c" />
+    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_imageFilter.c" />
+    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_rotozoom.c" />
     <ClCompile Include="Engine\Input.cpp" />
+    <ClCompile Include="Engine\Misc\MatrixMN.cpp" />
     <ClCompile Include="Engine\Misc\Vector2.cpp" />
+    <ClCompile Include="Engine\Misc\VectorN.cpp" />
     <ClCompile Include="Engine\Physics\Collisions.cpp" />
+    <ClCompile Include="Engine\Physics\Constraints.cpp" />
+    <ClCompile Include="Engine\Physics\Forces.cpp" />
     <ClCompile Include="Engine\Physics\RigidBody.cpp" />
     <ClCompile Include="Engine\Physics\Shapes.cpp" />
     <ClCompile Include="Game\Game.cpp" />
@@ -175,9 +183,17 @@
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Engine\Entity\EntitySystem.h" />
     <ClInclude Include="Engine\Graphics\Graphics.h" />
+    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives.h" />
+    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives_font.h" />
+    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_imageFilter.h" />
+    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_rotozoom.h" />
     <ClInclude Include="Engine\Input.h" />
+    <ClInclude Include="Engine\Misc\MatrixMN.h" />
     <ClInclude Include="Engine\Misc\Vector2.h" />
+    <ClInclude Include="Engine\Misc\VectorN.h" />
     <ClInclude Include="Engine\Physics\Collisions.h" />
+    <ClInclude Include="Engine\Physics\Constraints.h" />
+    <ClInclude Include="Engine\Physics\Forces.h" />
     <ClInclude Include="Engine\Physics\RigidBody.h" />
     <ClInclude Include="Engine\Physics\Shapes.h" />
     <ClInclude Include="Game\Game.h" />

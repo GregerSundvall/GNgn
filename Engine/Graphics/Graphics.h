@@ -15,9 +15,9 @@ class Graphics
 	SDL_Texture* texture;
 
 public:
-	static SDL_Renderer* renderer;
+	SDL_Renderer* renderer;
 	
-	Graphics();
+	Graphics(int width, int height);
 	~Graphics();
 	void Draw();
 	

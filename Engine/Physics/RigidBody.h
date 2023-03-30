@@ -2,7 +2,7 @@
 #include <SDL_render.h>
 
 #include "Shapes.h"
-#include "../Misc.h"
+#include "../Misc/Vector2.h"
 
 class RigidBody
 {

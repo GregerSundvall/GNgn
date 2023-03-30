@@ -1,16 +1,24 @@
 ﻿#pragma once
 #include "Input.h"
+#include "Entity/EntitySystem.h"
 #include "Graphics/Graphics.h"
 
+class Entity;
+
+
 class Engine{
-	double x;double y;
+	int width, height;
+	
 	Graphics* graphics;
-	// static Input* input;
+	EntitySystem* entities;
+	Input* input;
 	
 public:
-	Engine();
+	Engine(int width, int height);
 	~Engine();
+
+	void Run();
+	static Entity* AddGameObject();
 	static void ShutDown();
 
-	// Graphics* Graphics();
 };

@@ -3,12 +3,10 @@
 
 Game::Game()
 {
-	engine = new Engine();
 }
 
 Game::~Game()
 {
-	delete engine;
 }
 
 void Game::Run()

@@ -26,7 +26,11 @@ bool Collisions::CircleCircleCollision(RigidBody* a, RigidBody* b, std::vector<C
 	bool isColliding = ab.MagnitudeSquared() <= (sumOfRadii * sumOfRadii);
 	if (!isColliding) return false;
 	
-	Contact contact(a, b);
+	Contact contact;
+	contact.a = a;
+	contact.b = b;
+	contact.normal = ab;
+	contact.normal.Normalize();
 	contact.start = b->position - contact.normal * circleB->radius;
 	contact.start = a->position + contact.normal * circleA->radius;
 	contact.depth = (contact.end - contact.start).Magnitude();

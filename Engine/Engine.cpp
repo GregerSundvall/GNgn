@@ -1,14 +1,11 @@
 ﻿#include "Engine.h"
 
 
-Engine::Engine()
+Engine::Engine(int width, int height)
 {
-	graphics = new Graphics();
-	// input = new Input();
+	graphics = new Graphics(width, height);
+
 }
-
-
-// Graphics* Engine::Graphics() {return graphics;}
 
 Engine::~Engine()
 {

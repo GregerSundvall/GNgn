@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <vector>
 
-#include "../Misc.h"
+#include "../Misc/Vector2.h"
 
 
 enum ShapeType

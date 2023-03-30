@@ -3,13 +3,13 @@
 #include <SDL_image.h>
 #include <SDL2_gfxPrimitives.h>
 
-Graphics::Graphics()
+Graphics::Graphics(int width, int height)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) 
 	{
 		std::cerr << "SDL Init error" << std::endl;
 	}
-	window = SDL_CreateWindow("GNgn", 100, 100, 800, 600, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("GNgn", 100, 100, width, height, SDL_WINDOW_SHOWN);
 	if (!window) 
 	{
 		std::cerr << "SDL window error" << std::endl;

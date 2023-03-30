@@ -32,7 +32,6 @@ public:
 	Vector2 operator * (const double scalar) const;
 	Vector2 operator / (const double divisor) const;
 	Vector2 operator - ();
-
 	Vector2& operator += (const Vector2& other);
 	Vector2& operator -= (const Vector2& other);
 	Vector2& operator *= (const double scalar);

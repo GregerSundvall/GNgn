@@ -49,15 +49,6 @@ Vector2& Vector2::Normalize() {
 	return *this;
 }
 
-// Remove one of these 
-Vector2 Vector2::Normalized()  {
-	double const length = Magnitude();
-	if (length != 0.0){
-		return Vector2(x /= length, y /= length);
-	}
-	std::cerr << "Vector is zero, cannot normalize." << std::endl;
-	return Vector2(x, y);
-}
 Vector2 Vector2::UnitVector() const {
 	Vector2 result = Vector2(0, 0);
 	float length = Magnitude();
