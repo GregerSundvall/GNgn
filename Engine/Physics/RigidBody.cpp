@@ -43,7 +43,7 @@ RigidBody::~RigidBody() {
 }
 
 void RigidBody::SetTexture(const char* filePath) {
-	texture = IMG_LoadTexture(Graphics::renderer, filePath);
+	// texture = IMG_LoadTexture(Graphics::renderer, filePath);
 	// TODO check if texture is valid? This won't be even be here later though..
 }
 

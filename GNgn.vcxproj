@@ -163,9 +163,6 @@
     <ClCompile Include="Engine\Entity\Entity.cpp" />
     <ClCompile Include="Engine\Entity\EntitySystem.cpp" />
     <ClCompile Include="Engine\Graphics\Graphics.cpp" />
-    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives.c" />
-    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_imageFilter.c" />
-    <ClCompile Include="Engine\Graphics\lib\SDL2_gfx\SDL2_rotozoom.c" />
     <ClCompile Include="Engine\Input.cpp" />
     <ClCompile Include="Engine\Misc\MatrixMN.cpp" />
     <ClCompile Include="Engine\Misc\Vector2.cpp" />
@@ -183,10 +180,6 @@
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Engine\Entity\EntitySystem.h" />
     <ClInclude Include="Engine\Graphics\Graphics.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_gfxPrimitives_font.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_imageFilter.h" />
-    <ClInclude Include="Engine\Graphics\lib\SDL2_gfx\SDL2_rotozoom.h" />
     <ClInclude Include="Engine\Input.h" />
     <ClInclude Include="Engine\Misc\MatrixMN.h" />
     <ClInclude Include="Engine\Misc\Vector2.h" />
@@ -199,7 +192,15 @@
     <ClInclude Include="Game\Game.h" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include=".idea\.idea.GNgn\.idea\.gitignore" />
+    <Content Include=".idea\.idea.GNgn\.idea\encodings.xml" />
+    <Content Include=".idea\.idea.GNgn\.idea\indexLayout.xml" />
+    <Content Include=".idea\.idea.GNgn\.idea\projectSettingsUpdater.xml" />
+    <Content Include=".idea\.idea.GNgn\.idea\vcs.xml" />
+    <Content Include=".idea\.idea.GNgn\.idea\workspace.xml" />
     <Content Include="Game\Assets\player.png" />
+    <Content Include="GNgn.vcxproj.filters" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

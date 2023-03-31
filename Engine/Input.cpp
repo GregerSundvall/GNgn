@@ -2,6 +2,11 @@
 
 #include <SDL_events.h>
 
+void Input::Init()
+{
+	keyStates = SDL_GetKeyboardState(NULL);
+}
+
 void Input::Update()
 {
 	SDL_Event event;
@@ -23,5 +28,13 @@ void Input::Update()
 			}
 		default: {};
 		}
+
+		
 	}
+}
+
+
+
+bool Input::IsDown(int const key) {
+	return keyStates[key];
 }

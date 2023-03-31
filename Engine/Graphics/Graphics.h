@@ -1,24 +1,24 @@
 ﻿#pragma once
 #include <SDL.h>
+#include <vector>
 
-class Sprite
-{
-	SDL_Rect rect;
-	SDL_Texture* texture;
-};
+
+static SDL_Window* window;
+static SDL_Renderer* renderer;
 
 class Graphics
 {
-	SDL_Window* window;
-	bool running = false;
-
-	SDL_Texture* texture;
-
 public:
-	SDL_Renderer* renderer;
+	// static bool running = false;
+	// static int width, height;
+
+	// static std::vector<SDL_Texture*> textures;
+	//
+	// static SDL_Texture* texture;
 	
-	Graphics(int width, int height);
-	~Graphics();
-	void Draw();
-	
+	static bool Init();
+	// static int AddTexture(const char* filePath);
+	static void Update();
+	static void Draw();
+	static void ShutDown();
 };

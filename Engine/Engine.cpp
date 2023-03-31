@@ -1,16 +1,24 @@
 ﻿#include "Engine.h"
 
+#include "Graphics/Graphics.h"
 
-Engine::Engine(int width, int height)
-{
-	graphics = new Graphics(width, height);
 
+void Engine::Run() {
+	GFXStarted = Graphics::Init();
+	// input = new Input();
+	// entities = new EntitySystem();
+	
+	isRunning = true;
+	while (isRunning)
+	{
+		Graphics::Update();
+	}
 }
 
-Engine::~Engine()
-{
-	delete graphics;
-	// delete input;
+Entity* Engine::AddGameObject() {
+	return nullptr;					// TODO just returning nullptr for now
 }
-
-void Engine::ShutDown() {}
+void Engine::Stop() {
+	isRunning = false;
+	
+}

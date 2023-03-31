@@ -1,75 +1,63 @@
 ﻿#include "Graphics.h"
 #include <iostream>
 #include <SDL_image.h>
-#include <SDL2_gfxPrimitives.h>
+// #include <SDL2_gfxPrimitives.h>
 
-Graphics::Graphics(int width, int height)
-{
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) 
-	{
+
+bool Graphics::Init() {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cerr << "SDL Init error" << std::endl;
+		return false;
 	}
-	window = SDL_CreateWindow("GNgn", 100, 100, width, height, SDL_WINDOW_SHOWN);
-	if (!window) 
-	{
+	window = SDL_CreateWindow("GNgn", 100, 100, 1920, 1080, SDL_WINDOW_SHOWN);
+	if (!window) {
 		std::cerr << "SDL window error" << std::endl;
+		return false;
 	}
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (!renderer)
-	{
+	if (!renderer) {
 		std::cerr << "SDL renderer error" << std::endl;
+		return false;
 	}
 	int imgFlags = IMG_INIT_PNG;
-	if( !( IMG_Init( imgFlags ) & imgFlags ) )
-	{
+	if( !( IMG_Init( imgFlags ) & imgFlags ) ) {
 		printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+		return false;
 	}
-	
-	running = true;
-	std::string path = "Game/Assets/player.png";
-	texture = IMG_LoadTexture(renderer, "Game/Assets/player.png");
-	SDL_Rect destination = {100,100,32,32};
 
-	while (running)
-	{
-		SDL_Event event;
-		while(SDL_PollEvent(&event)) 
-		{
-			switch(event.type)
-			{
-			case SDL_QUIT:
-				{
-					running = false;
-					break;
-				}
-			case SDL_KEYDOWN:
-				{
-					int scancode = event.key.keysym.scancode;
-					if (scancode == SDL_SCANCODE_ESCAPE)
-						running = false;
-					break;
-				}
-			default: {};
-			}
-		}
-		SDL_RenderClear(renderer);
-		
-		// Render stuff
-		SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
-		SDL_RenderCopy(renderer, texture, nullptr, &destination);
-		
-		SDL_RenderPresent(renderer);
-		SDL_Delay(16); 
-	}
-	
+	// running = true;
+	std::string path = "Game/Assets/player.png";
+
+	// while (running)
+	// {
+
+
+	// }
+	return true;
 }
 
+// int Graphics::AddTexture(const char* filePath) {
+// 	auto texture = IMG_LoadTexture(renderer, filePath);
+// 	textures.push_back(texture);
+// 	return textures.size() -1;
+// }
 
-Graphics::~Graphics()
+void Graphics::Update()
 {
+	SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor( renderer, 10, 15, 20, 255 ); // Background color
+	Draw();		
+	SDL_RenderPresent(renderer);
+	SDL_Delay(16); 
+}
+
+void Graphics::Draw() {
+	SDL_Texture* texture = IMG_LoadTexture(renderer, "Game/Assets/player.png");
+	SDL_Rect destination = {100,100,32,32};
+	SDL_RenderCopy(renderer, texture, nullptr, &destination);
+}
+
+void Graphics::ShutDown() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-	SDL_Quit();
 }
-
-void Graphics::Draw() {}
