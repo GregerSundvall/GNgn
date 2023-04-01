@@ -2,7 +2,9 @@
 
 #include <SDL_events.h>
 
-void Input::Init()
+#include "Engine.h"
+
+void Input::Start()
 {
 	keyStates = SDL_GetKeyboardState(NULL);
 }
@@ -16,14 +18,14 @@ void Input::Update()
 		{
 		case SDL_QUIT:
 			{
-				// running = false;
+				Engine::Stop();
 				break;
 			}
 		case SDL_KEYDOWN:
 			{
 				int scancode = event.key.keysym.scancode;
 				if (scancode == SDL_SCANCODE_ESCAPE)
-					// running = false;
+					Engine::Stop();
 				break;
 			}
 		default: {};
@@ -35,6 +37,9 @@ void Input::Update()
 
 
 
-bool Input::IsDown(int const key) {
+bool Input::KeyIsDown(int const key) {
 	return keyStates[key];
 }
+
+bool Input::KeyWasPressed(int key) { return false; } // TODO not implemented
+bool Input::KeyWasReleased(int key) { return false; } // TODO not implemented

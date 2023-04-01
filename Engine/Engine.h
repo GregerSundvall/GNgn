@@ -11,7 +11,7 @@ static bool isRunning = false;
 class Engine
 {
 	int width, height;
-	bool GFXStarted;
+	// bool GFXStarted;
 	
 	// Graphics* graphics;
 	// EntitySystem* entities;
@@ -21,7 +21,8 @@ public:
 	Engine() = default;
 	~Engine() = default;
 
-	void Run();
+	static void Init();
+	static void Run();
 	static Entity* AddGameObject();
 	static void Stop();
 

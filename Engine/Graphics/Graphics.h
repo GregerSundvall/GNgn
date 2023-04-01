@@ -16,9 +16,9 @@ public:
 	//
 	// static SDL_Texture* texture;
 	
-	static bool Init();
+	static bool Start();
 	// static int AddTexture(const char* filePath);
 	static void Update();
 	static void Draw();
-	static void ShutDown();
+	static void Stop();
 };

@@ -8,6 +8,5 @@ public:
 
 	Game();
 	~Game();
-	void Run();
 	
 };

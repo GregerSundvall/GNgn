@@ -4,7 +4,7 @@
 // #include <SDL2_gfxPrimitives.h>
 
 
-bool Graphics::Init() {
+bool Graphics::Start() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cerr << "SDL Init error" << std::endl;
 		return false;
@@ -25,14 +25,6 @@ bool Graphics::Init() {
 		return false;
 	}
 
-	// running = true;
-	std::string path = "Game/Assets/player.png";
-
-	// while (running)
-	// {
-
-
-	// }
 	return true;
 }
 
@@ -57,7 +49,7 @@ void Graphics::Draw() {
 	SDL_RenderCopy(renderer, texture, nullptr, &destination);
 }
 
-void Graphics::ShutDown() {
+void Graphics::Stop() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 }
