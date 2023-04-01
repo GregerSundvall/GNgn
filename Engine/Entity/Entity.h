@@ -1,11 +1,18 @@
 ﻿#pragma once
+#include <vector>
+
+#include "../Misc/Vector2.h"
+
 
 class Entity
 {
-	int entityID;
-	int physicsID;
-	int graphicsID;
+	int entityID = -1;
+	int transformID = -1;
+	int physicsID = -1; 
+	int graphicsID = -1;
 public:
-	Entity();
+	Vector2& GetPosition();
 	
 };
+
+

@@ -1,8 +1,9 @@
 ﻿#include "Entity.h"
 
 #include "EntitySystem.h"
+#include "TransformSystem.h"
 
-Entity::Entity()
-{
-	// entityID = EntitySystem::Create();
+
+Vector2& Entity::GetPosition() {
+	return TransformSystem::GetPosition(transformID);
 }
