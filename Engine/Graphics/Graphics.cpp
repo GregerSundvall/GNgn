@@ -44,11 +44,9 @@ void Graphics::Update(){
 
 void Graphics::WriteToBuffer() {
 	std::vector<Sprite>* sprites = EntitySystem::SpritesToDraw();
-	// std::cout << "Sprites count in graffix: " << sprites->size() << "\n";
 	for (int i = 0; i < sprites->size(); ++i) {
 		Sprite sprite = sprites->at(i);
 		SDL_Rect destination = CreateRect(sprite.position, sprite.size);
-		std::cout<<"writing to buffer. Position:  "<<destination.x<<" "<<destination.y<<" texture#"<<sprite.textureID<<"\n";
 		SDL_RenderCopy(renderer, textures.at(sprite.textureID), nullptr, &destination);
 	}
 	delete sprites;

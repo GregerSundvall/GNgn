@@ -64,18 +64,16 @@ void EntitySystem::SetTexture(int const entityID, const char* filePath) {
 
 std::vector<Sprite>* EntitySystem::SpritesToDraw() {
 	std::vector<Sprite>* sprites = new std::vector<Sprite>;
-	// sprites->reserve(entities.size());
+	sprites->reserve(entities.size());
 
 	for (int i = 0; i < entities.size(); ++i) {
 		Entity entity = entities.at(i);
 		if (entity.GetTransformID() == -1 ||  // Entity does not have a transform
 			entity.GetTextureID() == -1) // Entity does not have a texture.
 			continue;
-
 		// TODO If outside screen: continue. Maybe..?
 		
 		sprites->push_back(Sprite(entity.GetTextureID(), entity.GetPosition(), entity.GetSize()));
-		// std::cout << "sprites count in entitySystem = " << sprites->size() << "\n";
 	}
 	return sprites;
 }
