@@ -1,11 +1,10 @@
 ﻿#include "Engine.h"
-
 #include "Input.h"
 #include "Graphics/Graphics.h"
 
 
 void Engine::Init() {
-	Graphics::Start();
+	Graphics::Init();
 	Input::Start();
 	// entities = new EntitySystem();
 

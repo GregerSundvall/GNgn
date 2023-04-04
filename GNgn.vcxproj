@@ -186,6 +186,7 @@
     <ClInclude Include="Engine\Graphics\Graphics.h" />
     <ClInclude Include="Engine\Input.h" />
     <ClInclude Include="Engine\Misc\MatrixMN.h" />
+    <ClInclude Include="Engine\Misc\Misc.h" />
     <ClInclude Include="Engine\Misc\Vector2.h" />
     <ClInclude Include="Engine\Misc\VectorN.h" />
     <ClInclude Include="Engine\Physics\Collisions.h" />

@@ -1,15 +1,19 @@
 ﻿#include "Graphics.h"
 #include <iostream>
 #include <SDL_image.h>
+
+#include "../Entity/EntitySystem.h"
 // #include <SDL2_gfxPrimitives.h>
 
 
-bool Graphics::Start() {
+bool Graphics::Init() {
+	int width = 1920;
+	int height = 1080;
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cerr << "SDL Init error" << std::endl;
 		return false;
 	}
-	window = SDL_CreateWindow("GNgn", 100, 100, 1920, 1080, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("GNgn", 100, 100, width, height, SDL_WINDOW_SHOWN);
 	if (!window) {
 		std::cerr << "SDL window error" << std::endl;
 		return false;
@@ -25,31 +29,52 @@ bool Graphics::Start() {
 		return false;
 	}
 
+	offsetX = width / 2;
+	offsetY = height / 2;
 	return true;
 }
 
-// int Graphics::AddTexture(const char* filePath) {
-// 	auto texture = IMG_LoadTexture(renderer, filePath);
-// 	textures.push_back(texture);
-// 	return textures.size() -1;
-// }
-
-void Graphics::Update()
-{
-	SDL_RenderClear(renderer);
+void Graphics::Update(){
 	SDL_SetRenderDrawColor( renderer, 10, 15, 20, 255 ); // Background color
-	Draw();		
+	SDL_RenderClear(renderer);
+	WriteToBuffer();		
 	SDL_RenderPresent(renderer);
 	SDL_Delay(16); 
 }
 
-void Graphics::Draw() {
-	SDL_Texture* texture = IMG_LoadTexture(renderer, "Game/Assets/player.png");
-	SDL_Rect destination = {100,100,32,32};
-	SDL_RenderCopy(renderer, texture, nullptr, &destination);
+void Graphics::WriteToBuffer() {
+	std::vector<Sprite>* sprites = EntitySystem::SpritesToDraw();
+	// std::cout << "Sprites count in graffix: " << sprites->size() << "\n";
+	for (int i = 0; i < sprites->size(); ++i) {
+		Sprite sprite = sprites->at(i);
+		SDL_Rect destination = CreateRect(sprite.position, sprite.size);
+		std::cout<<"writing to buffer. Position:  "<<destination.x<<" "<<destination.y<<" texture#"<<sprite.textureID<<"\n";
+		SDL_RenderCopy(renderer, textures.at(sprite.textureID), nullptr, &destination);
+	}
+	delete sprites;
 }
 
 void Graphics::Stop() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+}
+
+int Graphics::AddTexture(const char* filePath) {
+	for (int i = 0; i < paths.size(); ++i){
+		if (paths.at(i) == std::string(filePath)){
+			return i;
+		}
+	}
+	SDL_Texture* texture = IMG_LoadTexture(renderer, filePath);
+	textures.push_back(texture);
+	paths.push_back(std::string(filePath));
+	return textures.size() -1;
+}
+
+SDL_Rect Graphics::CreateRect(Vector2 position, Vector2 size) {
+	SDL_Rect rect = {
+		(int)(position.x + offsetX - size.x * 0.5),
+		(int)(-position.y + offsetY - size.y * 0.5),
+		(int)size.x, (int)size.y};
+	return rect;
 }
