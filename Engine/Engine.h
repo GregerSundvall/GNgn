@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Physics/Physics.h"
 // #include "Input.h"
 // #include "Entity/EntitySystem.h"
 // #include "Graphics/Graphics.h"
@@ -7,6 +8,8 @@
 class Entity;
 
 static bool isRunning = false;
+static int pixelsPerMeter = 15;
+static Physics* physics;
 
 class Engine
 {
@@ -23,7 +26,7 @@ public:
 
 	static void Init();
 	static void Run();
-	static Entity* AddGameObject();
 	static void Stop();
-
+	static int GetPixelsPerMeter();
+	static void SetPixelsPerMeter(int const value);
 };

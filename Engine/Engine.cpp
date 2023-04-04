@@ -6,8 +6,7 @@
 void Engine::Init() {
 	Graphics::Init();
 	Input::Start();
-	// entities = new EntitySystem();
-
+	physics = new Physics(9.8);
 }
 
 void Engine::Run() {
@@ -25,7 +24,6 @@ void Engine::Run() {
 	Graphics::Stop();
 }
 
-Entity* Engine::AddGameObject() {
-	return nullptr;					// TODO just returning nullptr for now
-}
 void Engine::Stop() { isRunning = false; }
+int Engine::GetPixelsPerMeter() { return pixelsPerMeter; }
+void Engine::SetPixelsPerMeter(int const value) { pixelsPerMeter = value;}

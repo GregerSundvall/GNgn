@@ -172,6 +172,7 @@
     <ClCompile Include="Engine\Physics\Collisions.cpp" />
     <ClCompile Include="Engine\Physics\Constraints.cpp" />
     <ClCompile Include="Engine\Physics\Forces.cpp" />
+    <ClCompile Include="Engine\Physics\Physics.cpp" />
     <ClCompile Include="Engine\Physics\RigidBody.cpp" />
     <ClCompile Include="Engine\Physics\Shapes.cpp" />
     <ClCompile Include="Game\Game.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Engine\Physics\Collisions.h" />
     <ClInclude Include="Engine\Physics\Constraints.h" />
     <ClInclude Include="Engine\Physics\Forces.h" />
+    <ClInclude Include="Engine\Physics\Physics.h" />
     <ClInclude Include="Engine\Physics\RigidBody.h" />
     <ClInclude Include="Engine\Physics\Shapes.h" />
     <ClInclude Include="Game\Game.h" />
