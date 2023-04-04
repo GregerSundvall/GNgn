@@ -43,8 +43,13 @@ RigidBody::~RigidBody() {
 }
 
 void RigidBody::SetTexture(const char* filePath) {
-	// texture = IMG_LoadTexture(Graphics::renderer, filePath);
-	// TODO check if texture is valid? This won't be even be here later though..
+	SDL_Surface* surface = IMG_Load(filePath);
+	if (surface) {
+		texture = SDL_CreateTextureFromSurface(renderer, surface);
+		SDL_FreeSurface(surface);
+	}
+	// texture = IMG_LoadTexture(renderer, filePath);
+	// TODO check if texture is valid? This won't even be here later though..
 }
 
 bool RigidBody::isStatic() const {

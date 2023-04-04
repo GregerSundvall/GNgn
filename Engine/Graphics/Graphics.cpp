@@ -2,9 +2,11 @@
 #include <iostream>
 #include <SDL_image.h>
 
+#include "../Engine.h"
 #include "../Entity/EntitySystem.h"
 // #include <SDL2_gfxPrimitives.h>
 
+#include "../Physics/RigidBody.h"
 
 bool Graphics::Init() {
 	int width = 1920;
@@ -43,13 +45,26 @@ void Graphics::Update(){
 }
 
 void Graphics::WriteToBuffer() {
-	std::vector<Sprite>* sprites = EntitySystem::SpritesToDraw();
-	for (int i = 0; i < sprites->size(); ++i) {
-		Sprite sprite = sprites->at(i);
-		SDL_Rect destination = CreateRect(sprite.position, sprite.size);
-		SDL_RenderCopy(renderer, textures.at(sprite.textureID), nullptr, &destination);
+	// std::vector<Sprite>* sprites = EntitySystem::SpritesToDraw();
+	// for (int i = 0; i < sprites->size(); ++i) {
+	// 	Sprite sprite = sprites->at(i);
+	// 	SDL_Rect destination = CreateRect(sprite.position, sprite.size);
+	// 	SDL_RenderCopy(renderer, textures.at(sprite.textureID), nullptr, &destination);
+	// }
+	// delete sprites;
+	// TODO temp stuff
+	std::vector<RigidBody*> rigidBodies = physics->GetBodies();
+	std::cout << rigidBodies.size() << "\n";
+	for (auto rb : rigidBodies) {
+		if (rb->shape->GetType() == BOX) {
+			Box* box = (Box*)rb->shape;
+			if (rb->texture) {
+				SDL_Rect destination = {(int)rb->position.x, (int)rb->position.y, (int)box->width, (int)box->height};
+				SDL_RenderCopyEx(renderer, rb->texture, NULL, &destination,
+					0, NULL, SDL_FLIP_NONE);
+			}	
+		}
 	}
-	delete sprites;
 }
 
 void Graphics::Stop() {

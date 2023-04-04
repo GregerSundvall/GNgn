@@ -14,6 +14,7 @@ void Engine::Run() {
 	while (isRunning)
 	{
 		Input::Update();
+		physics->Update(0.16);
 		Graphics::Update();
 	}
 
@@ -27,3 +28,4 @@ void Engine::Run() {
 void Engine::Stop() { isRunning = false; }
 int Engine::GetPixelsPerMeter() { return pixelsPerMeter; }
 void Engine::SetPixelsPerMeter(int const value) { pixelsPerMeter = value;}
+RigidBody* Engine::CreatePhysicsObject() { return physics->Create(); }

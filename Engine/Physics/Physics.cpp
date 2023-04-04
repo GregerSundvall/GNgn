@@ -4,15 +4,24 @@
 #include "RigidBody.h"
 #include "Constraints.h"
 #include "../Engine.h"
+#include "../Graphics/Graphics.h"
 
 
 Physics::Physics(double const gravity) {
 	this->gravity = gravity;
+	pixelsPerMeter = Engine::GetPixelsPerMeter();
 }
 
 Physics::~Physics() {
 	for (auto rigidBody: rigidBodies) { delete rigidBody; }
 	for (auto constraint: constraints) { delete constraint; }
+}
+
+RigidBody* Physics::Create() {
+	RigidBody* rb = new RigidBody(Box(32, 32), 0, 0, 10);
+	rb->SetTexture("./Game/Assets/player.png");
+	AddBody(rb);
+	return rb;
 }
 
 void Physics::AddBody(RigidBody* body) {
@@ -39,10 +48,10 @@ void Physics::AddTorque(double const torque) {
 	torques.push_back(torque);
 }
 
-void Physics::Update(double deltaTime) {
+void Physics::Update(double const deltaTime) {
 	// Apply forces and integrate them
 	for (auto& rigidBody : rigidBodies) {
-		Vector2 weight = Vector2(0, rigidBody->mass * gravity * Engine::GetPixelsPerMeter());
+		Vector2 weight = Vector2(0, rigidBody->mass * gravity * pixelsPerMeter);
 		rigidBody->AddForce(weight);
 
 		for (auto force : forces) {

@@ -11,6 +11,7 @@ class Physics
 {
 	float gravity = 9.8;
 	int iterationCount = 10;
+	int pixelsPerMeter;
 	std::vector<RigidBody*> rigidBodies;
 	std::vector<Constraint*> constraints;
 
@@ -21,6 +22,7 @@ public:
 	Physics(double gravity);
 	~Physics();
 
+	RigidBody* Create();
 	void AddBody(RigidBody* body);
 	std::vector<RigidBody*>& GetBodies();
 
@@ -30,8 +32,7 @@ public:
 	void AddForce(const Vector2& force);
 	void AddTorque(double torque);
 
-	void Update(double dt);
+	void Update(double deltaTime);
 
-	void CheckCollisions();
 
 };

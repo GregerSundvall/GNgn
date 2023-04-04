@@ -29,4 +29,5 @@ public:
 	static void Stop();
 	static int GetPixelsPerMeter();
 	static void SetPixelsPerMeter(int const value);
+	static RigidBody* CreatePhysicsObject();
 };
