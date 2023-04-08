@@ -1,5 +1,7 @@
 ﻿#include "Physics.h"
 
+#include <iostream>
+
 #include "Collisions.h"
 #include "RigidBody.h"
 #include "Constraints.h"
@@ -9,28 +11,33 @@
 
 Physics::Physics(double const gravity) {
 	this->gravity = gravity;
+	rigidBodies = new std::vector<RigidBody>;
+	rigidBodies->reserve(1000);
+	std::cout << rigidBodies->size() << "\n";
 	pixelsPerMeter = Engine::GetPixelsPerMeter();
 }
 
 Physics::~Physics() {
-	for (auto rigidBody: rigidBodies) { delete rigidBody; }
+	delete rigidBodies;
+	// for (auto rigidBody: rigidBodies) { delete rigidBody; }
 	for (auto constraint: constraints) { delete constraint; }
 }
 
-RigidBody* Physics::Create() {
+int Physics::Create() {
 	RigidBody* rb = new RigidBody(Box(32, 32), 0, 0, 10);
-	rb->SetTexture("./Game/Assets/player.png");
-	AddBody(rb);
-	return rb;
+	rigidBodies->emplace_back(RigidBody(Box(32, 32), 0, 0, 10));
+	// rb->SetTexture("./Game/Assets/player.png");
+	// AddBody(rb);
+	return rigidBodies->size() -1;
 }
 
-void Physics::AddBody(RigidBody* body) {
-	rigidBodies.push_back(body);
-}
+// void Physics::AddBody(RigidBody* body) {
+// 	rigidBodies->push_back(*body);
+// }
 
-std::vector<RigidBody*>& Physics::GetBodies() {
-	return rigidBodies;
-}
+// std::vector<RigidBody>* Physics::GetBodies() {
+// 	return rigidBodies;
+// }
 
 void Physics::AddConstraint(Constraint* constraint) {
 	constraints.push_back(constraint);	
@@ -48,9 +55,21 @@ void Physics::AddTorque(double const torque) {
 	torques.push_back(torque);
 }
 
+Vector2* Physics::GetPosition(int const rigidBodyID) { return &rigidBodiesStatic->at(rigidBodyID).position; }
+double Physics::GetRotation(int const rigidBodyID) { return rigidBodiesStatic->at(rigidBodyID).rotation; }
+
+std::vector<RigidBody>& Physics::GetRigidBodies() const {
+	return *rigidBodies;
+}
+
+std::vector<RigidBody>* Physics::GetRigidBodiesStatic() {
+	return rigidBodiesStatic;
+}
+
 void Physics::Update(double const deltaTime) {
 	// Apply forces and integrate them
-	for (auto& rigidBody : rigidBodies) {
+	for (int i = 0; i < rigidBodies->size(); i++) {
+		RigidBody* rigidBody = &rigidBodies->at(i);
 		Vector2 weight = Vector2(0, rigidBody->mass * gravity * pixelsPerMeter);
 		rigidBody->AddForce(weight);
 
@@ -62,16 +81,17 @@ void Physics::Update(double const deltaTime) {
 			rigidBody->AddTorque(torque);
 		}
 	}
-	for (auto& rigidBody : rigidBodies) {
+	for (int i = 0; i < rigidBodies->size(); i++) {
+		RigidBody* rigidBody = &rigidBodies->at(i);
 		rigidBody->IntegrateForces(deltaTime);
 	}
 
 	// Collision detection. All vs all, for now.
 	std::vector<PenetrationConstraint> penetrations;
-	for (int i = 0; i <= rigidBodies.size() -1; ++i) {
-		for (int j = 0; j < rigidBodies.size(); ++j) {
-			RigidBody* a = rigidBodies[i];
-			RigidBody* b = rigidBodies[j];
+	for (int i = 0; i <= rigidBodies->size() -1; ++i) {
+		for (int j = 0; j < rigidBodies->size(); ++j) {
+			RigidBody* a = &rigidBodies->at(i);
+			RigidBody* b = &rigidBodies->at(j);
 
 			std::vector<Contact> contacts;
 			if (Collisions::IsColliding(a, b, contacts)) {
@@ -107,7 +127,8 @@ void Physics::Update(double const deltaTime) {
 	}
 
 	// Integrate velocities
-	for (auto& rigidBody : rigidBodies) {
+	for (int i = 0; i < rigidBodies->size(); i++) {
+		RigidBody* rigidBody = &rigidBodies->at(i);
 		rigidBody->IntegrateVelocities(deltaTime);
 	}
 }

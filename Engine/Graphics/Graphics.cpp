@@ -52,19 +52,21 @@ void Graphics::WriteToBuffer() {
 	// 	SDL_RenderCopy(renderer, textures.at(sprite.textureID), nullptr, &destination);
 	// }
 	// delete sprites;
+
 	// TODO temp stuff
-	std::vector<RigidBody*> rigidBodies = physics->GetBodies();
-	std::cout << rigidBodies.size() << "\n";
-	for (auto rb : rigidBodies) {
-		if (rb->shape->GetType() == BOX) {
-			Box* box = (Box*)rb->shape;
-			if (rb->texture) {
-				SDL_Rect destination = {(int)rb->position.x, (int)rb->position.y, (int)box->width, (int)box->height};
-				SDL_RenderCopyEx(renderer, rb->texture, NULL, &destination,
-					0, NULL, SDL_FLIP_NONE);
-			}	
-		}
-	}
+	std::vector<Sprite>* sprites = EntitySystem::GetSprites();
+	std::cout << sprites->size() << "\n";
+	
+	// for (auto rb : rigidBodies) {
+	// 	if (rb->shape->GetType() == BOX) {
+	// 		Box* box = (Box*)rb->shape;
+	// 		if (rb->texture) {
+	// 			SDL_Rect destination = {(int)rb->position.x, (int)rb->position.y, (int)box->width, (int)box->height};
+	// 			SDL_RenderCopyEx(renderer, rb->texture, NULL, &destination,
+	// 				0, NULL, SDL_FLIP_NONE);
+	// 		}	
+	// 	}
+	// }
 }
 
 void Graphics::Stop() {

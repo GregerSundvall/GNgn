@@ -6,18 +6,25 @@
 
 
 static std::vector<Entity> entities;
-static std::vector<int> freeSlots;
 
 class EntitySystem
 {
 public:
 	void Init();
+	
+	void CreateBoxEntity(double x, double y, double width, double height, double weight, const char* filePath);
+	void CreateCircleEntity(double x, double y, double radius, double weight, const char* filePath);
+	
 	void Update();
+
+
+
+	
 
 	static int EntityCount();
 	
 	static Entity* CreateEntity();
-	static Entity* CreateEntity(double x, double y, double width, double height, const char* imageFilePath);
+	static Entity* CreateEntity(double x, double y, double width, double height, const char* imageFilePath, bool physics);
 	static void DestroyEntity(int entityID);
 	
 	static Vector2 GetPosition(int entityID);
@@ -32,6 +39,8 @@ public:
 		
 	static void SetTexture(int entityID, const char* filePath);
 	
-	static std::vector<Sprite>* SpritesToDraw();
+	static int EnablePhysics(int entityID);
 
+	static std::vector<Sprite>* GetSprites();
+	
 };

@@ -2,27 +2,34 @@
 
 #include "EntitySystem.h"
 #include "TransformSystem.h"
+#include "../Engine.h"
 #include "../Graphics/Graphics.h"
 
 
-Entity::Entity(int const entityID) {
-	this->entityID = entityID;
+Entity::Entity(double x, double y, double width, double height, double weight, const char* filePath) {
+	EntitySystem::CreateBoxEntity(x, y, width, height, weight, filePath);
 }
-
-Entity::Entity(int const entityID, double x, double y, double width, double height, const char* filePath) {
-	this->entityID = entityID;
-	SetPosition({x, y});
-	SetSize({width, height});
-	SetTexture(filePath);
+Entity::Entity(double x, double y, double radius, double weight, const char* filePath) {
+	EntitySystem::CreateCircleEntity(x, y, radius, weight, filePath);	
 }
 
 void Entity::Update(double deltaTime) {}
+
+
+
+
+
+
+
+
+void Entity::SetMass(double weight) {
+	rigidBodyID = Physics::Create(entityID, weight);
+}
 
 Vector2 Entity::GetPosition() {
 	if (transformID == -1) { transformID = TransformSystem::Create(); }
 	return TransformSystem::GetPosition(transformID);
 }
-
 void Entity::SetPosition(Vector2 const position) {
 	if (transformID == -1) { transformID = TransformSystem::Create(position);
 		return; }
@@ -33,6 +40,8 @@ double Entity::GetRotation() {
 	if (transformID == -1) { transformID = TransformSystem::Create(); }
 	return TransformSystem::GetRotation(transformID);
 }
+
+
 void Entity::SetRotation(double const rotation) {
 	if (transformID == -1) { transformID = TransformSystem::Create({0, 0}, rotation);
 		return; }
@@ -52,6 +61,7 @@ void Entity::SetSize(Vector2 const size) {
 void Entity::SetTexture(const char* filePath) {
 	textureID = Graphics::AddTexture(filePath);
 }
+
 
 int Entity::GetEntityID() const { return entityID; }
 int Entity::GetTransformID() const { return transformID; }

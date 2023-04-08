@@ -7,12 +7,15 @@ class RigidBody;
 class Constraint;
 
 
+
+static std::vector<RigidBody>* rigidBodiesStatic;
+
 class Physics
 {
-	float gravity = 9.8;
+	double gravity = 9.8;
 	int iterationCount = 10;
 	int pixelsPerMeter;
-	std::vector<RigidBody*> rigidBodies;
+	std::vector<RigidBody>* rigidBodies;
 	std::vector<Constraint*> constraints;
 
 	std::vector<Vector2> forces;
@@ -22,15 +25,21 @@ public:
 	Physics(double gravity);
 	~Physics();
 
-	RigidBody* Create();
-	void AddBody(RigidBody* body);
-	std::vector<RigidBody*>& GetBodies();
+	static int Create();
+	// void AddBody(RigidBody* body);
+
+	static Vector2* GetPosition(int rigidBodyID);
+	static double GetRotation(int rigidBodyID);
+
+	std::vector<RigidBody>& GetRigidBodies() const;
+	static std::vector<RigidBody>* GetRigidBodiesStatic();
 
 	void AddConstraint(Constraint* constraint);
 	std::vector<Constraint*>& GetConstraints();
 
 	void AddForce(const Vector2& force);
 	void AddTorque(double torque);
+
 
 	void Update(double deltaTime);
 

@@ -10,6 +10,7 @@ enum ShapeType
 };
 
 
+
 class Shape {
 public:
 	virtual ~Shape() = default;
@@ -63,4 +64,18 @@ public:
 	ShapeType GetType() const override;
 	Shape* Clone() const override;
 	double GetMomentOfInertia() const override;
+};
+
+
+// static std::vector<Circle> circleShapes;
+// static std::vector<Polygon> polygonShapes;
+
+class Shapes
+{
+	static std::vector<Box>* boxShapes;
+public:
+	Shapes() = default;
+	~Shapes() = default;
+	static void Init(){ boxShapes = new std::vector<Box>; }
+	static std::vector<Box>* GetBoxShapes() { return boxShapes; }
 };
