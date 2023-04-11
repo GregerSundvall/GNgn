@@ -161,7 +161,7 @@
   <ItemGroup>
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Entity\Entity.cpp" />
-    <ClCompile Include="Engine\Entity\EntitySystem.cpp" />
+    <ClCompile Include="Engine\Entity\Entities.cpp" />
     <ClCompile Include="Engine\Entity\Transform.cpp" />
     <ClCompile Include="Engine\Entity\TransformSystem.cpp" />
     <ClCompile Include="Engine\Graphics\Graphics.cpp" />
@@ -181,7 +181,7 @@
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
-    <ClInclude Include="Engine\Entity\EntitySystem.h" />
+    <ClInclude Include="Engine\Entity\Entities.h" />
     <ClInclude Include="Engine\Entity\Transform.h" />
     <ClInclude Include="Engine\Entity\TransformSystem.h" />
     <ClInclude Include="Engine\Graphics\Graphics.h" />

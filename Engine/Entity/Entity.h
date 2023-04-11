@@ -32,13 +32,17 @@ class Entity
 	double restitution;
 	double friction;
 
-	Shape* shape;
 	SDL_Texture* texture;
+	
+	ShapeType shapeType;
+	Box box;
+	Circle circle;
+	Polygon polygon;
 public:
 	// Box entity
 	Entity(double x, double y, double width, double height, double weight, const char* filePath);
 	// Circle entity
-	Entity(double x, double y, double radius, double weight, const char* filePath);
+	// Entity(double x, double y, double radius, double weight, const char* filePath);
 	
 	virtual void Update(double deltaTime);
 

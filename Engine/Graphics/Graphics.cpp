@@ -54,7 +54,7 @@ void Graphics::WriteToBuffer() {
 	// delete sprites;
 
 	// TODO temp stuff
-	std::vector<Sprite>* sprites = EntitySystem::GetSprites();
+	std::vector<Sprite>* sprites = Entities::GetSprites();
 	std::cout << sprites->size() << "\n";
 	
 	// for (auto rb : rigidBodies) {
@@ -74,16 +74,16 @@ void Graphics::Stop() {
 	SDL_DestroyWindow(window);
 }
 
-int Graphics::AddTexture(const char* filePath) {
+SDL_Texture* Graphics::AddTexture(const char* filePath) {
 	for (int i = 0; i < paths.size(); ++i){
 		if (paths.at(i) == std::string(filePath)){
-			return i;
+			return textures.at(i);
 		}
 	}
 	SDL_Texture* texture = IMG_LoadTexture(renderer, filePath);
 	textures.push_back(texture);
 	paths.push_back(std::string(filePath));
-	return textures.size() -1;
+	return texture;
 }
 
 SDL_Rect Graphics::CreateRect(Vector2 position, Vector2 size) {

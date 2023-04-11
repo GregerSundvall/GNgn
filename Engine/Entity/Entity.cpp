@@ -1,17 +1,20 @@
 ﻿#include "Entity.h"
 
-#include "EntitySystem.h"
+#include "Entities.h"
 #include "TransformSystem.h"
 #include "../Engine.h"
 #include "../Graphics/Graphics.h"
 
 
 Entity::Entity(double x, double y, double width, double height, double weight, const char* filePath) {
-	EntitySystem::CreateBoxEntity(x, y, width, height, weight, filePath);
+	position = {x, y};
+	box = {width, height};
+	mass = weight;
+	texture = Graphics::AddTexture(filePath);
 }
-Entity::Entity(double x, double y, double radius, double weight, const char* filePath) {
-	EntitySystem::CreateCircleEntity(x, y, radius, weight, filePath);	
-}
+// Entity::Entity(double x, double y, double radius, double weight, const char* filePath) {
+// 	Entities::CreateCircleEntity(x, y, radius, weight, filePath);	
+// }
 
 void Entity::Update(double deltaTime) {}
 

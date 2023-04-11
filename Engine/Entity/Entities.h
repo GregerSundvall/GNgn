@@ -5,15 +5,16 @@
 #include "Entity.h"
 
 
-static std::vector<Entity> entities;
 
-class EntitySystem
+
+class Entities
 {
+	static std::vector<Entity>* boxEntities;
 public:
 	void Init();
 	
-	void CreateBoxEntity(double x, double y, double width, double height, double weight, const char* filePath);
-	void CreateCircleEntity(double x, double y, double radius, double weight, const char* filePath);
+	static void CreateBoxEntity(double x, double y, double width, double height, double weight, const char* filePath);
+	// static void CreateCircleEntity(double x, double y, double radius, double weight, const char* filePath);
 	
 	void Update();
 

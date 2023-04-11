@@ -23,7 +23,7 @@ public:
 	static void WriteToBuffer();
 	static void Stop();
 	
-	static int AddTexture(const char* filePath);
+	static SDL_Texture* AddTexture(const char* filePath);
 	static SDL_Rect CreateRect(Vector2 position, Vector2 size);
 };
 

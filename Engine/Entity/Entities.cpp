@@ -1,4 +1,4 @@
-﻿#include "EntitySystem.h"
+﻿#include "Entities.h"
 
 #include <iostream>
 
@@ -7,77 +7,76 @@
 // #include "../Graphics/Graphics.h"
 
 
-void EntitySystem::Init() {
-	entities.reserve(1000);
-	freeSlots.reserve(1000);
+void Entities::Init() {
+	boxEntities.reserve(1000);
 	TransformSystem::Init();
 }
 
-void EntitySystem::CreateBoxEntity(double x, double y, double width, double height, double weight, const char* filePath) {
+void Entities::CreateBoxEntity(double x, double y, double width, double height, double weight, const char* filePath) {
+	Entity new = Entity( )
+}
+
+// void Entities::CreateCircleEntity(double x, double y, double radius, double weight, const char* filePath) {
+// 	
+// }
+
+
+void Entities::Update() {
 	
 }
 
-void EntitySystem::CreateCircleEntity(double x, double y, double radius, double weight, const char* filePath) {
-	
-}
+int Entities::EntityCount() { return entities.size(); }
 
-
-void EntitySystem::Update() {
-	
-}
-
-int EntitySystem::EntityCount() { return entities.size(); }
-
-Entity* EntitySystem::CreateEntity() {
+Entity* Entities::CreateEntity() {
 	entities.emplace_back(Entity(entities.size()));
 	return &entities.at((int)entities.size() -1);
 }
 
-Entity* EntitySystem::CreateEntity(double const x, double const y, double const width, double const height,
+Entity* Entities::CreateEntity(double const x, double const y, double const width, double const height,
                                    const char* imageFilePath, bool physics) {
 	
 	entities.emplace_back(Entity(entities.size(), x, y, width, height, imageFilePath));
 	return &entities.at(entities.size() -1);
 }
 
-void EntitySystem::DestroyEntity(int const entityID) {
+void Entities::DestroyEntity(int const entityID) {
 	freeSlots.push_back(entityID);
 	entities.at(entityID) = Entity(-1);
 }
 
-Vector2 EntitySystem::GetPosition(int entityID) {
+Vector2 Entities::GetPosition(int entityID) {
 	return TransformSystem::GetPosition(entities.at(entityID).GetTransformID());
 }
-void EntitySystem::SetPosition(int const entityID, Vector2 const& position) {
+void Entities::SetPosition(int const entityID, Vector2 const& position) {
 	entities.at(entityID).SetPosition(position,);
 }
 
-double EntitySystem::GetRotation(int const entityID) {
+double Entities::GetRotation(int const entityID) {
 	return TransformSystem::GetRotation(entities.at(entityID).GetTransformID());
 }
-void EntitySystem::SetRotation(int const entityID, double rotation) {
+void Entities::SetRotation(int const entityID, double rotation) {
 	TransformSystem::SetRotation(entities.at(entityID).GetTransformID(), rotation);
 }
 
-Vector2 EntitySystem::GetSize(int const entityID) {
+Vector2 Entities::GetSize(int const entityID) {
 	return TransformSystem::GetSize(entities.at(entityID).GetTransformID());
 }
-void EntitySystem::SetSize(int const entityID, double width, double height) {
+void Entities::SetSize(int const entityID, double width, double height) {
 	entities.at(entityID).SetSize({width, height});
 }
-void EntitySystem::SetSize(int const entityID, Vector2 const size) {
+void Entities::SetSize(int const entityID, Vector2 const size) {
 	entities.at(entityID).SetSize(size);
 }
 
-void EntitySystem::SetTexture(int const entityID, const char* filePath) {
+void Entities::SetTexture(int const entityID, const char* filePath) {
 	entities.at(entityID).SetTexture(filePath);
 }
 
-int EntitySystem::EnablePhysics(int entityID) {
+int Entities::EnablePhysics(int entityID) {
 	return Physics::Create();
 }
 
-std::vector<Sprite>* EntitySystem::GetSprites() {
+std::vector<Sprite>* Entities::GetSprites() {
 	std::vector<Sprite>* sprites = new std::vector<Sprite>;
 	sprites->reserve(entities.size());
 	
