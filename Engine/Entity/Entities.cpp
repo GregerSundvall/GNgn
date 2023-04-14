@@ -9,28 +9,23 @@
 
 std::vector<Entity>* Entities::entities;
 
-
-
 void Entities::Init() {
 	entities = new std::vector<Entity>;
-	std::cout << entities->capacity() << "\n";
-	// entities->reserve(1000);
+	entities->reserve(100);
 }
 
 
 void Entities::Update() {
-	for (int i = 0; i < entities->size(); ++i) {
-		// entities->at(i).Update();
-	}
 }
 
 int Entities::EntityCount() { return entities->size(); }
 
 void Entities::UpdateSprites() {
-	std::vector<Sprite>* sprites = Graphics::GetSprites();
+	std::vector<Sprite>* sprites = Graphics::Sprites();
 	
 	for (int i = 0; i < entities->size(); ++i) {
 		RigidBody* rb = entities->at(i).rigidBody;
+		// std::cout << "Entities::UpdateSprites " << rb->position.x << "  " << rb->position.y << "\n";
 		sprites->emplace_back(entities->at(i).texture, rb->position.x, rb->position.y, rb->shape.GetWidth(), rb->shape.GetHeight());
 	}
 }

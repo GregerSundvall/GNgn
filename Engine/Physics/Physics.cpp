@@ -12,9 +12,8 @@ std::vector<RigidBody> Physics::rigidBodies;
 
 Physics::Physics(double const gravity) {
 	this->gravity = gravity;
-	// rigidBodies.reserve(1000);
-	std::cout << rigidBodies.size() << "\n";
-	pixelsPerMeter = Engine::GetPixelsPerMeter();
+	rigidBodies.reserve(100);
+	pixelsPerMeter = Engine::PixelsPerMeter();
 }
 
 Physics::~Physics() {
@@ -50,6 +49,7 @@ void Physics::Update(double const deltaTime) {
 	// Apply forces and integrate them
 	for (int i = 0; i < rigidBodies.size(); i++) {
 		RigidBody* rigidBody = &rigidBodies.at(i);
+		std::cout << "Physics::Update " << rigidBody->position.x << "  " << rigidBody->position.y << "\n";
 		Vector2 weight = Vector2(0, rigidBody->mass * gravity * pixelsPerMeter);
 		rigidBody->AddForce(weight);
 
@@ -68,8 +68,8 @@ void Physics::Update(double const deltaTime) {
 
 	// Collision detection. All vs all, for now.
 	std::vector<PenetrationConstraint> penetrations;
-	for (int i = 0; i >! rigidBodies.size() -1; ++i) {
-		for (int j = 0; j < rigidBodies.size(); ++j) {
+	for (int i = 0; i <= rigidBodies.size() -1; i++) {
+		for (int j = i + 1; j < rigidBodies.size(); j++) {
 			RigidBody* a = &rigidBodies.at(i);
 			RigidBody* b = &rigidBodies.at(j);
 

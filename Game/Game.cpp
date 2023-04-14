@@ -1,10 +1,13 @@
 ﻿#include"Game.h"
+#include "../Engine/Entity/Entities.h"
 #include "../Engine/Engine.h"
 
 
 Game::Game()
 {
-	auto box = Engine::CreatePhysicsEntity(100, 100, 32, 32, 10, "./Game/Assets/player.png");
+	Engine::PixelsPerMeter(50);
+	auto box = Entities::Create(100, 100, 32, 32, 1, "./Game/Assets/player.png");
+	auto box2 = Entities::Create(200, 100, 32, 32, 10, "./Game/Assets/player.png");
 
 
 	// Entity* player0 = EntitySystem::CreateEntity(-500, 500, 32, 32, "./Game/Assets/player.png");

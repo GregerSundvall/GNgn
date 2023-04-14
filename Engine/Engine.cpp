@@ -3,6 +3,9 @@
 #include "Entity/Entities.h"
 #include "Graphics/Graphics.h"
 
+double Engine::deltaTime;
+double Engine::previousFrameTime;
+int Engine::pixelsPerMeter;
 
 void Engine::Init(const int windowWidth, const int windowHeight) {
 	Graphics::Init(windowWidth, windowHeight);
@@ -17,20 +20,22 @@ void Engine::Run() {
 	{
 		Input::Update();
 		Entities::Update();
-		physics->Update(0.16);
+		physics->Update(deltaTime);
+		Entities::UpdateSprites();
 		Graphics::Update();
 	}
 
-	// Destroy game?
-	// Destroy entities
-	// Destroy input?
-	// Destroy physics
+	// Destroy stuff
+	
 	Graphics::Stop();
 }
 
 void Engine::Stop() { isRunning = false; }
-int Engine::GetPixelsPerMeter() { return pixelsPerMeter; }
-void Engine::SetPixelsPerMeter(int const value) { pixelsPerMeter = value;}
-Entity* Engine::CreatePhysicsEntity(const double x, const double y, const double width, const double height, const double mass, const char* imagePath) {
-	return Entities::Create(x, y, width, height, mass, imagePath);
+int Engine::PixelsPerMeter() { return pixelsPerMeter; }
+void Engine::PixelsPerMeter(const int newValue) { pixelsPerMeter = newValue;}
+double Engine::DeltaTime() { return deltaTime; }
+void Engine::CalculateDeltaTime() {
+	const double currentTime = SDL_GetTicks() * 0.001; 
+	deltaTime = currentTime - previousFrameTime;
+	previousFrameTime = currentTime;
 }

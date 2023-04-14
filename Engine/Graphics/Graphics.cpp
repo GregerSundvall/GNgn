@@ -6,16 +6,24 @@
 #include "../Entity/Entities.h"
 // #include <SDL2_gfxPrimitives.h>
 
-#include "../Physics/RigidBody.h"
 
 int Graphics::width;
 int Graphics::height;
 std::vector<Sprite> Graphics::sprites;
-
+SDL_Window* Graphics::window;
+SDL_Renderer* Graphics::renderer;
+std::vector<SDL_Texture*> Graphics::textures;
+std::vector<std::string> Graphics::paths;
+int Graphics::offsetX;
+int Graphics::offsetY;
 
 bool Graphics::Init(const int windowWidth, const int windowHeight) {
 	width = windowWidth;
 	height = windowHeight;
+	offsetX = width / 2;
+	offsetY = height / 2;
+	sprites.reserve(100);
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cerr << "SDL Init error" << std::endl;
 		return false;
@@ -36,8 +44,6 @@ bool Graphics::Init(const int windowWidth, const int windowHeight) {
 		return false;
 	}
 	
-	offsetX = width / 2;
-	offsetY = height / 2;
 	
 	return true;
 }
@@ -52,24 +58,13 @@ void Graphics::Update(){
 
 void Graphics::WriteToBuffer() {
 	for (int i = 0; i < sprites.size(); ++i) {
-		SDL_RenderCopy(renderer, sprites.at(i).texture, nullptr, &sprites.at(i).rect);
+		std::cout << "Graphics::WriteToBuffer" << sprites.at(i).rect.x << "  " << sprites.at(i).rect.y << "\n";
+		// SDL_RenderCopy(renderer, sprites.at(i).texture, nullptr, &sprites.at(i).rect);
+		
+		SDL_Texture* texture = IMG_LoadTexture(renderer, "./Game/Assets/player.png");
+		SDL_RenderCopy(renderer, texture, nullptr, &sprites.at(i).rect);
 	}
 	sprites.clear();
-
-	// // TODO temp stuff
-	// std::vector<Sprite>* sprites = Entities::GetSprites();
-	// std::cout << sprites->size() << "\n";
-	
-	// for (auto rb : rigidBodies) {
-	// 	if (rb->shape->GetType() == BOX) {
-	// 		Box* box = (Box*)rb->shape;
-	// 		if (rb->texture) {
-	// 			SDL_Rect destination = {(int)rb->position.x, (int)rb->position.y, (int)box->width, (int)box->height};
-	// 			SDL_RenderCopyEx(renderer, rb->texture, NULL, &destination,
-	// 				0, NULL, SDL_FLIP_NONE);
-	// 		}	
-	// 	}
-	// }
 }
 
 void Graphics::Stop() {
@@ -77,7 +72,7 @@ void Graphics::Stop() {
 	SDL_DestroyWindow(window);
 }
 
-std::vector<Sprite>* Graphics::GetSprites() {
+std::vector<Sprite>* Graphics::Sprites() {
 	return &sprites;
 }
 
@@ -93,7 +88,7 @@ SDL_Texture* Graphics::AddTexture(const char* filePath) {
 	return texture;
 }
 
-SDL_Rect Graphics::CreateRect(Vector2 position, Vector2 size) {
+SDL_Rect Graphics::CreateRect(const Vector2 position, const Vector2 size) {
 	SDL_Rect rect = {
 		(int)(position.x + offsetX - size.x * 0.5),
 		(int)(-position.y + offsetY - size.y * 0.5),

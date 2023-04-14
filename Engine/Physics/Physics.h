@@ -15,7 +15,7 @@ class Physics
 {
 	double gravity = 9.8;
 	int iterationCount = 10;
-	int pixelsPerMeter;
+	int pixelsPerMeter = 50;
 
 	static std::vector<RigidBody> rigidBodies;
 	
