@@ -4,7 +4,7 @@
 
 Game::Game()
 {
-	auto box = Engine::CreatePhysicsObject();
+	auto box = Engine::CreatePhysicsEntity(100, 100, 32, 32, 10, "./Game/Assets/player.png");
 
 
 	// Entity* player0 = EntitySystem::CreateEntity(-500, 500, 32, 32, "./Game/Assets/player.png");

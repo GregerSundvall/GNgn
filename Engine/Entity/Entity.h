@@ -13,76 +13,37 @@
 
 class Entity
 {
-	Vector2 position;
-	Vector2 velocity;
-	Vector2 acceleration;
-
-	double rotation;
-	double angularVelocity;
-	double angularAcceleration;
-
-	Vector2 sumOfForces;
-	double sumOfAllTorque;
-
-	double mass;
-	double inverseMass;
-	double momentOfInertia;
-	double inverseMomentOfInertia;
-
-	double restitution;
-	double friction;
-
-	SDL_Texture* texture;
-	
-	ShapeType shapeType;
-	Box box;
-	Circle circle;
-	Polygon polygon;
+		
 public:
-	// Box entity
-	Entity(double x, double y, double width, double height, double weight, const char* filePath);
+	RigidBody* rigidBody;
+	SDL_Texture* texture;
+	// Creates a box entity
+	Entity(double x, double y, double width, double height, double mass, const char* filePath);
 	// Circle entity
 	// Entity(double x, double y, double radius, double weight, const char* filePath);
 	
-	virtual void Update(double deltaTime);
-
-
-
-
+	// virtual void Update(double deltaTime);
 	
-	void SetPosition(Vector2 const position);
-	void SetRotation(double rotation);
-	void SetWidthHeight(double width, double height);
-	void SetDiameter(double diameter);
-	void SetMass(double weight);
-	void SetShape(const Shape& shape);
-	void SetTexture(const char* filePath);
-	
-	Vector2 GetPosition();
-	double GetRotation();
-	Vector2 GetWidthHeight();
-	double GetDiameter();
-	double GetMass();
-	Shape* GetShape();
+	// void SetPosition(Vector2 const position);
+	// void SetPosition(double x, double y);
+	// void SetRotation(double rotation);
+	// void SetMass(double weight);
+	// void SetTexture(const char* filePath);
+	//
+	// void SetShape(double width, double height);
+	// void SetShape(double radius);
+	// void SetBoxWidth(double width);
+	// void SetBoxHeight(double height);
+	// void SetDiameter(double diameter);
+	//
+	// Vector2 GetPosition();
+	// double GetRotation();
+	// double GetMass();
+	//
+	// ShapeType GetShapeType();
+	// Vector2 GetBoxSize();
+	// double GetDiameter();
 
-	bool isStatic() const;
-
-	void AddForce(const Vector2& force);
-	void AddTorque(double torque);
-	void ClearForces();
-	void ClearTorque();
-
-	Vector2 LocalToWorldSpace(const Vector2& point) const;
-	Vector2 WorldToLocalSpace(const Vector2& point) const;
-
-	void ApplyLinearImpulse(const Vector2& j);
-	void ApplyAngularImpulse(const double j);
-	void ApplyImpulseAtPoint(const Vector2& j, const Vector2& r);
-
-	void IntegrateForces(const double deltaTime);
-	void IntegrateVelocities(const double deltaTime);
-
-	
 };
 
 

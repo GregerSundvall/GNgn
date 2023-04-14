@@ -9,7 +9,7 @@ static const Uint8* keyStates;
 class Input
 {
 public:
-	static void Start();
+	static void Init();
 	static void Update();
 	static bool KeyIsDown(int key);
 	static bool KeyWasPressed(int key);

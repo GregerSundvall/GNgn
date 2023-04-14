@@ -1,13 +1,12 @@
 ﻿#include "RigidBody.h"
 
-#include <SDL_image.h>
 
 #include "../Graphics/Graphics.h"
 
 
-RigidBody::RigidBody(const Shape& shape, double x, double y, double mass) {
-	this->shape = shape.Clone();
-	this->position = Vector2(x, y);
+RigidBody::RigidBody(const double x, const double y, const double width, const double height, const double mass) {
+	this->position = {x, y};
+	this->shape = Shape(width, height);
 	this->velocity = Vector2(0, 0);
 	this->acceleration = Vector2(0,0);
 	this->rotation = 0.0;
@@ -26,36 +25,27 @@ RigidBody::RigidBody(const Shape& shape, double x, double y, double mass) {
 		this->inverseMass = 0.0;
 	}
 
-	 momentOfInertia = shape.GetMomentOfInertia() * mass;
+	momentOfInertia = shape.GetMomentOfInertia() * mass;
 	if ( momentOfInertia != 0.0) {
 		this->inverseMomentOfInertia = 1.0 / momentOfInertia;
 	}
 	else {
 		this-> inverseMomentOfInertia = 0.0;
 	}
-	this->shape->UpdateVertices(rotation, position);
+	this->shape.UpdateVertices(rotation, position);
 	
 }
 
-RigidBody::~RigidBody() {
-	delete shape;
-	SDL_DestroyTexture(texture);
-}
+RigidBody::~RigidBody() {}
 
-void RigidBody::SetTexture(const char* filePath) {
-	SDL_Surface* surface = IMG_Load(filePath);
-	if (surface) {
-		texture = SDL_CreateTextureFromSurface(renderer, surface);
-		SDL_FreeSurface(surface);
-	}
-	// texture = IMG_LoadTexture(renderer, filePath);
-	// TODO check if texture is valid? This won't even be here later though..
-}
 
 bool RigidBody::isStatic() const {
 	const double epsilon = 0.005;
 	return fabs(inverseMass - 0.0) < epsilon;
 }
+
+ShapeType RigidBody::GetShapeType() { return shape.GetType(); }
+
 void RigidBody::AddForce(const Vector2& force) {
 	sumOfForces += force;
 }
@@ -87,42 +77,35 @@ Vector2 RigidBody::WorldToLocalSpace(const Vector2& point) const {
 
 void RigidBody::ApplyLinearImpulse(const Vector2& j) {
 	if (isStatic()) return;
-
 	velocity += j * inverseMass;
 }
 
 void RigidBody::ApplyAngularImpulse(const double j) {
 	if (isStatic())	return;
-
 	angularVelocity += j * inverseMomentOfInertia;
 }
 
 void RigidBody::ApplyImpulseAtPoint(const Vector2& j, const Vector2& r) {
 	if (isStatic()) return;
-
 	velocity += j * inverseMass;
 	angularVelocity += r.Cross(j) * inverseMomentOfInertia;
 }
 
 void RigidBody::IntegrateForces(const double deltaTime) {
 	if (isStatic()) return;
-
 	acceleration = sumOfForces * inverseMass;
 	velocity += acceleration * deltaTime;
-	
 	angularAcceleration = sumOfAllTorque * inverseMomentOfInertia;
 	angularVelocity += angularAcceleration * deltaTime;
-
 	ClearForces();
 	ClearTorque();
 }
 
 void RigidBody::IntegrateVelocities(const double deltaTime) {
 	if (isStatic()) return;
-
 	position += velocity * deltaTime;
 	rotation += angularVelocity * deltaTime;
-	shape->UpdateVertices(rotation, position);
+	shape.UpdateVertices(rotation, position);
 }
 
 

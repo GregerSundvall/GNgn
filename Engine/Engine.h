@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Physics/Physics.h"
+#include "Misc/Misc.h"
 // #include "Input.h"
 // #include "Entity/EntitySystem.h"
 // #include "Graphics/Graphics.h"
@@ -13,21 +14,16 @@ static Physics* physics;
 
 class Engine
 {
-	int width, height;
-	// bool GFXStarted;
-	
-	// Graphics* graphics;
-	// EntitySystem* entities;
-	// Input* input;
-	
 public:
 	Engine() = default;
 	~Engine() = default;
 
-	static void Init();
+	static void Init(int windowWidth, int windowHeight);
 	static void Run();
 	static void Stop();
 	static int GetPixelsPerMeter();
 	static void SetPixelsPerMeter(int const value);
-	static RigidBody* CreatePhysicsObject();
+	
+	// Create box with physics:
+	static Entity* CreatePhysicsEntity(double x, double y, double width, double height, double mass, const char* imagePath);
 };

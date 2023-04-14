@@ -3,14 +3,19 @@
 #include <SDL_image.h>
 
 #include "../Engine.h"
-#include "../Entity/EntitySystem.h"
+#include "../Entity/Entities.h"
 // #include <SDL2_gfxPrimitives.h>
 
 #include "../Physics/RigidBody.h"
 
-bool Graphics::Init() {
-	int width = 1920;
-	int height = 1080;
+int Graphics::width;
+int Graphics::height;
+std::vector<Sprite> Graphics::sprites;
+
+
+bool Graphics::Init(const int windowWidth, const int windowHeight) {
+	width = windowWidth;
+	height = windowHeight;
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cerr << "SDL Init error" << std::endl;
 		return false;
@@ -30,9 +35,10 @@ bool Graphics::Init() {
 		printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 		return false;
 	}
-
+	
 	offsetX = width / 2;
 	offsetY = height / 2;
+	
 	return true;
 }
 
@@ -45,17 +51,14 @@ void Graphics::Update(){
 }
 
 void Graphics::WriteToBuffer() {
-	// std::vector<Sprite>* sprites = EntitySystem::SpritesToDraw();
-	// for (int i = 0; i < sprites->size(); ++i) {
-	// 	Sprite sprite = sprites->at(i);
-	// 	SDL_Rect destination = CreateRect(sprite.position, sprite.size);
-	// 	SDL_RenderCopy(renderer, textures.at(sprite.textureID), nullptr, &destination);
-	// }
-	// delete sprites;
+	for (int i = 0; i < sprites.size(); ++i) {
+		SDL_RenderCopy(renderer, sprites.at(i).texture, nullptr, &sprites.at(i).rect);
+	}
+	sprites.clear();
 
-	// TODO temp stuff
-	std::vector<Sprite>* sprites = Entities::GetSprites();
-	std::cout << sprites->size() << "\n";
+	// // TODO temp stuff
+	// std::vector<Sprite>* sprites = Entities::GetSprites();
+	// std::cout << sprites->size() << "\n";
 	
 	// for (auto rb : rigidBodies) {
 	// 	if (rb->shape->GetType() == BOX) {
@@ -72,6 +75,10 @@ void Graphics::WriteToBuffer() {
 void Graphics::Stop() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+}
+
+std::vector<Sprite>* Graphics::GetSprites() {
+	return &sprites;
 }
 
 SDL_Texture* Graphics::AddTexture(const char* filePath) {

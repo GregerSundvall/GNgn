@@ -1,11 +1,13 @@
 ﻿#include "Engine.h"
 #include "Input.h"
+#include "Entity/Entities.h"
 #include "Graphics/Graphics.h"
 
 
-void Engine::Init() {
-	Graphics::Init();
-	Input::Start();
+void Engine::Init(const int windowWidth, const int windowHeight) {
+	Graphics::Init(windowWidth, windowHeight);
+	Input::Init();
+	Entities::Init();
 	physics = new Physics(9.8);
 }
 
@@ -14,13 +16,14 @@ void Engine::Run() {
 	while (isRunning)
 	{
 		Input::Update();
+		Entities::Update();
 		physics->Update(0.16);
 		Graphics::Update();
 	}
 
 	// Destroy game?
-	// Destroy input?
 	// Destroy entities
+	// Destroy input?
 	// Destroy physics
 	Graphics::Stop();
 }
@@ -28,4 +31,6 @@ void Engine::Run() {
 void Engine::Stop() { isRunning = false; }
 int Engine::GetPixelsPerMeter() { return pixelsPerMeter; }
 void Engine::SetPixelsPerMeter(int const value) { pixelsPerMeter = value;}
-RigidBody* Engine::CreatePhysicsObject() { return physics->Create(); }
+Entity* Engine::CreatePhysicsEntity(const double x, const double y, const double width, const double height, const double mass, const char* imagePath) {
+	return Entities::Create(x, y, width, height, mass, imagePath);
+}

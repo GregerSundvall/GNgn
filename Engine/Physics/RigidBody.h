@@ -1,8 +1,9 @@
 ﻿#pragma once
-#include <SDL_render.h>
 
 #include "Shapes.h"
 #include "../Misc/Vector2.h"
+
+
 
 class RigidBody
 {
@@ -26,21 +27,19 @@ public:
 	double restitution;
 	double friction;
 
-	Shape* shape = nullptr;
-	SDL_Texture* texture = nullptr;
+	Shape shape;
 
-	RigidBody(const Shape& shape, double x, double y, double mass);
+	RigidBody(double x, double y, double width, double height, double mass);
 	~RigidBody();
 
 	bool isStatic() const;
+	ShapeType GetShapeType();
 
 	void AddForce(const Vector2& force);
 	void AddTorque(double torque);
 	void ClearForces();
 	void ClearTorque();
 	
-	void SetTexture(const char* filePath);
-
 	Vector2 LocalToWorldSpace(const Vector2& point) const;
 	Vector2 WorldToLocalSpace(const Vector2& point) const;
 

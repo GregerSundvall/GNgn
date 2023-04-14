@@ -7,11 +7,11 @@
 
 int main(int argc, char* argv[])
 {
-    Engine::Init();
+    Engine::Init(1920, 1080);
+    Engine::Run();
     
     Game* game = new Game();
     
-    Engine::Run();
           
     // Destroy game
     // Destroy engine

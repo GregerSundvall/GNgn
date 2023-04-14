@@ -4,7 +4,7 @@
 
 #include "Engine.h"
 
-void Input::Start()
+void Input::Init()
 {
 	keyStates = SDL_GetKeyboardState(NULL);
 }
