@@ -9,8 +9,8 @@ class Sprite
 public:
 	SDL_Texture* texture;
 	SDL_Rect rect;
-	Vector2 position;
-	Vector2 size;
+	// Vector2 position;
+	// Vector2 size;
 	Sprite(SDL_Texture* texture, double x, double y, double width, double height) {
 		this->texture = texture;
 		rect = SDL_Rect(x, y, width, height);

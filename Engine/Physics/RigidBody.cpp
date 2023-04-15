@@ -1,12 +1,14 @@
 ﻿#include "RigidBody.h"
 
+#include <iostream>
+
 
 #include "../Graphics/Graphics.h"
 
 
 RigidBody::RigidBody(const double x, const double y, const double width, const double height, const double mass) {
 	this->position = {x, y};
-	this->shape = Shape(width, height);
+	this->shape = {width, height};
 	this->velocity = Vector2(0, 0);
 	this->acceleration = Vector2(0,0);
 	this->rotation = 0.0;

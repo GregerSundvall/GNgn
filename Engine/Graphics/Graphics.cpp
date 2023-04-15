@@ -58,11 +58,7 @@ void Graphics::Update(){
 
 void Graphics::WriteToBuffer() {
 	for (int i = 0; i < sprites.size(); ++i) {
-		std::cout << "Graphics::WriteToBuffer" << sprites.at(i).rect.x << "  " << sprites.at(i).rect.y << "\n";
-		// SDL_RenderCopy(renderer, sprites.at(i).texture, nullptr, &sprites.at(i).rect);
-		
-		SDL_Texture* texture = IMG_LoadTexture(renderer, "./Game/Assets/player.png");
-		SDL_RenderCopy(renderer, texture, nullptr, &sprites.at(i).rect);
+		SDL_RenderCopy(renderer, sprites.at(i).texture, nullptr, &sprites.at(i).rect);
 	}
 	sprites.clear();
 }

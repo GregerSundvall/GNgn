@@ -1,5 +1,7 @@
 ﻿#include "Shapes.h"
 
+#include <iostream>
+
 
 Shape::Shape() { type = UNINIT; }
 
@@ -32,9 +34,9 @@ void Shape::CreatePolygonFromVertices(const std::vector<Vector2> vertices) {
 		worldVertices.emplace_back(vertices.at(i));
 
 		minX = std::min(minX, vertices[i].x);
-		maxX = std::min(maxX, vertices[i].x);
+		maxX = std::max(maxX, vertices[i].x);
 		minY = std::min(minY, vertices[i].y);
-		maxY = std::min(maxY, vertices[i].y);
+		maxY = std::max(maxY, vertices[i].y);
 	}
 	width = maxX - minX;
 	height = maxY -minY;

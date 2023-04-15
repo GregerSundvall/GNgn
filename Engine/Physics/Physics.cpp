@@ -49,7 +49,6 @@ void Physics::Update(double const deltaTime) {
 	// Apply forces and integrate them
 	for (int i = 0; i < rigidBodies.size(); i++) {
 		RigidBody* rigidBody = &rigidBodies.at(i);
-		std::cout << "Physics::Update " << rigidBody->position.x << "  " << rigidBody->position.y << "\n";
 		Vector2 weight = Vector2(0, rigidBody->mass * gravity * pixelsPerMeter);
 		rigidBody->AddForce(weight);
 
