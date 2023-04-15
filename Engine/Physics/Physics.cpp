@@ -13,7 +13,7 @@ std::vector<RigidBody> Physics::rigidBodies;
 Physics::Physics(double const gravity) {
 	this->gravity = gravity;
 	rigidBodies.reserve(100);
-	pixelsPerMeter = Engine::PixelsPerMeter();
+	pixelsPerMeter = 50;
 }
 
 Physics::~Physics() {
@@ -28,22 +28,10 @@ RigidBody* Physics::Create(const double x, const double y, const double width, c
 }
 
 std::vector<RigidBody>* Physics::GetRigidBodies() { return &rigidBodies; }
-
-void Physics::AddConstraint(Constraint* constraint) {
-	constraints.push_back(constraint);	
-}
-
-std::vector<Constraint*>& Physics::GetConstraints() {
-	return constraints;
-}
-
-void Physics::AddForce(const Vector2& force) {
-	forces.push_back(force);
-}
-
-void Physics::AddTorque(double const torque) {
-	torques.push_back(torque);
-}
+std::vector<Constraint*>& Physics::GetConstraints() { return constraints; }
+void Physics::AddConstraint(Constraint* constraint) { constraints.push_back(constraint); }
+void Physics::AddForce(const Vector2& force) { forces.push_back(force); }
+void Physics::AddTorque(double const torque) { torques.push_back(torque); }
 
 void Physics::Update(double const deltaTime) {
 	// Apply forces and integrate them
@@ -51,7 +39,6 @@ void Physics::Update(double const deltaTime) {
 		RigidBody* rigidBody = &rigidBodies.at(i);
 		Vector2 weight = Vector2(0, rigidBody->mass * gravity * pixelsPerMeter);
 		rigidBody->AddForce(weight);
-
 		for (auto force : forces) {
 			rigidBody->AddForce(force);
 		}
@@ -65,7 +52,7 @@ void Physics::Update(double const deltaTime) {
 		rigidBody->IntegrateForces(deltaTime);
 	}
 
-	// Collision detection. All vs all, for now.
+	// Collision detection. All vs all, atm.
 	std::vector<PenetrationConstraint> penetrations;
 	for (int i = 0; i <= rigidBodies.size() -1; i++) {
 		for (int j = i + 1; j < rigidBodies.size(); j++) {
@@ -111,46 +98,6 @@ void Physics::Update(double const deltaTime) {
 		rigidBody->IntegrateVelocities(deltaTime);
 	}
 }
-
-
-
-// std::vector<RigidBody>* Physics::GetRigidBodies() {
-// 	return rigidBodies;
-// }
-
-// Circle* Physics::Create(double radius) {
-// 	circles->emplace_back(radius);
-// }
-
-
-// int Physics::Create() {
-// 	RigidBody* rb = new RigidBody(Box(32, 32), 0, 0, 10);
-// 	rigidBodies->emplace_back(RigidBody(Box(32, 32), 0, 0, 10));
-// 	// rb->SetTexture("./Game/Assets/player.png");
-// 	// AddBody(rb);
-// 	return rigidBodies->size() -1;
-// }
-
-// void Physics::AddBody(RigidBody* body) {
-// 	rigidBodies->push_back(*body);
-// }
-
-// std::vector<RigidBody>* Physics::GetBodies() {
-// 	return rigidBodies;
-// }
-
-
-// Vector2* Physics::GetPosition(int const rigidBodyID) { return &rigidBodies->at(rigidBodyID).position; }
-// double Physics::GetRotation(int const rigidBodyID) { return rigidBodiesStatic->at(rigidBodyID).rotation; }
-
-// std::vector<RigidBody>& Physics::GetRigidBodies() const {
-// 	return *rigidBodies;
-// }
-
-// std::vector<RigidBody>* Physics::GetRigidBodiesStatic() {
-// 	return rigidBodiesStatic;
-// }
-
 
 
 

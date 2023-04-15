@@ -8,6 +8,7 @@ double Engine::previousFrameTime;
 int Engine::pixelsPerMeter;
 
 void Engine::Init(const int windowWidth, const int windowHeight) {
+	pixelsPerMeter = 50;
 	Graphics::Init(windowWidth, windowHeight);
 	Input::Init();
 	Entities::Init();
@@ -18,6 +19,7 @@ void Engine::Run() {
 	isRunning = true;
 	while (isRunning)
 	{
+		CalculateDeltaTime();
 		Input::Update();
 		Entities::Update();
 		physics->Update(deltaTime);

@@ -9,7 +9,7 @@
 Game::Game()
 {
 	Engine::PixelsPerMeter(50);
-	auto box = Entities::Create(100, 100, 32, 32, 1, "./Game/Assets/player.png");
+	auto box = Entities::Create(100, 100, 32, 32, 100, "./Game/Assets/player.png");
 	auto box2 = Entities::Create(200, 100, 32, 32, 10, "./Game/Assets/player.png");
 	
 }

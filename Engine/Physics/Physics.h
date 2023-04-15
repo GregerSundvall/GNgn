@@ -1,26 +1,21 @@
 ﻿#pragma once
 #include <vector>
 
-#include "Shapes.h"
 #include "../Misc/Vector2.h"
 #include "RigidBody.h"
 
 class Box;
-// class RigidBody;
 class Constraint;
 
-// static std::vector<Shape>* rigidBodiesStatic;
 
 class Physics
 {
-	double gravity = 9.8;
+	double gravity = -9.8;
 	int iterationCount = 10;
 	int pixelsPerMeter = 50;
 
 	static std::vector<RigidBody> rigidBodies;
-	
 	std::vector<Constraint*> constraints;
-
 	std::vector<Vector2> forces;
 	std::vector<double> torques;
 
