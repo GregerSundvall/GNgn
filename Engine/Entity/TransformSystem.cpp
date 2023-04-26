@@ -1,6 +1,5 @@
 ﻿#include "TransformSystem.h"
 
-#include <algorithm>
 
 
 void TransformSystem::Init() {
@@ -15,7 +14,7 @@ int TransformSystem::Create(Vector2 const& position, double const rotation, Vect
 void TransformSystem::SetPosition(int const transformID, Vector2 const position) {
 	transforms.at(transformID).SetPosition(position);
 }
-
+ 
 Vector2 TransformSystem::GetPosition(int const transformID) {
 	return transforms.at(transformID).GetPosition();
 }

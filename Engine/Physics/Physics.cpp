@@ -1,11 +1,8 @@
 ﻿#include "Physics.h"
 
-#include <iostream>
-
 #include "Collisions.h"
 #include "RigidBody.h"
 #include "Constraints.h"
-#include "../Engine.h"
 #include "../Graphics/Graphics.h"
 
 std::vector<RigidBody> Physics::rigidBodies;

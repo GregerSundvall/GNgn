@@ -5,7 +5,6 @@
 #include "TransformSystem.h"
 #include "../Graphics/Graphics.h"
 #include "../Physics/Physics.h"
-// #include "../Graphics/Graphics.h"
 
 std::vector<Entity>* Entities::entities;
 

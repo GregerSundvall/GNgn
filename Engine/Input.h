@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include <SDL_stdinc.h>
-#include <string>
-#include <vector>
 
 
 static const Uint8* keyStates;

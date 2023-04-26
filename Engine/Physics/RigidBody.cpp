@@ -1,8 +1,4 @@
 ﻿#include "RigidBody.h"
-
-#include <iostream>
-
-
 #include "../Graphics/Graphics.h"
 
 

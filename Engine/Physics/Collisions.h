@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "RigidBody.h"
 #include "../Misc/Vector2.h"
-#include "../Misc/Misc.h"
 
 struct Contact
 {
